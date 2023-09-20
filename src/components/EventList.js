@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const EventList = () => {
-  // Sample event data (you can replace this with actual data)
   const intialEvents = [
     {
       id: 1,
