@@ -11,7 +11,7 @@ const EventList = () => {
       date: "October 15, 2023",
       location: "Virtual",
       imageUrl:
-        "https://res.cloudinary.com/tix-africa/image/upload/c_scale,f_jpg,w_640/v1694123697/akwjikiiy00pojsdprpr.jpg",
+        "https://res.cloudinary.com/tix-africa/image/upload/v1687936947/b5h4yxj0ajbwcdftjfx6.png",
     },
     {
       id: 2,
@@ -62,9 +62,9 @@ const EventList = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
-      <h2 className="text-3xl font-semibold mb-4">Upcoming Events</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 sm:p-0">
+    <div className="container mx-auto mt-8 p-4 sm:p-0">
+      <h2 className="text-2xl sm:text-3xl font-semibold mb-4">Upcoming Events</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 sm:px-0">
         {intialEvents.slice(0, visibleEvents).map((event) => (
            <Link href={`/event/${event.id}`} key={event.id}>
             <div key={event.id} className="bg-white m-4 rounded shadow-md">
