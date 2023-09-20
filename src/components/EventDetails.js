@@ -36,8 +36,8 @@ const EventDetail = ({ event }) => {
           </p>
         </div>
         <div className="mt-8 text-center">
-          <button className="text-lg bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
-            Get Ticket
+          <button className="text-lg bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105">
+            Load More
           </button>
         </div>
       </div>
