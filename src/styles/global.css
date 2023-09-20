@@ -10,3 +10,8 @@ body {
 nav {
   position: sticky;
 }
+
+.qr-code {
+  display: flex;
+  justify-content: center;
+}
