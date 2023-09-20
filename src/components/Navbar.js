@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {" "}
           <div className="flex w-full">
-            <div className="flex-shrink-0 mx-4">
+            <div className="flex-shrink-0">
               <Link href="/" className="text-white relative text-2xl" passHref>
                 Tessera
               </Link>
