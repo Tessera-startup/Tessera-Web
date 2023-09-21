@@ -1,4 +1,8 @@
-import heroImage from "/public/hero-image.jpg";
+import React from "react";
+import Layout from "../components/Layout";
+import Image from "next/image";
+
+import heroImage from '/public/hero-image.jpg';
 
 const HeroSection = () => {
   const sectionStyle = {
@@ -9,7 +13,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section py-8 md:py-16" style={sectionStyle}>
+    <section className="py-8 md:py-16 fadeIn" style={sectionStyle}>
       <div className="container mx-auto py-8 md:py-16">
         <div className="hero-text text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mt-4">
