@@ -12,13 +12,13 @@ const EventList = () => {
 
   return (
     <div className="container mx-auto mt-8 p-4 md:px-4 sm:p-0">
-      <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-white">
         Upcoming Events
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 sm:px-0">
         {intialEvents.slice(0, visibleEvents).map((event) => (
           <Link href={`/event/${event.id}`} key={event.id}>
-            <div className="bg-white m-4 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+            <div className="bg-gray-900 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
               <div className="relative">
                 <Image
                   src={event.imageUrl}
@@ -29,18 +29,19 @@ const EventList = () => {
                   objectFit="cover"
                   className="rounded-t-md"
                 />
-                <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-sm rounded-md">
+                <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
                   {event.category}
                 </div>
               </div>
               <div className="p-3">
-                <h3 className="text-xl font-medium mb-2">{event.title}</h3>
-                <p className="text-gray-600">{event.date}</p>
-                <p className="text-gray-600">{event.location}</p>
+                <h3 className="text-md sm:text-lg md:text-xl font-medium text-gray-300">{event.title}</h3>
+                <p className="text-gray-300">{event.date}</p>
+                <p className="text-gray-300">{event.location}</p>
                 <div className="flex justify-between items-center">
-                  <p className="text-lg font-semibold">$10</p>
-                    <a className="text-lg text-gray-600 hover:underline">Get Ticket</a>
-               
+                  <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-300">$10</p>
+                  <a className="text-sm sm:text-md md:text-lg text-gray-300 hover:underline">
+                    Get Ticket
+                  </a>
                 </div>
               </div>
             </div>
@@ -51,7 +52,7 @@ const EventList = () => {
         <div className="flex justify-center my-4">
           <button
             onClick={loadMoreEvents}
-            className="text-lg bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105"
+            className="text-sm sm:text-md md:text-lg bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105"
           >
             Load More
           </button>
