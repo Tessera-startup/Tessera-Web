@@ -9,6 +9,7 @@ function Home() {
     <Layout>
       <HeroSection />
       <EventList/>
+      <br/>
     </Layout>
   );
 }

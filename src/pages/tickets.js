@@ -39,13 +39,13 @@ const nftTickets = [
 const NftTicket = () => {
   return (
     <Layout>
-      <div className="container mx-auto mt-5 px-4">
+      <div className="container mx-auto mt-5 px-4 text-gray-400">
         <h1 className="text-3xl font-bold mb-4">NFT Tickets</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {nftTickets.map((nftTicket) => (
             <div
               key={nftTicket.id}
-              className="bg-white p-4 rounded shadow-md border border-gray-300"
+              className="bg-[#111827] p-4 rounded shadow-md border border-gray-700"
             >
               <h3 className="text-lg font-semibold mb-2">NFT Ticket</h3>
               <div className="mb-4">
