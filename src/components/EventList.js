@@ -11,7 +11,7 @@ const EventList = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 p-4 sm:p-0">
+    <div className="container mx-auto mt-8 p-4 md:px-4 sm:p-0">
       <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
         Upcoming Events
       </h2>
