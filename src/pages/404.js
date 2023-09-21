@@ -9,7 +9,7 @@ const Custom404 = () => {
         <div className="text-center">
           <h1 className="text-6xl font-bold text-gray-700">404</h1>
           <p className="text-xl text-gray-700 mt-4">
-            Oops! The page youre looking for doesnt exist.
+            Oops! The page you're looking for doesnt exist yet.
           </p>
           <p className="text-xl text-gray-700 mt-2">
             Lets get you back to the homepage.

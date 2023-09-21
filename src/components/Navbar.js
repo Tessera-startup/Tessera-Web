@@ -29,13 +29,6 @@ const Navbar = () => {
                 </Link>
                 <Link
                   passHref
-                  href="/schedules"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
-                >
-                  Schedules
-                </Link>
-                <Link
-                  passHref
                   href="/tickets"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
                 >
@@ -47,6 +40,13 @@ const Navbar = () => {
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
                 >
                   About
+                </Link>
+                <Link
+                  passHref
+                  href="/schedules"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                >
+                  Schedules
                 </Link>
                 <Link
                   passHref
@@ -111,13 +111,6 @@ const Navbar = () => {
           </Link>
           <Link
             passHref
-            href="/schedules"
-            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
-          >
-            Schedules
-          </Link>
-          <Link
-            passHref
             href="/tickets"
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
           >
@@ -129,6 +122,13 @@ const Navbar = () => {
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm font-medium"
           >
             About
+          </Link>
+          <Link
+            passHref
+            href="/schedules"
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
+          >
+            Schedules
           </Link>
           <Link
             passHref
