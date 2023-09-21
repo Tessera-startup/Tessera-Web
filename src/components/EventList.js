@@ -34,12 +34,12 @@ const EventList = () => {
                 </div>
               </div>
               <div className="p-3">
-                <h3 className="text-md sm:text-lg md:text-xl font-medium text-gray-300">{event.title}</h3>
-                <p className="text-gray-300">{event.date}</p>
-                <p className="text-gray-300">{event.location}</p>
+                <h3 className="text-md sm:text-lg md:text-xl font-medium text-gray-400">{event.title}</h3>
+                <p className="text-gray-400">{event.date}</p>
+                <p className="text-gray-400">{event.location}</p>
                 <div className="flex justify-between items-center">
-                  <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-300">$10</p>
-                  <a className="text-sm sm:text-md md:text-lg text-gray-300 hover:underline">
+                  <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">$10</p>
+                  <a className="text-sm sm:text-md md:text-lg text-gray-400 hover:underline">
                     Get Ticket
                   </a>
                 </div>

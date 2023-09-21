@@ -3,7 +3,7 @@ import React from "react";
 
 const EventDetail = ({ event }) => {
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 text-gray-400">
       <div className="hero-section relative h-60 md:h-80 lg:h-96">
         <img
           src={event.imageUrl}
@@ -11,7 +11,7 @@ const EventDetail = ({ event }) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="mt-8 p-4">
+      <div className="mt-8 p-4 md:p-0">
         <h2 className="text-3xl font-semibold mb-4">{event.title}</h2>
         <p className="text-lg font-medium">Date: {event.date}</p>
         <p className="text-lg font-medium">Location: {event.location}</p>
