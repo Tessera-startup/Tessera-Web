@@ -62,7 +62,7 @@ const NftTicket = () => {
                   <p>Date: {nftTicket.date}</p>
                   <p>Seat Number: {nftTicket.seatNumber}</p>
                 </div>
-                <div className="mb-4 lg:mt-0 md:mt-6 qr-code">
+                <div className="mb-4 lg:mt-0 md:mt-6 mt-5 qr-code">
                   <QRCode value={nftTicket.qrCodeData} size={128} />
                 </div>
               </div>
