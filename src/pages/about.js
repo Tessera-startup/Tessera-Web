@@ -5,8 +5,8 @@ import Image from "next/image";
 const AboutPage = () => {
   return (
     <Layout>
-      <div className="container mt-10 p-4 md:px-4 sm:p-0 mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-semibold mb-4 text-gray-600">
+      <div className="container mt-14 p-4 md:px-4 sm:p-0 mx-auto">
+        <h2 className="text-3xl sm:text-5xl font-semibold mb-4 text-gray-400">
           At our core, we are driven by a singular mission: to empower event
           creators with the limitless potential of decentralized technology,
           elevating event experiences to new heights
@@ -43,7 +43,7 @@ const AboutPage = () => {
           experience for our users.
         </p>
 
-        <p className="mt-4 mb-10 text-xl sm:text-2xl font-semibold text-gray-600">
+        <p className="mt-4 mb-20 text-xl sm:text-2xl font-semibold text-gray-600">
           Thank you for choosing us as your ticketing partner. We look forward
           to helping you discover and attend amazing events!
         </p>

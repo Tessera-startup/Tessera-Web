@@ -15,7 +15,7 @@ const EventList = () => {
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-white">
         Upcoming Events
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 sm:px-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
         {intialEvents.slice(0, visibleEvents).map((event) => (
           <Link href={`/event/${event.id}`} key={event.id}>
             <div className="bg-gray-900 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
@@ -39,9 +39,9 @@ const EventList = () => {
                 <p className="text-gray-400">{event.location}</p>
                 <div className="flex justify-between items-center">
                   <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">$10</p>
-                  <a className="text-sm sm:text-md md:text-lg text-gray-400 hover:underline">
+                  <p className="text-sm sm:text-md md:text-lg text-gray-400 transition duration-300 hover:underline hover:text-white cursor-pointer">
                     Get Ticket
-                  </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -52,7 +52,7 @@ const EventList = () => {
         <div className="flex justify-center my-4">
           <button
             onClick={loadMoreEvents}
-            className="text-sm sm:text-md md:text-lg bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105"
+            className="text-sm sm:text-md md:text-lg bg-gray-600 text-gray-400 px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105"
           >
             Load More
           </button>

@@ -70,6 +70,7 @@ const NftTicket = () => {
           ))}
         </div>
       </div>
+      <br/>
     </Layout>
   );
 };

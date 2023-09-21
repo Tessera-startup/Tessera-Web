@@ -20,10 +20,12 @@ const SponsorLogin = () => {
           </div>
         ) : (
           <div className="max-w-screen-sm mx-auto mt-9 px-5">
-            <h2 className="text-3xl font-semibold mb-4">Sponsor Login</h2>
+            <h2 className="text-3xl font-semibold mb-4  text-gray-400">
+              Sponsor Login
+            </h2>
             <form onSubmit={handleLogin}>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-600">
+                <label htmlFor="email" className="block text-gray-500">
                   Email:
                 </label>
                 <input
@@ -37,7 +39,7 @@ const SponsorLogin = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-600">
+                <label htmlFor="password" className="block text-gray-500">
                   Password:
                 </label>
                 <input
@@ -52,14 +54,14 @@ const SponsorLogin = () => {
               </div>
               <button
                 type="submit"
-                className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
+                className="bg-gray-700  text-gray-400 px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
               >
                 Login
               </button>
             </form>
-            <p className="mt-4">
-              Don't have an account?{" "}
-              <Link href="/signup" className="text-blue-600">
+            <p className="mt-4  text-gray-400">
+              Don't have an account? {""}
+              <Link href="/signup" className="text-white">
                 Sign up here
               </Link>
             </p>

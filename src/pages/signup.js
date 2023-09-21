@@ -19,17 +19,19 @@ const SponsorSignup = () => {
       <div className="container mx-auto mt-8">
         {registered ? (
           <div>
-            <h2 className="text-3xl font-semibold mb-4">
+            <h2 className="text-3xl font-semibold mb-4 text-gray-400">
               Registration Successful!
             </h2>
             <p>Your sponsor account has been created.</p>
           </div>
         ) : (
           <div className="max-w-screen-sm mx-auto mt-9 px-5">
-            <h2 className="text-3xl font-semibold mb-4">Sponsor Signup</h2>
+            <h2 className="text-3xl font-semibold mb-4 text-gray-400">
+              Sponsor Signup
+            </h2>
             <form onSubmit={handleSignup}>
               <div className="mb-4">
-                <label htmlFor="businessName" className="block text-gray-600">
+                <label htmlFor="businessName" className="block text-gray-500">
                   Business Name:
                 </label>
                 <input
@@ -43,7 +45,7 @@ const SponsorSignup = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-600">
+                <label htmlFor="email" className="block text-gray-500">
                   Email:
                 </label>
                 <input
@@ -57,7 +59,7 @@ const SponsorSignup = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-600">
+                <label htmlFor="password" className="block text-gray-500">
                   Password:
                 </label>
                 <input
@@ -71,7 +73,7 @@ const SponsorSignup = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="location" className="block text-gray-600">
+                <label htmlFor="location" className="block text-gray-500">
                   Location:
                 </label>
                 <input
@@ -85,7 +87,7 @@ const SponsorSignup = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="phoneNumber" className="block text-gray-600">
+                <label htmlFor="phoneNumber" className="block text-gray-500">
                   Phone Number:
                 </label>
                 <input
@@ -100,7 +102,7 @@ const SponsorSignup = () => {
               </div>
               <button
                 type="submit"
-                className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
+                className="bg-gray-700 text-gray-400 px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
               >
                 Signup
               </button>
