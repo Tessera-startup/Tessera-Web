@@ -1,3 +1,4 @@
+import QRCode from "qrcode.react";
 import React from "react";
 
 const EventDetail = ({ event }) => {
@@ -35,10 +36,18 @@ const EventDetail = ({ event }) => {
             justo sit amet neque ultrices venenatis non non velit.
           </p>
         </div>
-        <div className="mt-8 text-center">
-          <button className="text-lg bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105">
-            Load More
-          </button>
+        <div className="mt-8 flex flex-col items-center">
+          <QRCode value={event.qrCodeData} size={128} />
+          <div className="mb-5 text-center">
+            <p className="text-lg font-semibold mt-4">
+              To obtain your event ticket, present this QR code at the event
+              entrance.
+            </p>
+            <p className="text-lg">
+              Please ensure you have completed the necessary registration or
+              purchase process before arriving at the event.
+            </p>
+          </div>
         </div>
       </div>
     </div>
