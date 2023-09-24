@@ -105,17 +105,15 @@ nav {
 
 .button {
   background-color: #ffffff00;
-  color: #fff;
-  width: 8.5em;
+  width: 9.5em;
   height: 2.9em;
-  border: #3654ff 0.2em solid;
+  border: grey 0.2em solid;
   border-radius: 11px;
   text-align: right;
   transition: all 0.6s ease;
 }
 
 .button:hover {
-  background-color: #3654ff;
   cursor: pointer;
 }
 

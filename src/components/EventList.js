@@ -74,7 +74,7 @@ const EventList = () => {
         ))}
       </div>
       {visibleEvents < intialEvents.length && (
-        <div className="flex justify-center my-4 ">
+        <div className="flex justify-center my-4 text-gray-100">
           <button className="button pt-1" onClick={loadMoreEvents}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,7 @@ const EventList = () => {
               ></path>
             </svg>
 
-            <div className="text">Button</div>
+            <div className="text">Load more</div>
           </button>
         </div>
       )}
