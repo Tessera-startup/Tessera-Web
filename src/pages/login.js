@@ -13,6 +13,7 @@ const SponsorLogin = () => {
 
   return (
     <Layout>
+      <div className="gradient fixed"></div>
       <div className="container mx-auto mt-8">
         {loggedIn ? (
           <div>
@@ -20,12 +21,12 @@ const SponsorLogin = () => {
           </div>
         ) : (
           <div className="max-w-screen-sm mx-auto mt-9 px-5">
-            <h2 className="text-3xl font-semibold mb-4  text-gray-400">
+            <h2 className="text-3xl font-semibold mb-4 text-[#ffffff]">
               Sponsor Login
             </h2>
             <form onSubmit={handleLogin}>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-500">
+                <label htmlFor="email" className="block text-[#e2e8ff]">
                   Email:
                 </label>
                 <input
@@ -39,7 +40,7 @@ const SponsorLogin = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-500">
+                <label htmlFor="password" className="block text-[#e2e8ff]">
                   Password:
                 </label>
                 <input
@@ -54,7 +55,7 @@ const SponsorLogin = () => {
               </div>
               <button
                 type="submit"
-                className="bg-gray-700  text-gray-400 px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
+                className="bg-gray-700  text-[#e2e8ff] px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
               >
                 Login
               </button>
