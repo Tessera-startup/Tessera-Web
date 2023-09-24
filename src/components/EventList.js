@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { intialEvents } from "../../data/events";
 
 const EventList = () => {
@@ -11,14 +12,28 @@ const EventList = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 p-4 md:px-4 sm:p-0">
-      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container mx-auto mt-8 p-4 md:px-4 sm:p-0"
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 web3-gradient"
+      >
         Upcoming Events
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+      </motion.h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {intialEvents.slice(0, visibleEvents).map((event) => (
           <Link href={`/event/${event.id}`} key={event.id}>
-            <div className="bg-gray-900 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
+            >
               <div className="relative">
                 <Image
                   src={event.imageUrl}
@@ -34,17 +49,27 @@ const EventList = () => {
                 </div>
               </div>
               <div className="p-3">
-                <h3 className="text-md sm:text-lg md:text-xl font-medium text-gray-400">{event.title}</h3>
+                <motion.h3
+                  className="text-md sm:text-lg md:text-xl font-medium text-gray-400"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {event.title}
+                </motion.h3>
                 <p className="text-gray-400">{event.date}</p>
                 <p className="text-gray-400">{event.location}</p>
                 <div className="flex justify-between items-center">
-                  <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">$10</p>
-                  <p className="text-sm sm:text-md md:text-lg text-gray-400 transition duration-300 hover:underline hover:text-white cursor-pointer">
-                    Get Ticket
+                  <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">
+                    $10
                   </p>
+                  <motion.p
+                    className="text-sm sm:text-md md:text-lg text-gray-400 cursor-pointer"
+                    whileHover={{ textDecoration: "underline" }}
+                  >
+                    Get Ticket
+                  </motion.p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </Link>
         ))}
       </div>
@@ -58,7 +83,7 @@ const EventList = () => {
           </button>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -24,6 +24,15 @@ body {
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
 }
 
+.web3-gradient {
+  background: linear-gradient(135deg,rgb(153, 125, 255) 9.15%, rgb(128, 255, 234) 86.26%, rgb(128, 236, 255));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+
 nav {
   position: sticky;
 }
