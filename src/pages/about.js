@@ -7,12 +7,10 @@ const AboutPage = () => {
     <Layout>
       <div className="container mt-14 p-4 md:px-4 sm:p-0 mx-auto">
         <h2 className="text-3xl sm:text-5xl font-semibold mb-4 text-gray-400">
-          At our core, we are driven by a singular mission: to empower event
-          creators with the limitless potential of decentralized technology,
-          elevating event experiences to new heights
+          Our Mission
         </h2>
 
-        <div>
+        {/* <div>
           <Image
             src="https://res.cloudinary.com/tix-africa/image/upload/q_auto:low/v1646398956/website/about-crowd.png"
             height={500}
@@ -20,7 +18,7 @@ const AboutPage = () => {
             layout="responsive"
             alt="Event Crowd"
           />
-        </div>
+        </div> */}
 
         <p className="text-xl sm:text-2xl font-semibold text-gray-600">
           Welcome to our platform! We are passionate about bringing people
@@ -38,7 +36,9 @@ const AboutPage = () => {
 
         <p className="mt-4 text-xl sm:text-2xl font-semibold text-gray-600">
           Our platform offers features like decentralized ticketing with NFTs,
-          event filtering and search, and a user-friendly interface. We are
+          event filterAt our core, we are driven by a singular mission: to empower event
+          creators with the limitless potential of decentralized technology,
+          elevating event experiences to new heightsing and search, and a user-friendly interface. We are
           constantly innovating and striving to provide the best possible
           experience for our users.
         </p>
