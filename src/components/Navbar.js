@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="flex w-full items-center"> {/* Added items-center class here */}
             <div className="flex-shrink-0 mx-4">
               <Link href="/" className="text-white relative text-2xl" passHref>
-                <Image src={NavbarImg} alt={"tessera"} width={100} height={100} />
+                <Image src={NavbarImg} alt={"tessera"} width={70} height={50} />
               </Link>
             </div>
             <div className="hidden md:flex justify-end w-full items-center">
