@@ -40,15 +40,15 @@ const NftTicket = () => {
   return (
     <Layout>
     <div className="gradient fixed"></div>
-      <div className="container mx-auto mt-32 px-4 text-gray-400">
-        <h1 className="text-3xl font-bold mb-4">NFT Tickets</h1>
+      <div className="container mx-auto mt-32 px-4 tessera-header">
+        <h1 className="text-3xl font-bold mb-4 tessera-header text-white">NFT Tickets</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {nftTickets.map((nftTicket) => (
             <div
               key={nftTicket.id}
               className="bg-[#111827] p-4 blog-header-image border border-gray-700"
             >
-              <h3 className="text-lg font-semibold mb-2">NFT Ticket</h3>
+              <h3 className="text-lg font-semibold mb-2 text-gray-300">NFT Ticket</h3>
               <div className="mb-4">
                 <img
                   src={nftTicket.imageUrl}
@@ -57,7 +57,7 @@ const NftTicket = () => {
                 />
               </div>
               <div className="flex flex-col lg:flex-row justify-between align-baseline">
-                <div>
+                <div className="text-gray-400">
                   <p>Event: {nftTicket.eventName}</p>
                   <p>Location: {nftTicket.location}</p>
                   <p>Date: {nftTicket.date}</p>
