@@ -59,7 +59,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   passHref
-                  href="/login"
+                  href="/wallet"
                   className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
                 >
                   Connect Wallet
@@ -145,6 +145,13 @@ const Navbar = () => {
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2  rounded-md text-sm font-medium"
           >
             Login
+          </Link>
+          <Link
+            passHref
+            href="/wallet"
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2  rounded-md text-sm font-medium"
+          >
+            wallet
           </Link>
         </div>
       </div>

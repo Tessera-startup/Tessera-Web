@@ -7,15 +7,15 @@ const Custom404 = () => {
     <Layout>
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <h1 className="text-6xl font-bold text-gray-700">404</h1>
-          <p className="text-xl text-gray-700 mt-4">
+          <h1 className="text-6xl font-bold text-[#ffffff]">404</h1>
+          <p className="text-base text-[#ffffff] mt-4">
             Oops! The page you're looking for doesnt exist yet.
           </p>
-          <p className="text-xl text-gray-700 mt-2">
+          <p className="text-base text-[#ffffff] mt-2">
             Lets get you back to the homepage.
           </p>
           <div className="mt-4">
-            <Link href="/" className="text-gray-700 font-semibold">
+            <Link href="/" className="text-[#ffffff] font-semibold">
               Go to Homepage
             </Link>
           </div>
