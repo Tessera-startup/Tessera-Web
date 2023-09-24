@@ -7,9 +7,10 @@ import Layout from "../components/Layout";
 function Home() {
   return (
     <Layout>
+      <div className="gradient fixed"></div>
       <HeroSection />
-      <EventList/>
-      <br/>
+      <EventList />
+      <br />
     </Layout>
   );
 }

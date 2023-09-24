@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import NavbarImg from "../../public/tesseralogo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,13 +11,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800  mx-auto">
+    <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex w-full">
-            <div className="flex-shrink-0 pl-4 md:p-0">
+        <div className="flex items-center justify-between h-20 w-full">
+          <div className="flex w-full items-center"> {/* Added items-center class here */}
+            <div className="flex-shrink-0 mx-4">
               <Link href="/" className="text-white relative text-2xl" passHref>
-                Tessera
+                <Image src={NavbarImg} alt={"tessera"} width={100} height={100} />
               </Link>
             </div>
             <div className="hidden md:flex justify-end w-full items-center">
@@ -32,7 +34,7 @@ const Navbar = () => {
                   href="/tickets"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
                 >
-                 My Tickets
+                  My Tickets
                 </Link>
                 <Link
                   passHref
@@ -54,6 +56,13 @@ const Navbar = () => {
                   className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
                 >
                   Login
+                </Link>
+                <Link
+                  passHref
+                  href="/login"
+                  className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+                >
+                  Connect Wallet
                 </Link>
               </div>
             </div>
@@ -114,7 +123,7 @@ const Navbar = () => {
             href="/tickets"
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
           >
-            Ticket
+            My Tickets
           </Link>
           <Link
             passHref
