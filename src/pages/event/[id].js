@@ -61,13 +61,18 @@ const EventPage = () => {
 
   return (
     <Layout>
-      {event ? (
-        <div>
-        <EventDetail event={event}/>
-        </div>
-      ) : (
-        <p>Event not found</p>
-      )}
+      <>
+        {event ? (
+          <>
+            <div className="event-content">
+              <div className="gradient fixed"></div>
+              <EventDetail event={event} />
+            </div>
+          </>
+        ) : (
+          <p>Event not found</p>
+        )}
+      </>
     </Layout>
   );
 };
