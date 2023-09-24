@@ -63,6 +63,16 @@ nav {
   overflow: hidden;
 }
 
+.hero-action-button {
+    padding: 10px 20px;
+    color: #fff;
+    position: relative;
+    border-radius: 8px;
+    background-image: linear-gradient(135deg,#926AFF 0%,#69193b 50%,#0e0d0c 100%);
+    background-image: linear-gradient(135deg,color(display-p3 .5725490196 .4156862745 1/1) 0%,color(display-p3 1 .4666666667 .6901960784/1) 50%,color(display-p3 1 .7019607843 .4039215686/1) 100%);
+    transition: transform .2s cubic-bezier(.6,.6,0,1),margin-top .2s cubic-bezier(.6,.6,0,1);
+}
+
 .tessera-header {
   font-family: "Space Grotesk", sans-serif;
 }
@@ -91,4 +101,36 @@ nav {
   to {
     opacity: 1;
   }
+}
+
+.button {
+  background-color: #ffffff00;
+  color: #fff;
+  width: 8.5em;
+  height: 2.9em;
+  border: #3654ff 0.2em solid;
+  border-radius: 11px;
+  text-align: right;
+  transition: all 0.6s ease;
+}
+
+.button:hover {
+  background-color: #3654ff;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 1.6em;
+  margin: -0.2em 0.8em 1em;
+  position: absolute;
+  display: flex;
+  transition: all 0.6s ease;
+}
+
+.button:hover svg {
+  transform: translateX(5px);
+}
+
+.text {
+  margin: 0 1.5em
 }

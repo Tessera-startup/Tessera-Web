@@ -74,12 +74,24 @@ const EventList = () => {
         ))}
       </div>
       {visibleEvents < intialEvents.length && (
-        <div className="flex justify-center my-4">
-          <button
-            onClick={loadMoreEvents}
-            className="text-sm sm:text-md md:text-lg bg-gray-600 text-gray-400 px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 transform hover:scale-105"
-          >
-            Load More
+        <div className="flex justify-center my-4 ">
+          <button className="button pt-1" onClick={loadMoreEvents}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6 pt-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              ></path>
+            </svg>
+
+            <div className="text">Button</div>
           </button>
         </div>
       )}
