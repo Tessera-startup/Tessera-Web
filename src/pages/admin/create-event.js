@@ -39,7 +39,7 @@ function CreateEventPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <div className="container p-4 sm:p-8 about relative z-10">
+        <div className="container p-0 sm:p-8 about relative z-10">
           <h2 className="text-3xl font-semibold text-white mb-4 mt-12">
             Create a New Event
           </h2>

@@ -21,7 +21,7 @@ const Dashboard = ({ children }) => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 p-4">
+      <div className="flex-1 pr-6">
         <div className="container mx-auto">{children}</div>
       </div>
     </div>
