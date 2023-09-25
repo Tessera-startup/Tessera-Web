@@ -114,7 +114,7 @@ function CreateEventPage() {
             </div>
             <button
               type="submit"
-              className="btn-transparent text-white px-5 py-3 rounded-md hover:bg-gray-600 transition duration-300"
+              className="btn-transparent text-white px-5 py-3 rounded-md hover:text-gray-400 transition duration-300"
             >
               Create Event
             </button>
