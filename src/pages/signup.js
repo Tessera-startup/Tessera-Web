@@ -17,7 +17,7 @@ const SponsorSignup = () => {
   return (
     <Layout>
       <div className="gradient fixed"></div>
-      <div className="container mx-auto mt-8 relative z-50">
+      <div className="container mx-auto mt-8 relative z-10">
         {registered ? (
           <div>
             <h2 className="text-3xl font-semibold mb-4 text-gray-400">

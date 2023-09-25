@@ -40,7 +40,7 @@ const NftTicket = () => {
   return (
     <Layout>
     <div className="gradient fixed"></div>
-      <div className="container mx-auto mt-32 px-4 tessera-header relative z-50">
+      <div className="container mx-auto mt-32 px-4 tessera-header relative z-10">
         <h1 className="text-3xl font-bold mb-4 tessera-header text-white">NFT Tickets</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {nftTickets.map((nftTicket) => (

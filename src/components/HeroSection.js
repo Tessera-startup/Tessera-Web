@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="hero-section py-8 md:py-16 relative z-50">
+    <section className="hero-section py-8 md:py-16 relative z-10">
       <div className="container mx-auto py-8 md:py-16">
         <div className="text-center">
           <div className="mx-auto">

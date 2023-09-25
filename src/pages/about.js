@@ -6,7 +6,7 @@ const AboutPage = () => {
   return (
     <Layout>
       <div className="gradient fixed"></div>
-      <div className="container p-4 sm:p-8 about relative z-50">
+      <div className="container p-4 sm:p-8 about relative z-10">
         <h2 className="text-2xl mt-24 sm:text-3xl md:text-4xl font-semibold mb-4 text-white">
           Our Mission
         </h2>

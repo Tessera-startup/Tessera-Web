@@ -8,6 +8,7 @@ function CreateEventPage() {
   const [eventTitle, setEventTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [ticketCount, setTicketCount] = useState(0);
+  const [eventDescription,setEventDescription] = useState("");
 
   // Function to handle file input change and update image preview
   const handleImageChange = (e) => {
@@ -38,7 +39,7 @@ function CreateEventPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <div className="container p-4 sm:p-8 about relative z-50">
+        <div className="container p-4 sm:p-8 about relative z-10">
           <h2 className="text-3xl font-semibold text-white mb-4 mt-12">
             Create a New Event
           </h2>
@@ -78,6 +79,17 @@ function CreateEventPage() {
             </div>
             <div className="mb-4">
               <label className="block text-lg text-white font-semibold mb-2">
+                Event Description:
+              </label>
+              <textarea
+                value={eventDescription}
+                onChange={(e) => setEventDescription(e.target.value)}
+                className="bg-gray-800 text-white border rounded-md p-2 w-full h-32" // Adjust the height as needed
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg text-white font-semibold mb-2">
                 Event Date:
               </label>
               <input
@@ -102,7 +114,7 @@ function CreateEventPage() {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              className="bg-gray-500 border-2 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-300"
             >
               Create Event
             </button>
