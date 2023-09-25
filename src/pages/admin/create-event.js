@@ -52,7 +52,7 @@ function CreateEventPage() {
                 type="file"
                 onChange={handleImageChange}
                 accept="image/*"
-                className="bg-gray-800 text-white border rounded-md p-2 w-full"
+                className="bg-gray-800 text-white btn-transparent rounded-md p-2 w-full"
                 required
               />
               {eventImage && (
@@ -73,7 +73,7 @@ function CreateEventPage() {
                 type="text"
                 value={eventTitle}
                 onChange={(e) => setEventTitle(e.target.value)}
-                className="bg-gray-800 text-white border rounded-md p-2 w-full"
+                className="bg-gray-800 text-white btn-transparent rounded-md p-2 w-full"
                 required
               />
             </div>
@@ -84,7 +84,7 @@ function CreateEventPage() {
               <textarea
                 value={eventDescription}
                 onChange={(e) => setEventDescription(e.target.value)}
-                className="bg-gray-800 text-white border rounded-md p-2 w-full h-32" // Adjust the height as needed
+                className="bg-gray-800 text-white btn-transparent rounded-md p-2 w-full h-32" // Adjust the height as needed
                 required
               />
             </div>
@@ -96,7 +96,7 @@ function CreateEventPage() {
                 type="date"
                 value={eventDate}
                 onChange={(e) => setEventDate(e.target.value)}
-                className="bg-gray-800 text-white border rounded-md p-2"
+                className="bg-gray-800 text-white btn-transparent rounded-md p-2"
                 required
               />
             </div>
@@ -108,13 +108,13 @@ function CreateEventPage() {
                 type="number"
                 value={ticketCount}
                 onChange={(e) => setTicketCount(e.target.value)}
-                className="bg-gray-800 text-white border rounded-md p-2"
+                className="bg-gray-800 text-white btn-transparent rounded-md p-2"
                 required
               />
             </div>
             <button
               type="submit"
-              className="bg-gray-500 border-2 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-300"
+              className="btn-transparent text-white px-5 py-3 rounded-md hover:bg-gray-600 transition duration-300"
             >
               Create Event
             </button>

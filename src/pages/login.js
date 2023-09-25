@@ -32,7 +32,7 @@ const SponsorLogin = () => {
                 <input
                   type="email"
                   id="email"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
+                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -46,7 +46,7 @@ const SponsorLogin = () => {
                 <input
                   type="password"
                   id="password"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
+                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -55,7 +55,7 @@ const SponsorLogin = () => {
               </div>
               <button
                 type="submit"
-                className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+                className="text-gray-300 btn-transparent bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
               >
                 Login
               </button>

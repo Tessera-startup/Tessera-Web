@@ -53,21 +53,21 @@ const Navbar = () => {
                 <Link
                   passHref
                   href="/login"
-                  className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+                  className="text-gray-300 border btn-transparent  hover:text-white px-6 py-2 rounded-md text-sm"
                 >
                   Login
                 </Link>
                 <Link
                   passHref
                   href="/wallet"
-                  className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+                  className="text-gray-300 border btn-transparent  hover:text-white px-6 py-2 rounded-md text-sm"
                 >
                   Connect Wallet
                 </Link>
               </div>
             </div>
           </div>
-          <div className="flex md:hidden">
+          <div className="flex md:hidden pr-1">
             <button
               type="button"
               onClick={toggleMenu}

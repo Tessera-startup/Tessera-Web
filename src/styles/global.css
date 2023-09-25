@@ -174,10 +174,14 @@ nav {
   background-color: #ffffff00;
   width: 9.5em;
   height: 2.9em;
-  border: grey 0.2em solid;
+  border: 1px solid rgba(226, 232, 255, 0.1);
   border-radius: 11px;
   text-align: right;
   transition: all 0.6s ease;
+}
+
+.btn-transparent {
+  border: 1px solid rgba(226, 232, 255, 0.1);
 }
 
 .button:hover {
