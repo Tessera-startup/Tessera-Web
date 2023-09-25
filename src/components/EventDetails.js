@@ -6,7 +6,7 @@ import { IoMdArrowBack } from "react-icons/io";
 
 const EventDetail = ({ event }) => {
   return (
-    <div className="container mx-auto mb-10">
+    <div className="container mx-auto mb-10 relative z-50">
       <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
         <IoMdArrowBack /> <span className="ml-2">Go back</span>
       </Link>

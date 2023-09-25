@@ -16,7 +16,7 @@ const EventList = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container mx-auto p-4 md:px-4 sm:p-0"
+      className="container mx-auto p-4 md:px-4 sm:p-0 relative z-50"
     >
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
