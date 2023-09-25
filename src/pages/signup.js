@@ -15,7 +15,7 @@ const SponsorSignup = () => {
   };
 
   return (
-    <Layout>relative z-50
+    <Layout>
       <div className="gradient fixed"></div>
       <div className="container mx-auto mt-8 relative z-50">
         {registered ? (
