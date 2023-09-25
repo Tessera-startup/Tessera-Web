@@ -5,6 +5,7 @@ import { intialEvents } from "../../data/events";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { IoMdArrowBack } from "react-icons/io";
 
 function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
@@ -17,8 +18,12 @@ function AdminPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
+        {" "}
+        <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
+          <IoMdArrowBack /> <span className="ml-2">Go back</span>
+        </Link>
         <div className="event-content p-0 sm:p-8 about relative z-10">
-          <h2 className="text-3xl font-semibold mb-4 mt-12 text-white">
+          <h2 className="text-3xl font-semibold mb-4 text-white">
             All Posts
           </h2>
           {intialEvents.slice(0, visibleEvents).map((event) => (

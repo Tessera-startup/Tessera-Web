@@ -14,7 +14,9 @@ const Navbar = () => {
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
       <div className="container mx-auto">
         <div className="flex items-center justify-between h-20 w-full">
-          <div className="flex w-full items-center"> {/* Added items-center class here */}
+          <div className="flex w-full items-center">
+            {" "}
+            {/* Added items-center class here */}
             <div className="flex-shrink-0 mx-4">
               <Link href="/" className="text-white relative text-2xl" passHref>
                 <Image src={NavbarImg} alt={"tessera"} width={70} height={50} />
@@ -67,7 +69,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex md:hidden pr-1">
+          <div className="flex md:hidden pr-2">
             <button
               type="button"
               onClick={toggleMenu}
@@ -151,7 +153,7 @@ const Navbar = () => {
             href="/wallet"
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2  rounded-md text-sm font-medium"
           >
-            wallet
+            Connect Wallet
           </Link>
         </div>
       </div>
