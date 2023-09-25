@@ -14,7 +14,7 @@ const SponsorLogin = () => {
   return (
     <Layout>
       <div className="gradient fixed"></div>
-      <div className="container mx-auto mt-8 z-10 relative">
+      <div className="container mx-auto mt-32 z-10 relative">
         {loggedIn ? (
           <div>
             <h2 className="text-3xl font-semibold mb-4">Welcome, Sponsor!</h2>
@@ -55,7 +55,7 @@ const SponsorLogin = () => {
               </div>
               <button
                 type="submit"
-                className="bg-gray-700  text-[#e2e8ff] px-6 py-2 rounded-md hover:bg-gray-500 transition duration-300 transform hover:scale-105"
+                className="text-gray-300 border border-white bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
               >
                 Login
               </button>

@@ -8,7 +8,7 @@ function CreateEventPage() {
   const [eventTitle, setEventTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [ticketCount, setTicketCount] = useState(0);
-  const [eventDescription,setEventDescription] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
 
   // Function to handle file input change and update image preview
   const handleImageChange = (e) => {
@@ -39,7 +39,7 @@ function CreateEventPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <div className="container p-0 sm:p-8 about relative z-10">
+        <div className="event-content  p-0 sm:p-8 about relative z-10">
           <h2 className="text-3xl font-semibold text-white mb-4 mt-12">
             Create a New Event
           </h2>
