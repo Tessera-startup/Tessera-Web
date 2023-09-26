@@ -24,7 +24,7 @@ function AdminPage() {
         </Link>
         <div className="event-content p-0 sm:p-8 about relative z-10">
           <h2 className="text-3xl font-semibold mb-4 text-white">
-            All Posts
+            All Events
           </h2>
           {intialEvents.slice(0, visibleEvents).map((event) => (
             <Link href={`/event/${event.id}`} key={event.id}>
