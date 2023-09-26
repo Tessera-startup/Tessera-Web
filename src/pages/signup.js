@@ -5,6 +5,7 @@ const SponsorSignup = () => {
   const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [location, setLocation] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [registered, setRegistered] = useState(false);
@@ -47,31 +48,15 @@ const SponsorSignup = () => {
               </div>
               <div className="mb-4">
                 <label htmlFor="email" className="block text-[#e2e8ff]">
-                  Email:
+                  Business Email:
                 </label>
                 <input
                   type="email"
                   id="email"
                   className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-            
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-[#e2e8ff]">
-                  Password:
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-            
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
@@ -83,7 +68,6 @@ const SponsorSignup = () => {
                   type="text"
                   id="location"
                   className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-            
                   placeholder="Enter your location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
@@ -98,10 +82,40 @@ const SponsorSignup = () => {
                   type="tel"
                   id="phoneNumber"
                   className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-            
                   placeholder="Enter your phone number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="password" className="block text-[#e2e8ff]">
+                  Password:
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-[#e2e8ff]"
+                >
+                  Confirm Password:
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
               </div>

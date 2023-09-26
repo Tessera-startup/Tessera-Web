@@ -1,5 +1,5 @@
 import Image from "next/image";
-import heroImage from "/public/tesseralogo.png";
+import heroImage from "/public/tesseralogoMain.png";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
@@ -14,11 +14,11 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              <div className="w-64 h-24 md:w-80 md:h-30">
+              <div className="w-48 h-48 md:w-80 md:h-80"> {/* Adjust width and height */}
                 <Image
                   src={heroImage}
                   layout="responsive"
-                  objectFit="contain"
+                  objectFit="contain" // Set objectFit to "contain"
                   alt={"codecrafted"}
                 />
               </div>

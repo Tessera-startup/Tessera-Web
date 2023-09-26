@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import Dashboard from "../../components/Dashboard";
+import { IoMdArrowBack } from "react-icons/io";
+import Link from "next/link";
 
 function CreateEventPage() {
   // State variables for form fields
@@ -39,8 +41,11 @@ function CreateEventPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
+        <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/admin">
+          <IoMdArrowBack /> <span className="ml-2">Go back</span>
+        </Link>
         <div className="event-content  p-0 sm:p-8 about relative z-10">
-          <h2 className="text-3xl font-semibold text-white mb-4 mt-32">
+          <h2 className="text-3xl font-semibold text-white mb-4">
             Create a New Event
           </h2>
           <form onSubmit={handleSubmit}>
