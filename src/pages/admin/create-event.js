@@ -72,7 +72,7 @@ function CreateEventPage() {
             </div>
             <div className="mb-4">
               <label className="block text-lg text-white font-semibold mb-2">
-                Event Title:
+                Event Name:
               </label>
               <input
                 type="text"
