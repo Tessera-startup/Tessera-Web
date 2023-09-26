@@ -50,14 +50,14 @@ function CreateEventPage() {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-lg text-white font-semibold mb-2">
+              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
                 Event Image:
               </label>
               <input
                 type="file"
                 onChange={handleImageChange}
                 accept="image/*"
-                className="bg-gray-800 text-white btn-transparent rounded-md p-2 w-full"
+                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full"
                 required
               />
               {eventImage && (
@@ -71,55 +71,55 @@ function CreateEventPage() {
               )}
             </div>
             <div className="mb-4">
-              <label className="block text-lg text-white font-semibold mb-2">
+              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
                 Event Name:
               </label>
               <input
                 type="text"
                 value={eventTitle}
                 onChange={(e) => setEventTitle(e.target.value)}
-                className="bg-gray-800 text-white btn-transparent rounded-md p-2 w-full"
+                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-lg text-white font-semibold mb-2">
+              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
                 Event Description:
               </label>
               <textarea
                 value={eventDescription}
                 onChange={(e) => setEventDescription(e.target.value)}
-                className="bg-gray-800 text-white btn-transparent rounded-md p-2 w-full h-32" // Adjust the height as needed
+                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full h-32" // Adjust the height as needed
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-lg text-white font-semibold mb-2">
+              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
                 Event Date:
               </label>
               <input
                 type="date"
                 value={eventDate}
                 onChange={(e) => setEventDate(e.target.value)}
-                className="bg-gray-800 text-white btn-transparent rounded-md p-2"
+                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-lg text-white font-semibold mb-2">
+              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
                 Ticket Count:
               </label>
               <input
                 type="number"
                 value={ticketCount}
                 onChange={(e) => setTicketCount(e.target.value)}
-                className="bg-gray-800 text-white btn-transparent rounded-md p-2"
+                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
                 required
               />
             </div>
             <button
               type="submit"
-              className="btn-transparent text-white px-5 py-3 rounded-md hover:text-gray-400 transition duration-300"
+              className="btn-transparent text-[#e2e8ff] px-5 py-3 rounded-md hover:text-gray-400 transition duration-300"
             >
               Create Event
             </button>
