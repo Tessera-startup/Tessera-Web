@@ -11,6 +11,7 @@ function CreateEventPage() {
   const [eventDate, setEventDate] = useState("");
   const [ticketCount, setTicketCount] = useState(0);
   const [eventDescription, setEventDescription] = useState("");
+  const [ticketAmount, setTicketAmount] = useState(0);
 
   // Function to handle file input change and update image preview
   const handleImageChange = (e) => {
@@ -29,19 +30,24 @@ function CreateEventPage() {
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can handle form submission logic here, such as sending data to the server.
-    // For now, let's log the form values to the console.
     console.log("Event Image:", eventImage);
     console.log("Event Title:", eventTitle);
     console.log("Event Date:", eventDate);
     console.log("Ticket Count:", ticketCount);
+    console.log("Event Description:", eventDescription);
+    console.log("Ticket Amount:", ticketAmount);
+    
+    
   };
 
   return (
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/admin">
+        <Link
+          className="flex items-center mt-32 mb-5 text-gray-400"
+          href="/admin"
+        >
           <IoMdArrowBack /> <span className="ml-2">Go back</span>
         </Link>
         <div className="event-content  p-0 sm:p-8 about relative z-10">
@@ -90,6 +96,18 @@ function CreateEventPage() {
                 value={eventDescription}
                 onChange={(e) => setEventDescription(e.target.value)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full h-32" // Adjust the height as needed
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
+                Ticket Amount:
+              </label>
+              <input
+                type="number"
+                value={ticketAmount}
+                onChange={(e) => setTicketAmount(e.target.value)}
+                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
                 required
               />
             </div>

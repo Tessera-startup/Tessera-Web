@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import NavbarImg from "../../public/tesseralogo.png";
+import NavbarImg from "../../public/tesseralogoMain.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
