@@ -3,8 +3,61 @@ import Link from "next/link";
 import QRCode from "qrcode.react";
 import React from "react";
 import { IoMdArrowBack } from "react-icons/io";
+import * as solanaWeb3 from "@solana/web3.js";
+
+
 
 const EventDetail = ({ event }) => {
+  const senderWallet = ""
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
+
+  const purchaseTicket = async (receiver) => {
+    const connection = new solanaWeb3.Connection("https://api.devnet.solana.com")
+    const transaction = new solanaWeb3.Transaction();
+    const lamports = amount * solanaWeb3.LAMPORTS_PER_SOL
+    try {
+      const desPubKey = new solanaWeb3.PublicKey(receiver)
+      const sendWalletInformation = await connection.getAccountInfo(senderWallet.PublicKey)
+      const transactionInstruction = solanaWeb3.SystemProgram.transfer({
+        fromPubkey: senderWallet.PublicKey,
+        toPubkey: desPubKey,
+        lamports
+      })
+
+      let trans = await setWalletTransaction(transaction, connection)
+      let signature = await signAndSendTransaction(senderWallet, trans, connection)
+    } catch (error) {
+
+    }
+
+  }
+
+
+  const setWalletTransaction = async (instruction, connection) => {
+    const transaction = new solanaWeb3.Transaction();
+    transaction.add(instruction);
+    transaction.feePayer = wallet.publicKey;
+    let hash = await connection.getRecentBlockhash();
+    console.log("blockhash", hash);
+    transaction.recentBlockhash = hash.blockhash;
+    return transaction;
+  }
+
+  const signAndSendTransaction = async (wallet, transaction, connection) => {
+    // Sign transaction, broadcast, and confirm
+    const { signature } = await window.solana.signAndSendTransaction(
+      transaction
+    );
+    await connection.confirmTransaction(signature);
+    return signature;
+  }
+
+
+
+
+
   return (
     <div className="container mx-auto mb-10 relative z-10">
       <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
@@ -57,22 +110,46 @@ const EventDetail = ({ event }) => {
             justo sit amet neque ultrices venenatis non non velit.
           </p>
         </div>
-        <div className="mt-8 flex flex-col items-center">
-          <QRCode value={event.qrCodeData} size={128} />
-          <div className="mt-5 text-center">
-            <p className="text-lg lg:text-xl font-semibold mb-2 text-[#ffffff]">
-              How to Use Your QR Code
-            </p>
-            <p className="text-base lg:text-lg text-[#e2e8ff]">
-              To obtain your event ticket, simply present this QR code at the
-              event entrance.
-            </p>
-            <p className="text-base lg:text-lg mt-2 text-[#e2e8ff]">
-              Please ensure you have completed the necessary registration or
-              purchase process before arriving at the event.
-            </p>
+        <div>
+          <div className="flex text-white text-[20px] font-bold mx-auto justify-center"><p>Purchase Ticket</p></div>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-[#e2e8ff]">
+              Name:
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+              placeholder="Enter your name"
+              // value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-[#e2e8ff]">
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+              placeholder="Enter your email"
+              // value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex justify-center"
+          
+          onClick={()=>{
+            
+          }}
+          >
+            <button className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">Purchase</button>
           </div>
         </div>
+
       </div>
     </div>
   );
