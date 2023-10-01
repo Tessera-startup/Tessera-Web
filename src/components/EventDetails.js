@@ -1,34 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import QRCode from "qrcode.react";
-import React from "react";
+import { React, useContext } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import * as solanaWeb3 from "@solana/web3.js";
+import { TessaraContext } from "../context/Context";
 
 
 
 const EventDetail = ({ event }) => {
-  const senderWallet = ""
+  const { wallet, setWallet } = useContext(TessaraContext)
   const handleLogin = (e) => {
     e.preventDefault();
   };
 
-  const purchaseTicket = async (receiver) => {
+  const purchaseTicket = async (receiver, amount) => {
     const connection = new solanaWeb3.Connection("https://api.devnet.solana.com")
-    const transaction = new solanaWeb3.Transaction();
     const lamports = amount * solanaWeb3.LAMPORTS_PER_SOL
+
     try {
       const desPubKey = new solanaWeb3.PublicKey(receiver)
-      const sendWalletInformation = await connection.getAccountInfo(senderWallet.PublicKey)
       const transactionInstruction = solanaWeb3.SystemProgram.transfer({
-        fromPubkey: senderWallet.PublicKey,
+        fromPubkey: wallet.publicKey,
         toPubkey: desPubKey,
         lamports
       })
-
-      let trans = await setWalletTransaction(transaction, connection)
-      let signature = await signAndSendTransaction(senderWallet, trans, connection)
+      let trans = await setWalletTransaction(transactionInstruction, connection)
+      let signature = await signAndSendTransaction(trans, connection)
     } catch (error) {
+      console.log(error.message);
 
     }
 
@@ -40,13 +40,11 @@ const EventDetail = ({ event }) => {
     transaction.add(instruction);
     transaction.feePayer = wallet.publicKey;
     let hash = await connection.getRecentBlockhash();
-    console.log("blockhash", hash);
     transaction.recentBlockhash = hash.blockhash;
     return transaction;
   }
 
-  const signAndSendTransaction = async (wallet, transaction, connection) => {
-    // Sign transaction, broadcast, and confirm
+  const signAndSendTransaction = async (transaction, connection) => {
     const { signature } = await window.solana.signAndSendTransaction(
       transaction
     );
@@ -141,10 +139,11 @@ const EventDetail = ({ event }) => {
             />
           </div>
           <div className="flex justify-center"
-          
-          onClick={()=>{
-            
-          }}
+
+            onClick={() => {
+              purchaseTicket("39QcE4gSNztpjvq78aa45W6J9Pn551is52C2XxhSsDTR", 0.01)
+
+            }}
           >
             <button className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">Purchase</button>
           </div>

@@ -20,7 +20,6 @@ const Navbar = () => {
       if (window.solana) {
         const currentWallet = await window.solana.connect()
         setWallet(currentWallet)
-        console.log(currentWallet, "CURRENT");
 
       } else {
         return toast.warning("Wallet extension not installed")
