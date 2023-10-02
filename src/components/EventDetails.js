@@ -1,20 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import QRCode from "qrcode.react";
-import { React, useContext } from "react";
+import { React, useContext, useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import * as solanaWeb3 from "@solana/web3.js";
 import { TessaraContext } from "../context/Context";
+import { toast } from "react-toastify";
 
 
 
 const EventDetail = ({ event }) => {
   const { wallet, setWallet } = useContext(TessaraContext)
+  const [formData, setFormData] = useState({name:"", email:""})
+
+
   const handleLogin = (e) => {
     e.preventDefault();
   };
 
+  const handleChange =(e)=>{
+    setFormData({...formData, [e.target.name]: e.target.value})
+
+  }
+
   const purchaseTicket = async (receiver, amount) => {
+    if(!formData.email || !formData.name)return toast.warning("Name and email are required")
     const connection = new solanaWeb3.Connection("https://api.devnet.solana.com")
     const lamports = amount * solanaWeb3.LAMPORTS_PER_SOL
 
@@ -115,12 +125,13 @@ const EventDetail = ({ event }) => {
               Name:
             </label>
             <input
-              type="email"
-              id="email"
+              type="name"
+              id="name"
+              name="name"
               className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
               placeholder="Enter your name"
               // value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleChange(e)}
               required
             />
           </div>
@@ -131,17 +142,24 @@ const EventDetail = ({ event }) => {
             <input
               type="email"
               id="email"
+              name="email"
               className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
               placeholder="Enter your email"
               // value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleChange(e)}
               required
             />
           </div>
           <div className="flex justify-center"
 
             onClick={() => {
-              purchaseTicket("39QcE4gSNztpjvq78aa45W6J9Pn551is52C2XxhSsDTR", 0.01)
+              console.log(formData, "FOMRDATA");
+              if (wallet != "" | window.solana == undefined) {
+                
+                purchaseTicket("39QcE4gSNztpjvq78aa45W6J9Pn551is52C2XxhSsDTR", 0.01)
+              } else {
+                return toast.warning("Wallet not connected")
+              }
 
             }}
           >
