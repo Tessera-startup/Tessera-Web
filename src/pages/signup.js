@@ -41,7 +41,7 @@ const SponsorSignup = () => {
         setError("Registration failed. Please try again.");
       }
     } finally {
-      setLoading(true); // Set loading to false regardless of success or failure
+      setLoading(false);
     }
   };
 
@@ -81,6 +81,7 @@ const SponsorSignup = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+              {error && <p className="text-red-500">{error}</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="phoneNumber" className="block text-[#e2e8ff]">
@@ -123,7 +124,11 @@ const SponsorSignup = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-              {error && <p className="text-red-500">{error}</p>}
+              {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+                  {error}
+                </div>
+              )}
             </div>
             <div className="mb-4">
               <button
