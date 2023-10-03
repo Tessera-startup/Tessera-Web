@@ -44,7 +44,7 @@ const Scanner = (props) => {
             style={{ width: '40%', height: '40%' }}
           />
         </div>
-  
+
 
         {data == null ? <p className='flex mx-auto'>No data Loaded</p> :
 
@@ -58,10 +58,11 @@ const Scanner = (props) => {
 
               <div>
                 <p className='text-black font-bold italic text-[9px]'>Ticket Owner: {data.customer_name} </p>
-                <p className='text-black font-bold italic text-[9px]'>Event: </p>
-                <p className='text-black font-bold italic text-[9px]'>Date: {data?.date}</p>
-                <p className='text-black font-bold italic text-[9px]'>Location: </p>
+                <p className='text-black font-bold italic text-[9px]'>Event:  {data?.event_name} </p>
+                <p className='text-black font-bold italic text-[9px]'>Date Paid: {data?.date}</p>
+                <p className='text-black font-bold italic text-[9px]'>Location:{data?.location} </p>
                 <p className='text-black font-bold italic text-[9px]'>Payer's Address : {data?.payer_address}</p>
+
 
               </div>
             </div>
