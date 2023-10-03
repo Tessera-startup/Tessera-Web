@@ -1,14 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavbarImg from "../../public/tesseralogoMain.png";
+import { toast } from 'react-toastify'
+import { TessaraContext } from "../context/Context";
+
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { wallet, setWallet } = useContext(TessaraContext)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const connectWallet = async () => {
+    try {
+      if (window.solana) {
+        const currentWallet = await window.solana.connect()
+        setWallet(currentWallet)
+
+      } else {
+        return toast.warning("Wallet extension not installed")
+      }
+
+    } catch (error) {
+      console.log(error, "Wallet connection error");
+
+    }
+    await window.solana.on('connect', () => {
+      
+      toast.success("Wallect connected")
+    })
+  }
+
 
   return (
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
@@ -42,7 +68,7 @@ const Navbar = () => {
                   href="/tickets"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
                 >
-                  My Tickets
+                  Tickets
                 </Link>
                 <Link
                   passHref
@@ -58,13 +84,21 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
+
                 <Link
                   passHref
-                  href="/wallet"
+                  href="/scanner"
                   className="text-gray-300 border btn-transparent  hover:text-white px-6 py-2 rounded-md text-sm"
                 >
-                  Connect Wallet
+                  Scan Ticket
                 </Link>
+                <button
+
+                  className="bg-white text-black px-4 py-2 rounded-lg"
+                  onClick={() => connectWallet()}
+                >
+                  {!wallet == "" ? "Connected":"Connect Wallet"}
+                </button>
               </div>
             </div>
           </div>
@@ -147,13 +181,13 @@ const Navbar = () => {
           >
             Login
           </Link>
-          <Link
-            passHref
-            href="/wallet"
-            className="block text-gray-300 btn-transparent hover:bg-gray-700 hover:text-white hover:px-4 p-2 rounded-md text-sm font-medium"
+          <button
+
+            className="bg-white text-black px-4 py-2"
+            onClick={() => { }}
           >
             Connect Wallet
-          </Link>
+          </button>
         </div>
       </div>
     </nav>
