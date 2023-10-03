@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const SponsorSignup = () => {
   const [businessname, setBusinessname] = useState("");
@@ -10,6 +11,8 @@ const SponsorSignup = () => {
   const [phonenumber, setPhonenumber] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -26,6 +29,13 @@ const SponsorSignup = () => {
         }
       );
       console.log(res.data);
+      //Check for a successful response
+      if(res.status === 200){
+        router.push('/login');
+      } else {
+        console.error("Unexpected response", res);
+        setError("Registration failed. Please try again.");
+      }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         // Check if the server responds with a 400 status (Bad Request)
