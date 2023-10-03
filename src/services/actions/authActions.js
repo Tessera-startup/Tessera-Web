@@ -26,21 +26,20 @@ export const loginAction = createAsyncThunk(
         try {
             const { data } = await loginInRoute(formData)
           
-            const payload = {
-                success: true,
-                access: data.access,
-                refresh: data.refresh,
-                credentials: data.data
-            }
+            // const payload = {
+            //     success: true,
+            //     access: data.access,
+            //     refresh: data.refresh,
+            //     credentials: data.data
+            // }
 
             if (data) {
                 toast.success('Login successful.')
 
-                localStorage.setItem('user', JSON.stringify(payload))
+                localStorage.setItem('user', JSON.stringify(data))
 
-                // navigate('/user-dashboard', { replace: true })
 
-                
+
             }
 
             return data
