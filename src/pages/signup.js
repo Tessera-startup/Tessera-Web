@@ -1,133 +1,148 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
+import axios from "axios";
 
 const SponsorSignup = () => {
-  const [businessName, setBusinessName] = useState("");
+  const [businessname, setBusinessname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [location, setLocation] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [registered, setRegistered] = useState(false);
+  const [phonenumber, setPhonenumber] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    setRegistered(true);
+    try {
+      setLoading(true);
+      const res = await axios.post(
+        "https://tessera-api.onrender.com/auth/register",
+        {
+          businessname,
+          email,
+          password,
+          confirmPassword,
+          phonenumber,
+        }
+      );
+      console.log(res.data);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        // Check if the server responds with a 400 status (Bad Request)
+        // This could indicate that the email is already taken
+        console.log("User with this email is already registered.");
+        setError("User with this email is already registered.");
+      } else {
+        // Handle other errors
+        console.error(
+          "Registration failed:",
+          error.response?.data || error.message
+        );
+        setError("Registration failed. Please try again.");
+      }
+    } finally {
+      setLoading(true); // Set loading to false regardless of success or failure
+    }
   };
 
   return (
     <Layout>
       <div className="gradient fixed"></div>
       <div className="container mx-auto mt-32 relative z-10">
-        {registered ? (
-          <div>
-            <h2 className="text-3xl font-semibold mb-4 text-gray-400">
-              Registration Successful!
-            </h2>
-            <p>Your sponsor account has been created.</p>
-          </div>
-        ) : (
-          <div className="max-w-screen-sm mx-auto mt-9 px-5">
-            <h2 className="text-3xl font-semibold mb-4 text-[#e2e8ff]">
-              Sponsor Signup
-            </h2>
-            <form onSubmit={handleSignup}>
-              <div className="mb-4">
-                <label htmlFor="businessName" className="block text-[#e2e8ff]">
-                  Business Name:
-                </label>
-                <input
-                  type="text"
-                  id="businessName"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-                  placeholder="Enter your business name"
-                  value={businessName}
-                  onChange={(e) => setBusinessName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-[#e2e8ff]">
-                  Business Email:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="location" className="block text-[#e2e8ff]">
-                  Location:
-                </label>
-                <input
-                  type="text"
-                  id="location"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-                  placeholder="Enter your location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="phoneNumber" className="block text-[#e2e8ff]">
-                  Phone Number:
-                </label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-                  placeholder="Enter your phone number"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-[#e2e8ff]">
-                  Password:
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-[#e2e8ff]"
-                >
-                  Confirm Password:
-                </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-                  placeholder="Confirm your password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
-              </div>
+        <div className="max-w-screen-sm mx-auto mt-9 px-5">
+          <h2 className="text-3xl font-semibold mb-4 text-[#e2e8ff]">
+            Sponsor Signup
+          </h2>
+          <form onSubmit={handleSignup}>
+            <div className="mb-4">
+              <label htmlFor="businessName" className="block text-[#e2e8ff]">
+                Business Name:
+              </label>
+              <input
+                type="text"
+                id="businessname"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Enter your business name"
+                value={businessname}
+                onChange={(e) => setBusinessname(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-[#e2e8ff]">
+                Business Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="phoneNumber" className="block text-[#e2e8ff]">
+                Phone Number:
+              </label>
+              <input
+                type="tel"
+                id="phonenumber"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Enter your phone number"
+                value={phonenumber}
+                onChange={(e) => setPhonenumber(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-[#e2e8ff]">
+                Password:
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="confirmPassword" className="block text-[#e2e8ff]">
+                Confirm Password:
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              {error && <p className="text-red-500">{error}</p>}
+            </div>
+            <div className="mb-4">
               <button
                 type="submit"
-                className="text-gray-300 btn-transparent bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+                className="relative text-gray-300 btn-transparent bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+                disabled={loading}
               >
-                Signup
+                <div className="lds-dual-ring-container">
+                  {loading && (
+                    <div className="flex justify-center items-center">
+                      Signing up <div className="lds-dual-ring"></div>
+                    </div>
+                  )}
+                  {!loading && <span>Signup</span>}
+                </div>
               </button>
-            </form>
-          </div>
-        )}
+            </div>
+          </form>
+        </div>
       </div>
     </Layout>
   );
