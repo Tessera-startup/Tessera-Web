@@ -153,13 +153,13 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             passHref
             href="/admin"
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
           >
             Admin
-          </Link>
+          </Link> */}
           <Link
             passHref
             href="/tickets"
