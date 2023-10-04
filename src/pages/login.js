@@ -3,17 +3,19 @@ import Layout from "../components/Layout";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const SponsorLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
       const res = await axios.post(
         "https://tessera-api.onrender.com/auth/login",
@@ -22,10 +24,15 @@ const SponsorLogin = () => {
           password,
         }
       );
-  
+
       if (res.status === 200) {
-        // Redirect to the admin page upon successful login
-        router.push('/admin');  
+        const { user, accesstoken } = res.data;
+        //access token in local storage
+        localStorage.setItem("accessToken", accesstoken);
+        console.log("Login successful. Access token:", accesstoken);
+        setLoggedIn(true);
+        toast.success("Login successful!");
+        router.push("/admin");
       } else {
         console.error("Unexpected response:", res);
         setError("Login failed. Please check your credentials and try again.");
@@ -42,7 +49,6 @@ const SponsorLogin = () => {
       }
     }
   };
-  
 
   return (
     <Layout>
@@ -89,12 +95,15 @@ const SponsorLogin = () => {
               Login
             </button>
           </form>
-          <p className="mt-4  text-gray-400">
-            Don't have an account? {""}
+          <p className="mt-4 text-gray-400">
+            Don't have an account?{" "}
             <Link href="/signup" className="text-white">
               Sign up here
             </Link>
           </p>
+          {loggedIn && (
+            <p className="text-green-500">Logged in successfully!</p>
+          )}
         </div>
       </div>
     </Layout>

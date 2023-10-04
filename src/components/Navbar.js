@@ -1,47 +1,60 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavbarImg from "../../public/tesseralogoMain.png";
-import { toast } from 'react-toastify'
+import { toast } from "react-toastify";
 import { TessaraContext } from "../context/Context";
-
-
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { wallet, setWallet } = useContext(TessaraContext)
+  const { wallet, setWallet } = useContext(TessaraContext);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const router = useRouter();
+
   const connectWallet = async () => {
     try {
       if (window.solana) {
-        const currentWallet = await window.solana.connect()
-        setWallet(currentWallet)
-
+        const currentWallet = await window.solana.connect();
+        setWallet(currentWallet);
       } else {
-        return toast.warning("Wallet extension not installed")
+        return toast.warning("Wallet extension not installed");
       }
-
     } catch (error) {
       console.log(error, "Wallet connection error");
-
     }
-    await window.solana.on('connect', () => {
-      
-      toast.success("Wallect connected")
-    })
-  }
+    await window.solana.on("connect", () => {
+      toast.success("Wallect connected");
+    });
+  };
 
+  const logout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("accessToken"); // Clear access token from localStorage
+    toast.success("Logged out successfully");
+    router.push("/");
+  };
+
+  useEffect(() => {
+    // Check if access token exists in localStorage
+    const accessToken = localStorage.getItem("accessToken");
+    setLoggedIn(!!accessToken); // Update the loggedIn state based on the existence of the access token
+  }, []);
+
+  useEffect(() => {
+    console.log("loggedIn state:", loggedIn);
+  }, [loggedIn]);
 
   return (
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
       <div className="container mx-auto">
         <div className="flex items-center justify-between h-20 w-full">
           <div className="flex w-full items-center">
-            {" "}
             <div className="flex-shrink-0 mx-4">
               <Link href="/" className="text-white relative text-2xl" passHref>
                 <Image src={NavbarImg} alt={"tessera"} width={50} height={50} />
@@ -56,13 +69,15 @@ const Navbar = () => {
                 >
                   Home
                 </Link>
-                {/* <Link
+                <Link
                   passHref
                   href="/admin"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                  className={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm ${
+                    loggedIn ? "" : "hidden"
+                  }`}
                 >
                   Admin
-                </Link> */}
+                </Link>
                 <Link
                   passHref
                   href="/tickets"
@@ -78,13 +93,26 @@ const Navbar = () => {
                   About
                 </Link>
                 <Link
-                  passHref
                   href="/login"
-                  className="text-gray-300 border btn-transparent  hover:text-white px-6 py-2 rounded-md text-sm"
+                  className={`text-gray-300 border btn-transparent hover:text-white px-3 py-2 rounded-md text-sm ${
+                    loggedIn ? "hidden" : ""
+                  }`}
                 >
                   Login
                 </Link>
 
+                {loggedIn && (
+                  <Link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      logout(); 
+                    }}
+                    href="/logout"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                  >
+                    Logout
+                  </Link>
+                )}
                 <Link
                   passHref
                   href="/scanner"
@@ -93,11 +121,10 @@ const Navbar = () => {
                   Scan Ticket
                 </Link>
                 <button
-
                   className="bg-white text-black px-4 py-2 rounded-lg"
                   onClick={() => connectWallet()}
                 >
-                  {!wallet == "" ? "Connected":"Connect Wallet"}
+                  {!wallet == "" ? "Connected" : "Connect Wallet"}
                 </button>
               </div>
             </div>
@@ -153,13 +180,15 @@ const Navbar = () => {
           >
             Home
           </Link>
-          {/* <Link
-            passHref
-            href="/admin"
-            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
-          >
-            Admin
-          </Link> */}
+          {/* {loggedIn && (
+            <Link
+              passHref
+              href="/admin"
+              className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
+            >
+              Admin
+            </Link>
+          )} */}
           <Link
             passHref
             href="/tickets"
@@ -176,17 +205,32 @@ const Navbar = () => {
           </Link>
           <Link
             passHref
-            href="/login"
-            className="block text-gray-300  hover:bg-gray-700 hover:text-white hover:px-4 py-2  rounded-md text-sm font-medium"
+            href="/about"
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm font-medium"
           >
-            Login
+            Sca ticket
           </Link>
           <button
-
-            className="bg-white text-black px-4 py-2"
-            onClick={() => { }}
+            className={`block btn-transparent px-4 py-2 text-white hover:bg-gray-700 hover:text-white hover:px-4  mb-3 rounded-md text-sm font-medium ${
+              loggedIn ? "hidden" : ""
+            }`}
+            onClick={() => router.push("/login")}
           >
-            Connect Wallet
+            Login
+          </button>
+          {loggedIn && (
+            <button
+              className="block btn-transparent text-white mb-3 px-4 py-2"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          )}
+          <button
+            className="block bg-white px-4 py-2"
+            onClick={() => connectWallet()}
+          >
+            {!wallet == "" ? "Connected" : "Connect Wallet"}
           </button>
         </div>
       </div>

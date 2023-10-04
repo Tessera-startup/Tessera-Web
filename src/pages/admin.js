@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
 import { intialEvents } from "../../data/events";
@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { IoMdArrowBack } from "react-icons/io";
+import { useRouter } from "next/router";
 
 function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
@@ -14,6 +15,18 @@ function AdminPage() {
   const eventCount = 25;
   const ticketCount = 100;
   const balanceSol = 500;
+
+  const router = useRouter();
+
+  useEffect(()=> {
+    // Check if access token exists in localStorage
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("Login successful. Access token:", accessToken);
+    if (!accessToken) {
+      // Redirect to the login page if not logged in
+      router.push("/login");
+    }
+  },[router])
 
   return (
     <Layout>

@@ -31,7 +31,11 @@ const SponsorSignup = () => {
       console.log(res.data);
       //Check for a successful response
       if(res.status === 200){
-        router.push('/login');
+        const token = res.data.token;
+
+        // Store the token in localStorage
+        localStorage.setItem("token", token);
+        router.push("/dashboard");
       } else {
         console.error("Unexpected response", res);
         setError("Registration failed. Please try again.");
