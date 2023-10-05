@@ -1,11 +1,28 @@
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { intialEvents } from "../../data/events";
+import axios from "axios";
 
 const EventList = () => {
+  const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
+
+  useEffect(() => {
+    // Fetch events data when the component mounts
+    fetchEventsData();
+  }, []);
+
+  const fetchEventsData = async () => {
+    try {
+      const response = await axios.get(
+        "https://tessera-api.onrender.com/events/all-events"
+      );
+      setEvents(response.data);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
   const loadMoreEvents = () => {
     setVisibleEvents(visibleEvents + 3);
@@ -26,7 +43,7 @@ const EventList = () => {
         Upcoming Events
       </motion.h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {intialEvents.slice(0, visibleEvents).map((event) => (
+        {events.slice(0, visibleEvents).map((event) => (
           <Link href={`/event/${event.id}`} key={event.id}>
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -45,7 +62,7 @@ const EventList = () => {
                   className="rounded-t-md"
                 />
                 <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
-                  {event.category}
+                  {event.location}
                 </div>
               </div>
               <div className="p-3">
@@ -59,7 +76,7 @@ const EventList = () => {
                 <p className="text-gray-400">{event.location}</p>
                 <div className="flex justify-between items-center">
                   <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">
-                    $10
+                    {event.ticket_count}
                   </p>
                   <motion.p
                     className="text-sm sm:text-md md:text-lg text-gray-400 cursor-pointer"
@@ -73,7 +90,7 @@ const EventList = () => {
           </Link>
         ))}
       </div>
-      {visibleEvents < intialEvents.length && (
+      {visibleEvents < events.length && (
         <div className="flex justify-center my-4 text-gray-100">
           <button className="button pt-1" onClick={loadMoreEvents}>
             <svg

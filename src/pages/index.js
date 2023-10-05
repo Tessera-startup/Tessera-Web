@@ -3,22 +3,14 @@ import HeroSection from "../components/HeroSection";
 import EventList from "../components/EventList";
 import Layout from "../components/Layout";
 
-
-
 function Home() {
   return (
-
-  
-        <Layout>
-
-          <div className="gradient fixed"></div>
-          <HeroSection />
-          <EventList />
-          <br />
-        </Layout>
-
-  
-
+    <Layout>
+      <div className="gradient fixed"></div>
+      <HeroSection />
+      <EventList />
+      <br />
+    </Layout>
   );
 }
 

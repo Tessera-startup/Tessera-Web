@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import Dashboard from "../../components/Dashboard";
-import { intialEvents } from "../../../data/events";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { IoMdArrowBack } from "react-icons/io";
+import axios from "axios";
 
 function AdminPage() {
+  const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
+
+  useEffect(() => {
+    // Fetch events data when the component mounts
+    fetchEventsData();
+  }, []);
+
+  const fetchEventsData = async () => {
+    try {
+      const response = await axios.get(
+        "https://tessera-api.onrender.com/events/all-events"
+      );
+      setEvents(response.data);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
   const loadMoreEvents = () => {
     setVisibleEvents(visibleEvents + 3);
@@ -22,10 +39,8 @@ function AdminPage() {
           <IoMdArrowBack /> <span className="ml-2">Go back</span>
         </Link>
         <div className="event-content p-0 sm:p-8 about relative z-10">
-          <h2 className="text-3xl font-semibold mb-4 text-white">
-            All Events
-          </h2>
-          {intialEvents.slice(0, visibleEvents).map((event) => (
+          <h2 className="text-3xl font-semibold mb-4 text-white">All Events</h2>
+          {events.slice(0, visibleEvents).map((event) => (
             <Link href={`/event/${event.id}`} key={event.id}>
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
@@ -35,7 +50,7 @@ function AdminPage() {
               >
                 <div className="relative">
                   <Image
-                    src={event.imageUrl}
+                    src={event?.image} // Adjust this based on your API response
                     alt={event.title}
                     width={640}
                     height={480}
@@ -44,7 +59,7 @@ function AdminPage() {
                     className="blog-header-image"
                   />
                   <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
-                    {event.category}
+                    {event.location} location
                   </div>
                 </div>
                 <div className="p-3">
@@ -58,7 +73,7 @@ function AdminPage() {
                   <p className="text-gray-400">{event.location}</p>
                   <div className="flex justify-between items-center">
                     <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">
-                      $10
+                      {event.amount}
                     </p>
                     <motion.p
                       className="text-sm sm:text-md md:text-lg text-gray-400 cursor-pointer"
@@ -72,7 +87,7 @@ function AdminPage() {
             </Link>
           ))}
         </div>
-        {visibleEvents < intialEvents.length && (
+        {visibleEvents < events.length && (
           <div className="flex justify-center mb-10 text-gray-100">
             <button className="button" onClick={loadMoreEvents}>
               <svg
