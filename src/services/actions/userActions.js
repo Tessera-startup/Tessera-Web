@@ -1,38 +1,58 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { } from "../routes/userRoutes"
+import { createEvent, getAllEvents, getAllTickets } from "../routes/userRoutes"
 
 
 
-// export const getSampleActions = createAsyncThunk(
-//     'user/getTransactionsActions',
-//     async (_, { rejectWithValue }) => {
-//         try {
-//             const { data } = await transactionRoute()
+export const getTicketsAction = createAsyncThunk(
+    'user/getTickets',
+    async (_, { rejectWithValue }) => {
+        try {
+            const { data } = await getAllTickets()
 
 
-//             return data.data
-//         } catch (error) {
-//             console.log(error.response)
-//             return rejectWithValue(null)
-//         }
-//     }
-// )
+            return data
+        } catch (error) {
+            console.log(error.response)
+            return rejectWithValue(null)
+        }
+    }
+)
 
 
-// export const postSampleActions = createAsyncThunk(
-//     'user/getTransactionsActions',
-//     async ({formData}, { rejectWithValue }) => {
-//         try {
-//             const { data } = await transactionRoute(formData)
+export const getAllEventsAction = createAsyncThunk(
+    'user/getEvents',
+    async (_, { rejectWithValue }) => {
+        try {
+            const { data } = await getAllEvents()
+            console.log("EVENT FULFILLED");
 
 
-//             return data.data
-//         } catch (error) {
-//             console.log(error.response)
-//             return rejectWithValue(null)
-//         }
-//     }
-// )
+            return data
+        } catch (error) {
+            console.log(error)
+            return rejectWithValue(null)
+        }
+    }
+)
+
+
+export const createEventAction = createAsyncThunk(
+  'user/createEvent',
+  async ({formData, toast}, { rejectWithValue }) => {
+    try {
+      const { data } = await createEvent(formData)
+      toast.success("Event create successfully")
+      
+
+
+      return data
+    } catch (error) {
+      console.log(error)
+      toast.error("Failed to create the event. Please try again.");
+      return rejectWithValue(null)
+    }
+  }
+)
 
 
 

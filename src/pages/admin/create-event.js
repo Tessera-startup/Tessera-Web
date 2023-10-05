@@ -5,76 +5,37 @@ import { IoMdArrowBack } from "react-icons/io";
 import Link from "next/link";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { createEventAction } from "../../services/actions/userActions";
+import { useDispatch } from "react-redux";
 
 function CreateEventPage() {
-  const [eventImage, setEventImage] = useState(null);
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [ticketCount, setTicketCount] = useState(0);
-  const [eventDescription, setEventDescription] = useState("");
-  const [ticketAmount, setTicketAmount] = useState(0);
 
+  const dispatch = useDispatch()
+  const [formData, setFormData] = useState({
+    image: "",
+    date_of_event: "",
+    amount: "",
+    description: "",
+    location: "",
+    name: "",
+    ticket_count: ""
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
   //image handler - issue handling image upload
   const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    if (selectedImage) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setEventImage(e.target.result);
-      };
-      reader.readAsDataURL(selectedImage);
-    } else {
-      setEventImage(null);
-    }
+    setFormData({ ...formData, [e.target.name]: e.target.files[0] })
   };
 
   const handleSubmit = async (e) => {
+    console.log("PRESSED", formData);
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", eventTitle);
-    formData.append("date_of_event", eventDate);
-    formData.append("location", eventLocation);
-    formData.append("ticket_count", ticketCount);
-    formData.append("amount", ticketAmount);
-    formData.append("image", eventImage);
-    formData.append("description", eventDescription);
+    const res = await dispatch(createEventAction({ formData, toast }))
+    console.log("GOT HERE");
 
-    // Proceed with the request using accessToken..
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      toast.error("Authorization token is missing. Please log in.");
-      return;
-    }
 
-    console.log("formData:", formData);
-    console.log("headers:", {
-      "Content-Type": "multipart/form-data",
-      Authorization: accessToken,
-    });
-
-    try {
-      const response = await axios.post(
-        "https://tessera-api.onrender.com/events/create-event",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-
-      if (response.status === 201) {
-        // Event creation successful
-        toast.success("Event created successfully!");
-      } else {
-        toast.error("Failed to create the event. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error creating event:", error);
-      toast.error("An error occurred. Please try again later.");
-    }
   };
 
   return (
@@ -98,15 +59,16 @@ function CreateEventPage() {
               </label>
               <input
                 type="file"
-                onChange={handleImageChange}
+                name="image"
+                onChange={(e) => handleImageChange(e)}
                 accept="image/*"
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full"
                 required
               />
-              {eventImage ? (
+              {formData.image ? (
                 <div className="mt-2">
                   <img
-                    src={eventImage}
+                    src={URL.createObjectURL(formData.image)}
                     alt="Event Preview"
                     className="max-w-full h-auto"
                   />
@@ -122,8 +84,8 @@ function CreateEventPage() {
               </label>
               <input
                 type="text"
-                value={eventTitle}
-                onChange={(e) => setEventTitle(e.target.value)}
+                name="name"
+                onChange={(e) => handleChange(e)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full"
                 required
               />
@@ -134,8 +96,8 @@ function CreateEventPage() {
               </label>
               <input
                 type="text"
-                value={eventLocation}
-                onChange={(e) => setEventLocation(e.target.value)}
+                name="location"
+                onChange={(e) => handleChange(e)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full"
                 required
               />
@@ -145,8 +107,8 @@ function CreateEventPage() {
                 Event Description:
               </label>
               <textarea
-                value={eventDescription}
-                onChange={(e) => setEventDescription(e.target.value)}
+                name="description"
+                onChange={(e) => handleChange(e)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full h-32"
                 required
               />
@@ -157,8 +119,9 @@ function CreateEventPage() {
               </label>
               <input
                 type="number"
-                value={ticketAmount}
-                onChange={(e) => setTicketAmount(e.target.value)}
+                name="amount"
+
+                onChange={(e) => handleChange(e)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
                 required
               />
@@ -169,8 +132,9 @@ function CreateEventPage() {
               </label>
               <input
                 type="date"
-                value={eventDate}
-                onChange={(e) => setEventDate(e.target.value)}
+                name="date_of_event"
+
+                onChange={(e) => handleChange(e)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
                 required
               />
@@ -181,8 +145,9 @@ function CreateEventPage() {
               </label>
               <input
                 type="number"
-                value={ticketCount}
-                onChange={(e) => setTicketCount(e.target.value)}
+                name="ticket_count"
+
+                onChange={(e) => handleChange(e)}
                 className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
                 required
               />

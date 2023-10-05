@@ -1,7 +1,8 @@
 import { API } from '../axios_config'
 
-export const getRouteSample = () => API.get('/events/route1')
-export const postRouteSample = (formData) => API.post('/events/route2', formData)
+export const getAllTickets = () => API.get('/events/all-tickets')
+export const getAllEvents = () => API.get('/events/all-events')
+export const createEvent = (formData) => API.post('/events/create-event', formData, { headers: { "content-type": "multipart/form-data" }})
 
 
 

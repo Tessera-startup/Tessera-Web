@@ -18,53 +18,52 @@ function AdminPage() {
 
   const router = useRouter();
 
-  useEffect(()=> {
+  useEffect(() => {
     // Check if access token exists in localStorage
-    const accessToken = localStorage.getItem("accessToken");
-    console.log("Login successful. Access token:", accessToken);
-    if (!accessToken) {
-      // Redirect to the login page if not logged in
-      router.push("/login");
-    }
-  },[router])
+    const user = JSON.parse(localStorage.getItem("user"))
+    if (!user.accesstoken) {
+    // Redirect to the login page if not logged in
+    router.push("/login");
+  }
+}, [router])
 
-  return (
-    <Layout>
-      <div className="gradient fixed"></div>
-      <Dashboard>
-        <div className="container p-0 sm:p-8 about relative z-10">
-          <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
-            Dashboard
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Event Counts Card */}
-            <div className="btn-transparent p-4 rounded-lg">
-              <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
-                Event Counts
-              </h3>
-              <p className="text-3xl font-bold text-green-400">{eventCount}</p>
-            </div>
+return (
+  <Layout>
+    <div className="gradient fixed"></div>
+    <Dashboard>
+      <div className="container p-0 sm:p-8 about relative z-10">
+        <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
+          Dashboard
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Event Counts Card */}
+          <div className="btn-transparent p-4 rounded-lg">
+            <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
+              Event Counts
+            </h3>
+            <p className="text-3xl font-bold text-green-400">{eventCount}</p>
+          </div>
 
-            {/* Ticket Counts Card */}
-            <div className="btn-transparent p-4 rounded-lg">
-              <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
-                Ticket Counts
-              </h3>
-              <p className="text-3xl font-bold text-blue-400">{ticketCount}</p>
-            </div>
+          {/* Ticket Counts Card */}
+          <div className="btn-transparent p-4 rounded-lg">
+            <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
+              Ticket Counts
+            </h3>
+            <p className="text-3xl font-bold text-blue-400">{ticketCount}</p>
+          </div>
 
-            {/* Balance (Sol) Card */}
-            <div className="btn-transparent p-4 rounded-lg">
-              <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
-                Balance (Sol)
-              </h3>
-              <p className="text-3xl font-bold text-yellow-400">{balanceSol}</p>
-            </div>
+          {/* Balance (Sol) Card */}
+          <div className="btn-transparent p-4 rounded-lg">
+            <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
+              Balance (Sol)
+            </h3>
+            <p className="text-3xl font-bold text-yellow-400">{balanceSol}</p>
           </div>
         </div>
-      </Dashboard>
-    </Layout>
-  );
+      </div>
+    </Dashboard>
+  </Layout>
+);
 }
 
 export default AdminPage;
