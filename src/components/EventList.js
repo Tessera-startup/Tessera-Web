@@ -2,31 +2,26 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { getAllEventsAction } from "../services/actions/userActions";
+import { useSelector } from "react-redux";
 
 const EventList = () => {
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
+  const { events } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
-    // Fetch events data when the component mounts
-    fetchEventsData();
+    dispatch(getAllEventsAction());
   }, []);
-
-  const fetchEventsData = async () => {
-    try {
-      const response = await axios.get(
-        "https://tessera-api.onrender.com/events/all-events"
-      );
-      setEvents(response.data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
 
   const loadMoreEvents = () => {
     setVisibleEvents(visibleEvents + 3);
   };
+
 
   return (
     <motion.div
@@ -43,8 +38,8 @@ const EventList = () => {
         Upcoming Events
       </motion.h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {events.slice(0, visibleEvents).map((event) => (
-          <Link href={`/event/${event.id}`} key={event.id}>
+        {events?.slice(0, visibleEvents).map((event) => (
+          <Link href={`/event/${event?._id}`} key={event?._id}>
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -53,16 +48,16 @@ const EventList = () => {
             >
               <div className="relative">
                 <Image
-                  src={event.imageUrl}
-                  alt={event.title}
-                  width={640}
-                  height={480}
+                  src={event?.image}
+                  alt={event?.title}
+                  width={500}
+                  height={500}
                   layout="responsive"
                   objectFit="cover"
                   className="rounded-t-md"
                 />
                 <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
-                  {event.location}
+                  {event?.location}
                 </div>
               </div>
               <div className="p-3">
@@ -70,13 +65,13 @@ const EventList = () => {
                   className="text-md sm:text-lg md:text-xl font-medium text-gray-400"
                   whileHover={{ scale: 1.05 }}
                 >
-                  {event.title}
+                  {event?.title}
                 </motion.h3>
-                <p className="text-gray-400">{event.date}</p>
-                <p className="text-gray-400">{event.location}</p>
+                <p className="text-gray-400">{event?.date_of_event}</p>
+                <p className="text-gray-400">{event?.location}</p>
                 <div className="flex justify-between items-center">
                   <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">
-                    {event.ticket_count}
+                    {event?.ticket_count}
                   </p>
                   <motion.p
                     className="text-sm sm:text-md md:text-lg text-gray-400 cursor-pointer"
@@ -90,7 +85,7 @@ const EventList = () => {
           </Link>
         ))}
       </div>
-      {visibleEvents < events.length && (
+      {visibleEvents < events?.length && (
         <div className="flex justify-center my-4 text-gray-100">
           <button className="button pt-1" onClick={loadMoreEvents}>
             <svg

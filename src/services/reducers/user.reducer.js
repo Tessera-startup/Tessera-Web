@@ -1,30 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {  } from '../actions/userActions'
+import { getAllEventsAction, getTicketsAction } from '../actions/userActions'
 
 
 
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        // transactions: null,
-      
+        events: null,
+        loadingState: false,
+
 
     },
     extraReducers: (builder) => {
-        // builder.addCase(getTransactionsActions.pending, (state, action) => {
-        //     // state.signUpLoading = true
-        // })
-        // builder.addCase(getTransactionsActions.fulfilled, (state, action) => {
-        //     // state.signUpLoading = false
-        //     state.transactions = action.payload
-        // })
-        // builder.addCase(getTransactionsActions.rejected, (state, action) => {
-        //     // state.signUpLoading = false
-        // })
-        // //
-        
+        builder.addCase(getTicketsAction.pending, (state, action) => {
+            state.loadingState = true
+        })
+        builder.addCase(getTicketsAction.fulfilled, (state, action) => {
+            state.loadingState = false
+            state.events = action.payload
+        })
+        builder.addCase(getTicketsAction.rejected, (state, action) => {
+            state.loadingState = false
+        })
+        //
+        builder.addCase(getAllEventsAction.pending, (state, action) => {
+            state.loadingState = true
+        })
+        builder.addCase(getAllEventsAction.fulfilled, (state, action) => {
+            state.loadingState = false
+            state.events = action.payload
+        })
+        builder.addCase(getAllEventsAction.rejected, (state, action) => {
+            state.loadingState = false
+        })
 
-  
+        // //
+
+
+
 
 
 

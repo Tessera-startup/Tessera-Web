@@ -9,7 +9,7 @@ export const SignUpAction = createAsyncThunk(
         try {
             const { data } = await signUpRoute(formData)
 
-            toast.success("SignUp Successfull")
+            toast.success("SignUp Successful")
             // navigate('/login', { replace: true })
 
             return data
@@ -22,9 +22,10 @@ export const SignUpAction = createAsyncThunk(
 
 export const loginAction = createAsyncThunk(
     'auth/loginAction',
-    async ({ formData, toast }, { rejectWithValue }) => {
+    async ({ formData, toast}, { rejectWithValue }) => {
         try {
             const { data } = await loginInRoute(formData)
+            console.log(formData,"FORMDATA");
         
 
             if (data) {
@@ -32,6 +33,7 @@ export const loginAction = createAsyncThunk(
 
                 localStorage.setItem('user', JSON.stringify(data))
             }
+          
 
             return data
         } catch (error) {
