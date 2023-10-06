@@ -6,16 +6,15 @@ import { useSelector } from "react-redux";
 
 function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
+  const [eventCount, setEventCount] = useState(null); // State to store event count
   const [isLoading, setIsLoading] = useState(true);
   const { authData } = useSelector((state) => state.auth);
 
   // Mock data for event counts, ticket counts, and balance (sol)
-  const eventCount = 25;
   const ticketCount = 100;
   const balanceSol = 500;
 
   const router = useRouter();
-
   // Check if the user is logged in
   useEffect(() => {
     if (!authData || !authData.user) {
@@ -26,9 +25,29 @@ function AdminPage() {
     }
   }, [authData, router]);
 
-  if (isLoading) {
+  // Fetch the total number of events
+  const fetchEventCount = async () => {
+    try {
+      const response = await fetch(
+        "https://tessera-api.onrender.com/events/all-events"
+      );
+      const data = await response.json();
+      setEventCount(data.length);
+      console.log("Event count:", data.length);
+    } catch (error) {
+      console.error("Error fetching event count:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEventCount(); // Call the function when the component mounts
+  }, []);
+
+  if (isLoading || eventCount === null) {
     return <div>Loading...</div>;
   }
+
+  
   return (
     <Layout>
       <div className="gradient fixed"></div>
