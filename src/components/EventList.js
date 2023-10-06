@@ -4,13 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { getAllEventsAction } from "../services/actions/userActions";
+import { getAllEventsAction, setCurrentEvent } from "../services/actions/userActions";
 import { useSelector } from "react-redux";
 
 const EventList = () => {
   // const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
   const { events } = useSelector(state => state.user)
+
   const dispatch = useDispatch()
 
 
@@ -39,7 +40,9 @@ const EventList = () => {
       </motion.h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {events?.slice(0, visibleEvents).map((event) => (
-          <Link href={`/event/${event?._id}`} key={event?._id}>
+          <Link
+           onClick={()=> dispatch(setCurrentEvent({data:event}))}
+            href={`/event/${event?._id}`} key={event?._id}>
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -49,7 +52,7 @@ const EventList = () => {
               <div className="relative">
                 <Image
                   src={event?.image}
-                  alt={event?.title}
+                  // alt={event?.name}
                   width={500}
                   height={500}
                   layout="responsive"
@@ -81,6 +84,7 @@ const EventList = () => {
                   </motion.p>
                 </div>
               </div>
+              
             </motion.div>
           </Link>
         ))}

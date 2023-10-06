@@ -1,41 +1,48 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createEvent, getAllEvents, getAllTickets } from "../routes/userRoutes";
+import { createAsyncThunk } from "@reduxjs/toolkit"
+import { createEvent, createEventTicket, getAllEvents, getAllTickets } from "../routes/userRoutes"
+import axios from "axios"
+
+
 
 export const getTicketsAction = createAsyncThunk(
-  "user/getTickets",
+  'user/getTickets',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await getAllTickets();
+      const { data } = await getAllTickets()
 
-      return data;
+
+      return data
     } catch (error) {
-      console.log(error.response);
-      return rejectWithValue(null);
+      console.log(error.response)
+      return rejectWithValue(null)
     }
   }
-);
+)
+
 
 export const getAllEventsAction = createAsyncThunk(
-  "user/getEvents",
+  'user/getEvents',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await getAllEvents();
-      console.log("EVENT FULFILLED");
+      const { data } = await getAllEvents()
 
-      return data;
+      return data
     } catch (error) {
-      console.log(error);
-      return rejectWithValue(null);
+      console.log(error)
+      return rejectWithValue(null)
     }
   }
-);
+)
+
 
 export const createEventAction = createAsyncThunk(
-  "user/createEvent",
+  'user/createEvent',
   async ({ formData, toast }, { rejectWithValue }) => {
     try {
-      const { data } = await createEvent(formData);
-      toast.success("Event create successfully");
+      const { data } = await createEvent(formData)
+      toast.success("Event create successfully")
+
+
 
       return data;
     } catch (error) {
@@ -44,34 +51,40 @@ export const createEventAction = createAsyncThunk(
       return rejectWithValue(null);
     }
   }
-);
+)
 
-// export const getSolanaPrice = createAsyncThunk(
-//     'user/getSolPrice',
-//     async (_, { rejectWithValue }) => {
-//         try {
-//             const url = "https://data.messari.io/api/v1/assets/sol/metrics"
-//             const { data } = await fetch(url)
-//                 .then(response => {
-//                     if (!response.ok) {
-//                         throw new Error('Network response was not ok');
-//                     }
-//                     const jsonData = response.json();
-//                     return jsonData.data.market_data.price_usd
-//                 })
-//                 .then(data => {
+export const createEventTicketAction = createAsyncThunk(
+  'user/createEventTicket',
+  async ({ formData, toast }, { rejectWithValue }) => {
+    try {
+      const { data } = await createEventTicket(formData)
 
-//                     console.log(data);
-//                 })
-//                 .catch(error => {
-//                     // Handle errors here
-//                     console.error('Error:', error);
-//                 });
 
-//         } catch (error) {
 
-//             console.log(error.response)
-//             return rejectWithValue(null)
-//         }
-//     }
-// )
+
+      return data
+    } catch (error) {
+      console.log(error)
+      return rejectWithValue(null)
+    }
+  }
+)
+
+export const setCurrentEvent = createAsyncThunk(
+  'user/currentEvent',
+  async ({ data }, { rejectWithValue }) => {
+    try {
+
+
+      return data
+    } catch (error) {
+      console.log(error.response)
+      return rejectWithValue(null)
+    }
+  }
+)
+
+
+
+
+
