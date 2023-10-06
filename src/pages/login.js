@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 const SponsorLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State to track login errors
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -17,16 +18,18 @@ const SponsorLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true); // Set loading to true on submit
+
       const formData = {
         email: email,
         password: password,
       };
-  
+
       // Dispatch the login action and wait for the Promise to resolve
       const actionResult = await dispatch(loginAction({ formData, toast }));
-  
+
       console.log("Login Action Result:", actionResult);
-  
+
       if (actionResult.type === `${loginAction.fulfilled}`) {
         console.log("Login successful");
         setError("");
@@ -37,9 +40,17 @@ const SponsorLogin = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
+      setError("Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false);
     }
   };
-  
+
+  useEffect(() => {
+    return () => {
+      setLoading(false);
+    };
+  }, []);
 
   return (
     <Layout>
@@ -78,12 +89,24 @@ const SponsorLogin = () => {
                 required
               />
             </div>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+                {error}
+              </div>
+            )}
             <button
               type="submit"
-              className="text-gray-300 btn-transparent bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
+              disabled={loading}
+              className="text-gray-300 btn-transparent mt-4 bg-gray-700 hover:text-white px-6 py-2 rounded-md text-sm"
             >
-              Login
+              <div className="lds-dual-ring-container">
+                {loading && (
+                  <div className="flex justify-center items-center">
+                    Login in <div className="lds-dual-ring"></div>
+                  </div>
+                )}
+                {!loading && <span>Login</span>}
+              </div>
             </button>
           </form>
           <p className="mt-4 text-gray-400">

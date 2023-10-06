@@ -30,24 +30,29 @@ export const loginAction = createAsyncThunk(
 
       if (data) {
         toast.success("Login successful.");
+
         localStorage.setItem("user", JSON.stringify(data));
       }
-      return { success: true, data };
+
+      return data;
     } catch (error) {
       toast.warn("Login not successful");
-      return { success: false, error };
+      return rejectWithValue(null);
     }
   }
 );
 
-export const logoutAction = createAsyncThunk("auth/logoutAction", async () => {
-  try {
-    // Perform any necessary logout logic here
-    localStorage.removeItem("user");
-    return { success: true };
-  } catch (error) {
-    // Handle any errors that might occur during the logout process
-    console.error("Logout error:", error);
-    throw new Error("Logout failed");
+export const logoutAction = createAsyncThunk(
+  "auth/logoutAction",
+  async ({ toast, history }) => {
+    try {
+      toast.success("Logout successful.");
+      localStorage.removeItem("user");
+      history.push("/"); // Redirect to the homepage
+      return { success: true };
+    } catch (error) {
+      console.error("Logout error:", error);
+      throw new Error("Logout failed");
+    }
   }
-});
+);

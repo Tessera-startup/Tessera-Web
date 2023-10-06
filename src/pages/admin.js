@@ -13,15 +13,6 @@ function AdminPage() {
 
   const router = useRouter();
 
-//   useEffect(() => {
-//     // Check if access token exists in localStorage
-//     const user = JSON.parse(localStorage.getItem("user"))
-//     if (!user.accesstoken) {
-//     // Redirect to the login page if not logged in
-//     router.push("/login");
-//   }
-// }, [router])
-
 return (
   <Layout>
     <div className="gradient fixed"></div>

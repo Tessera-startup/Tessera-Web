@@ -36,7 +36,7 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    dispatch(logoutAction());
+    dispatch(logoutAction({ toast, history: router }));
   };
 
   return (
@@ -49,7 +49,7 @@ const Navbar = () => {
                 <Image src={NavbarImg} alt={"tessera"} width={50} height={50} />
               </Link>
             </div>
-            <div className="hidden md:flex justify-end w-full items-center">
+            <div className="hidden md:flex justify-end w-full items-center mx-4">
               <div className="flex space-x-4">
                 <Link
                   passHref
