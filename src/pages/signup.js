@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { SignUpAction } from "../services/actions/authActions";
+import { useDispatch } from "react-redux";
 
 const SponsorSignup = () => {
   const [businessname, setBusinessname] = useState("");
@@ -9,51 +12,42 @@ const SponsorSignup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const formData = {
+      businessname,
+      email,
+      password,
+      phonenumber,
+    };
+
     try {
       setLoading(true);
-      const res = await axios.post(
-        "https://tessera-api.onrender.com/auth/register",
-        {
-          businessname,
-          email,
-          password,
-          confirmPassword,
-          phonenumber,
-        }
+      const { payload, error: signUpError } = await dispatch(
+        SignUpAction({ formData, toast })
       );
-      console.log(res.data);
-      //Check for a successful response
-      if(res.status === 200){
-        const token = res.data.token;
 
-        // Store the token in localStorage
-        localStorage.setItem("token", token);
-        router.push("/dashboard");
+      if (payload) {
+        toast.success("Sign up successful. Please log in.");
+        router.push("/login");
       } else {
-        console.error("Unexpected response", res);
-        setError("Registration failed. Please try again.");
+        // If there's an error from the API, display it
+        setError(signUpError);
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        // Check if the server responds with a 400 status (Bad Request)
-        // This could indicate that the email is already taken
-        console.log("User with this email is already registered.");
-        setError("User with this email is already registered.");
-      } else {
-        // Handle other errors
-        console.error(
-          "Registration failed:",
-          error.response?.data || error.message
-        );
-        setError("Registration failed. Please try again.");
-      }
+      // Handle unexpected errors (e.g., network issues)
+      setError("Sign up failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -95,7 +89,13 @@ const SponsorSignup = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              {error && <p className="text-red-500">{error}</p>}
+              {error && error.message && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+                  {error.message === "Rejected"
+                    ? "Email has already been used by another Event Organizer"
+                    : error.message}
+                </div>
+              )}
             </div>
             <div className="mb-4">
               <label htmlFor="phoneNumber" className="block text-[#e2e8ff]">
@@ -138,11 +138,6 @@ const SponsorSignup = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-              {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
-                  {error}
-                </div>
-              )}
             </div>
             <div className="mb-4">
               <button

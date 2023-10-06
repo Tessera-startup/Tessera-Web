@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { loginAction } from "../services/actions/authActions";
@@ -10,61 +9,37 @@ import { useDispatch } from "react-redux";
 const SponsorLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-
-
-
+  const [error, setError] = useState(""); // State to track login errors
 
   const router = useRouter();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const formData = {
-      email: email,
-      password: password
+    try {
+      const formData = {
+        email: email,
+        password: password,
+      };
+  
+      // Dispatch the login action and wait for the Promise to resolve
+      const actionResult = await dispatch(loginAction({ formData, toast }));
+  
+      console.log("Login Action Result:", actionResult);
+  
+      if (actionResult.type === `${loginAction.fulfilled}`) {
+        console.log("Login successful");
+        setError("");
+        router.push("/admin");
+      } else {
+        console.log("Login failed");
+        setError("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
-    const status = await dispatch(loginAction({ formData, toast }))
-    if (status.error == undefined) {
-      router.push("/admin")
-      
-    }
-
-
-    // try {
-    //   const res = await axios.post(
-    //     "https://tessera-api.onrender.com/auth/login",
-    //     {
-    //       email,
-    //       password,
-    //     }
-    //   );
-
-    //   if (res.status === 200) {
-    //     const { user, accesstoken } = res.data;
-    //     //access token in local storage
-    //     localStorage.setItem("accessToken", accesstoken);
-    //     console.log("Login successful. Access token:", accesstoken);
-    //     setLoggedIn(true);
-    //     toast.success("Login successful!");
-    //     router.push("/admin");
-    //   } else {
-    //     console.error("Unexpected response:", res);
-    //     setError("Login failed. Please check your credentials and try again.");
-    //   }
-    // } catch (error) {
-    //   // Handle and display the error
-    //   if (error.response && error.response.status === 403) {
-    //     setError("Incorrect password. Please try again.");
-    //   } else if (error.response && error.response.status === 400) {
-    //     setError("User not found. Please check your email and try again.");
-    //   } else {
-    //     console.error("Login failed:", error.response?.data || error.message);
-    //     setError("Login failed. Please try again.");
-    //   }
-    // }
   };
+  
 
   return (
     <Layout>
@@ -117,9 +92,6 @@ const SponsorLogin = () => {
               Sign up here
             </Link>
           </p>
-          {loggedIn && (
-            <p className="text-green-500">Logged in successfully!</p>
-          )}
         </div>
       </div>
     </Layout>

@@ -5,17 +5,19 @@ import NavbarImg from "../../public/tesseralogoMain.png";
 import { toast } from "react-toastify";
 import { TessaraContext } from "../context/Context";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../services/actions/authActions";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { wallet, setWallet } = useContext(TessaraContext);
-  const [loggedIn, setLoggedIn] = useState(true);
-
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const loggedIn = useSelector((state) => state.auth.authData !== null);
+  console.log(loggedIn);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  const router = useRouter();
 
   const connectWallet = async () => {
     try {
@@ -34,21 +36,8 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    setLoggedIn(false);
-    localStorage.removeItem("accessToken"); // Clear access token from localStorage
-    toast.success("Logged out successfully");
-    router.push("/");
+    dispatch(logoutAction());
   };
-
-  useEffect(() => {
-    // Check if access token exists in localStorage
-    const accessToken = localStorage.getItem("accessToken");
-    setLoggedIn(!!accessToken); // Update the loggedIn state based on the existence of the access token
-  }, []);
-
-  useEffect(() => {
-    console.log("loggedIn state:", loggedIn);
-  }, [loggedIn]);
 
   return (
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
@@ -105,7 +94,7 @@ const Navbar = () => {
                   <Link
                     onClick={(e) => {
                       e.preventDefault();
-                      logout(); 
+                      logout();
                     }}
                     href="/logout"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
