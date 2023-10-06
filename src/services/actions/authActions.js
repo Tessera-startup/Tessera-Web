@@ -47,7 +47,7 @@ export const logoutAction = createAsyncThunk(
   async ({ toast, history }) => {
     try {
       toast.success("Logout successful.");
-      localStorage.removeItem("user");
+      localStorage.removeItem("user"); // Clear user data from localStorage
       history.push("/"); // Redirect to the homepage
       return { success: true };
     } catch (error) {

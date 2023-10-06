@@ -1,48 +1,46 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
-import { createEvent, createEventTicket, getAllEvents, getAllTickets } from "../routes/userRoutes"
-import axios from "axios"
-
-
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createEvent,
+  createEventTicket,
+  getAllEvents,
+  getAllTickets,
+} from "../routes/userRoutes";
+import axios from "axios";
 
 export const getTicketsAction = createAsyncThunk(
-  'user/getTickets',
+  "user/getTickets",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await getAllTickets()
+      const { data } = await getAllTickets();
 
-
-      return data
+      return data;
     } catch (error) {
-      console.log(error.response)
-      return rejectWithValue(null)
+      console.log(error.response);
+      return rejectWithValue(null);
     }
   }
-)
-
+);
 
 export const getAllEventsAction = createAsyncThunk(
-  'user/getEvents',
+  "user/getEvents",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await getAllEvents()
+      const { data } = await getAllEvents();
 
-      return data
+      return data;
     } catch (error) {
-      console.log(error)
-      return rejectWithValue(null)
+      console.log(error);
+      return rejectWithValue(null);
     }
   }
-)
-
+);
 
 export const createEventAction = createAsyncThunk(
-  'user/createEvent',
+  "user/createEvent",
   async ({ formData, toast }, { rejectWithValue }) => {
     try {
-      const { data } = await createEvent(formData)
-      toast.success("Event create successfully")
-
-
+      const { data } = await createEvent(formData);
+      toast.success("Event create successfully");
 
       return data;
     } catch (error) {
@@ -51,40 +49,30 @@ export const createEventAction = createAsyncThunk(
       return rejectWithValue(null);
     }
   }
-)
+);
 
 export const createEventTicketAction = createAsyncThunk(
-  'user/createEventTicket',
+  "user/createEventTicket",
   async ({ formData, toast }, { rejectWithValue }) => {
     try {
-      const { data } = await createEventTicket(formData)
+      const { data } = await createEventTicket(formData);
 
-
-
-
-      return data
+      return data;
     } catch (error) {
-      console.log(error)
-      return rejectWithValue(null)
+      console.log(error);
+      return rejectWithValue(null);
     }
   }
-)
+);
 
 export const setCurrentEvent = createAsyncThunk(
-  'user/currentEvent',
+  "user/currentEvent",
   async ({ data }, { rejectWithValue }) => {
     try {
-
-
-      return data
+      return data;
     } catch (error) {
-      console.log(error.response)
-      return rejectWithValue(null)
+      console.log(error.response);
+      return rejectWithValue(null);
     }
   }
-)
-
-
-
-
-
+);
