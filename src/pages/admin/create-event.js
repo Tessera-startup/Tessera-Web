@@ -3,7 +3,6 @@ import Layout from "../../components/Layout";
 import Dashboard from "../../components/Dashboard";
 import { IoMdArrowBack } from "react-icons/io";
 import Link from "next/link";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { createEventAction } from "../../services/actions/userActions";
 import { useDispatch } from "react-redux";

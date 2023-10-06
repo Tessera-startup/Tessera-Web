@@ -3,51 +3,52 @@ import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { API } from "./../services/axios_config";
 
 function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
-  const [eventCount, setEventCount] = useState(null); // State to store event count
+  const [eventCount, setEventCount] = useState(0);
+  const [ticketCount, setTicketCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { authData } = useSelector((state) => state.auth);
 
-  // Mock data for event counts, ticket counts, and balance (sol)
-  const ticketCount = 100;
   const balanceSol = 500;
 
   const router = useRouter();
-  // Check if the user is logged in
+
   useEffect(() => {
     if (!authData || !authData.user) {
-      // Redirect to login or handle unauthorized access
       router.push("/login");
     } else {
+      // Call both fetch functions when the component mounts
+      fetchEventCount();
+      fetchTicketCount();
       setIsLoading(false);
     }
   }, [authData, router]);
 
-  // Fetch the total number of events
   const fetchEventCount = async () => {
     try {
-      const response = await fetch(
-        "https://tessera-api.onrender.com/events/all-events"
-      );
-      const data = await response.json();
-      setEventCount(data.length);
-      console.log("Event count:", data.length);
+      const response = await API.get("/events/all-events");
+      setEventCount(response.data.length);
     } catch (error) {
       console.error("Error fetching event count:", error);
     }
   };
 
-  useEffect(() => {
-    fetchEventCount(); // Call the function when the component mounts
-  }, []);
+  const fetchTicketCount = async () => {
+    try {
+      const response = await API.get("/events/all-event-tickets");
+      setTicketCount(response.data.length);
+    } catch (error) {
+      console.error("Error fetching ticket count:", error);
+    }
+  };
 
-  if (isLoading || eventCount === null) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  
   return (
     <Layout>
       <div className="gradient fixed"></div>

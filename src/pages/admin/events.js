@@ -19,7 +19,7 @@ function AdminPage() {
   const fetchEventsData = async () => {
     try {
       const response = await axios.get(
-        "https://tessera-api.onrender.com/events/all-events"
+        "https://tessera-api.onrender.com/events/user-events"
       );
       setEvents(response.data);
     } catch (error) {
