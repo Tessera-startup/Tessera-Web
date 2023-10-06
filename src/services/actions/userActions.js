@@ -51,7 +51,6 @@ export const createEventAction = createAsyncThunk(
       return rejectWithValue(null);
     }
   }
-<<<<<<< HEAD
 )
 
 export const createEventTicketAction = createAsyncThunk(
@@ -87,38 +86,5 @@ export const setCurrentEvent = createAsyncThunk(
 
 
 
-=======
-);
-
-// export const getSolanaPrice = createAsyncThunk(
-//     'user/getSolPrice',
-//     async (_, { rejectWithValue }) => {
-//         try {
-//             const url = "https://data.messari.io/api/v1/assets/sol/metrics"
-//             const { data } = await fetch(url)
-//                 .then(response => {
-//                     if (!response.ok) {
-//                         throw new Error('Network response was not ok');
-//                     }
-//                     const jsonData = response.json();
-//                     return jsonData.data.market_data.price_usd
-//                 })
-//                 .then(data => {
-
-//                     console.log(data);
-//                 })
-//                 .catch(error => {
-//                     // Handle errors here
-//                     console.error('Error:', error);
-//                 });
->>>>>>> 1133475b75f0a2fa430d1e56a6e0a64b3f27985a
 
 
-<<<<<<< HEAD
-=======
-//             console.log(error.response)
-//             return rejectWithValue(null)
-//         }
-//     }
-// )
->>>>>>> 1133475b75f0a2fa430d1e56a6e0a64b3f27985a
