@@ -7,9 +7,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
+  const { authData } = useSelector(state => state.auth)
+
 
   // Mock data for event counts, ticket counts, and balance (sol)
   const eventCount = 25;
@@ -33,7 +36,7 @@ return (
     <Dashboard>
       <div className="container p-0 sm:p-8 about relative z-10">
         <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
-          Dashboard
+          Dashboard {authData?.user?.email}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Event Counts Card */}

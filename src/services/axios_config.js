@@ -25,7 +25,7 @@ instance.interceptors.request.use(
             USERFROMLS = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
         }
         if (USERFROMLS) {
-            console.log(USERFROMLS.accesstoken, "ACCESSSSSSS TOKEN");
+           
 
             req.headers['Authorization'] = `Bearer ${USERFROMLS.accesstoken}`
         }

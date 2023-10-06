@@ -1,30 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
-import QRCode from "qrcode.react";
-import { React, useContext, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import * as solanaWeb3 from "@solana/web3.js";
 import { TessaraContext } from "../context/Context";
 import { toast } from "react-toastify";
+import { createEventTicketAction, getSolanaPrice } from "../services/actions/userActions";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
 
 
 
 const EventDetail = ({ event }) => {
   const { wallet, setWallet } = useContext(TessaraContext)
-  const [formData, setFormData] = useState({name:"", email:""})
+  const [formData, setFormData] = useState({ name: "", email: "" })
+  const [solanaPrice, setSolanaPrice] = useState(0)
+  const dispatch = useDispatch()
+  const { purchase_ticket } = useSelector(state => state.user)
+
 
 
   const handleLogin = (e) => {
     e.preventDefault();
   };
 
-  const handleChange =(e)=>{
-    setFormData({...formData, [e.target.name]: e.target.value})
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
 
   }
 
   const purchaseTicket = async (receiver, amount) => {
-    if(!formData.email || !formData.name)return toast.warning("Name and email are required")
+    if (!formData.email || !formData.name) return toast.warning("Name and email are required")
     const connection = new solanaWeb3.Connection("https://api.devnet.solana.com")
     const lamports = amount * solanaWeb3.LAMPORTS_PER_SOL
 
@@ -63,6 +70,22 @@ const EventDetail = ({ event }) => {
   }
 
 
+  useEffect(() => {
+
+
+    const url = "https://data.messari.io/api/v1/assets/sol/metrics"
+    axios.get(url).then((response) => {
+      setSolanaPrice(response.data.data.market_data.price_usd)
+
+    })
+
+
+
+
+
+  }, [])
+
+
 
 
 
@@ -73,8 +96,8 @@ const EventDetail = ({ event }) => {
       </Link>
       <div className="blog-header-image">
         <Image
-          src={event.imageUrl}
-          alt={event.title}
+          src={event?.image}
+          alt={event?.name}
           width={500}
           height={300}
           layout="responsive"
@@ -82,42 +105,28 @@ const EventDetail = ({ event }) => {
         />
       </div>
       <div className="mt-8">
+
         <h2 className="text-3xl lg:text-4xl text-[#ffffff] tessera-header font-semibold mb-4 section-header-title ">
-          {event.title}
+          {event?.name}
         </h2>
         <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
-          Date: {event.date}
+          Date: {event?.date_of_event}
         </p>
         <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
-          Location: {event.location}
+          Location: {event?.location}
         </p>
         <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
-          Price: $10
+          Price: ${event?.amount}
         </p>
         <div className="mt-8">
           <h2 className="text-2xl lg:text-3xl font-semibold text-[#ffffff]">
             About this Event
           </h2>
           <p className="text-base lg:text-lg text-[#e2e8ff]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            id tellus nec felis consectetur ultrices. Integer fringilla urna et
-            semper tempor. Vestibulum scelerisque elit nec libero mattis, id
-            malesuada tortor feugiat. Vivamus eu imperdiet lorem. Suspendisse ut
-            justo sit amet neque ultrices venenatis non non velit.
+            {event?.description}
           </p>
         </div>
-        <div className="mt-8">
-          <h2 className="text-2xl lg:text-3xl font-semibold text-[#ffffff]">
-            Directions
-          </h2>
-          <p className="text-base lg:text-lg text-[#e2e8ff]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            id tellus nec felis consectetur ultrices. Integer fringilla urna et
-            semper tempor. Vestibulum scelerisque elit nec libero mattis, id
-            malesuada tortor feugiat. Vivamus eu imperdiet lorem. Suspendisse ut
-            justo sit amet neque ultrices venenatis non non velit.
-          </p>
-        </div>
+
         <div>
           <div className="flex text-white text-[20px] font-bold mx-auto justify-center"><p>Purchase Ticket</p></div>
           <div className="mb-4">
@@ -152,11 +161,20 @@ const EventDetail = ({ event }) => {
           </div>
           <div className="flex justify-center"
 
-            onClick={() => {
-              console.log(formData, "FOMRDATA");
-              if (wallet != "" | window.solana == undefined) {
-                
-                purchaseTicket("39QcE4gSNztpjvq78aa45W6J9Pn551is52C2XxhSsDTR", 0.01)
+            onClick={async () => {
+
+              if (wallet != "" && window.solana != undefined) {
+                const data = { event_id: event?._id, amount: event?.amount, customer_name: formData.name, email: formData.email }
+                console.log(data);
+                const res = await dispatch(createEventTicketAction({ formData: data, toast }))
+                if (res.error == undefined) {
+                  const amount = event?.amount / solanaPrice
+                  purchaseTicket(purchase_ticket?.address, amount.toFixed(2))
+
+                }
+
+
+
               } else {
                 return toast.warning("Wallet not connected")
               }
