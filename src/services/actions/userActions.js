@@ -44,13 +44,14 @@ export const createEventAction = createAsyncThunk(
 
 
 
-      return data
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Failed to create the event. Please try again.");
-      return rejectWithValue(null)
+      return rejectWithValue(null);
     }
   }
+<<<<<<< HEAD
 )
 
 export const createEventTicketAction = createAsyncThunk(
@@ -58,7 +59,7 @@ export const createEventTicketAction = createAsyncThunk(
   async ({ formData, toast }, { rejectWithValue }) => {
     try {
       const { data } = await createEventTicket(formData)
-     
+
 
 
 
@@ -86,5 +87,38 @@ export const setCurrentEvent = createAsyncThunk(
 
 
 
+=======
+);
+
+// export const getSolanaPrice = createAsyncThunk(
+//     'user/getSolPrice',
+//     async (_, { rejectWithValue }) => {
+//         try {
+//             const url = "https://data.messari.io/api/v1/assets/sol/metrics"
+//             const { data } = await fetch(url)
+//                 .then(response => {
+//                     if (!response.ok) {
+//                         throw new Error('Network response was not ok');
+//                     }
+//                     const jsonData = response.json();
+//                     return jsonData.data.market_data.price_usd
+//                 })
+//                 .then(data => {
+
+//                     console.log(data);
+//                 })
+//                 .catch(error => {
+//                     // Handle errors here
+//                     console.error('Error:', error);
+//                 });
+>>>>>>> 1133475b75f0a2fa430d1e56a6e0a64b3f27985a
 
 
+<<<<<<< HEAD
+=======
+//             console.log(error.response)
+//             return rejectWithValue(null)
+//         }
+//     }
+// )
+>>>>>>> 1133475b75f0a2fa430d1e56a6e0a64b3f27985a

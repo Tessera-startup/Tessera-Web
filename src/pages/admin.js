@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
-import { intialEvents } from "../../data/events";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
@@ -21,14 +16,14 @@ function AdminPage() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    // Check if access token exists in localStorage
-    const user = JSON.parse(localStorage.getItem("user"))
-    if (!user.accesstoken) {
-    // Redirect to the login page if not logged in
-    router.push("/login");
-  }
-}, [router])
+//   useEffect(() => {
+//     // Check if access token exists in localStorage
+//     const user = JSON.parse(localStorage.getItem("user"))
+//     if (!user.accesstoken) {
+//     // Redirect to the login page if not logged in
+//     router.push("/login");
+//   }
+// }, [router])
 
 return (
   <Layout>

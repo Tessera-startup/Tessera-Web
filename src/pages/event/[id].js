@@ -60,7 +60,7 @@ const EventPage = () => {
   // ];
 
   const event = events?.find((event) => event?._id === id);
- 
+
 
   return (
     <Layout>
@@ -69,7 +69,7 @@ const EventPage = () => {
           <>
             <div className="event-content">
               <div className="gradient fixed"></div>
-              <EventDetail event={event} />
+              <EventDetail event={id} />
             </div>
           </>
         ) : (
