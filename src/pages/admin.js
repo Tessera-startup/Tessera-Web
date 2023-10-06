@@ -9,10 +9,9 @@ function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
   const [eventCount, setEventCount] = useState(0);
   const [ticketCount, setTicketCount] = useState(0);
+  const [solBalance, setSolBalance] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { authData } = useSelector((state) => state.auth);
-
-  const balanceSol = 500;
 
   const router = useRouter();
 
@@ -20,9 +19,10 @@ function AdminPage() {
     if (!authData || !authData.user) {
       router.push("/login");
     } else {
-      // Call both fetch functions when the component mounts
+      // Call all fetch functions when the component mounts
       fetchEventCount();
       fetchTicketCount();
+      fetchSolBalance();
       setIsLoading(false);
     }
   }, [authData, router]);
@@ -42,6 +42,15 @@ function AdminPage() {
       setTicketCount(response.data.length);
     } catch (error) {
       console.error("Error fetching ticket count:", error);
+    }
+  };
+
+  const fetchSolBalance = async () => {
+    try {
+      const response = await API.post("/auth/balance");
+      setSolBalance(response.data.balance);
+    } catch (error) {
+      console.error("Error fetching Sol balance:", error);
     }
   };
 
@@ -79,7 +88,7 @@ function AdminPage() {
               <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
                 Balance (Sol)
               </h3>
-              <p className="text-3xl font-bold text-yellow-400">{balanceSol}</p>
+              <p className="text-3xl font-bold text-yellow-400">{solBalance}</p>
             </div>
           </div>
         </div>
