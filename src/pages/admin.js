@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { API } from "./../services/axios_config";
+import { getSolanaBalanceAction } from "../services/actions/userActions";
+
 
 function AdminPage() {
   const [visibleEvents, setVisibleEvents] = useState(3);
@@ -11,32 +13,39 @@ function AdminPage() {
   const [ticketCount, setTicketCount] = useState(0);
   const [solBalance, setSolBalance] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  const dispatch = useDispatch()
+  const { solana_balance } = useSelector(state => state.user)
+  let authData
+  if (typeof window !== "undefined") {
+    authData = JSON.parse(localStorage.getItem('user'))
+  }
   const router = useRouter();
 
   useEffect(() => {
-    const checkAuthAndFetchData = async () => {
-      // Check if access token exists in localStorage
-      const user = JSON.parse(localStorage.getItem("user"));
+    const formData = { address: authData?.user?.public_key }
+    dispatch(getSolanaBalanceAction({ formData: formData }))
+    // const checkAuthAndFetchData = async () => {
+    //   // Check if access token exists in localStorage
+    //   const user = JSON.parse(localStorage.getItem("user"));
 
-      if (!user || !user.accesstoken) {
-        // Redirect to the login page if not logged in
-        router.push("/login");
-      } else {
-        try {
-          // Call all fetch functions when the component mounts
-          await fetchEventCount();
-          await fetchTicketCount();
-          await fetchSolBalance();
-          setIsLoading(false);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          setIsLoading(false);
-        }
-      }
-    };
+    //   if (!user || !user.accesstoken) {
+    //     // Redirect to the login page if not logged in
+    //     router.push("/login");
+    //   } else {
+    //     try {
+    //       // Call all fetch functions when the component mounts
+    //       await fetchEventCount();
+    //       await fetchTicketCount();
+    //       await fetchSolBalance();
+    //       setIsLoading(false);
+    //     } catch (error) {
+    //       console.error("Error fetching data:", error);
+    //       setIsLoading(false);
+    //     }
+    //   }
+    // };
 
-    checkAuthAndFetchData();
+    // checkAuthAndFetchData();
   }, [router]);
 
   const fetchEventCount = async () => {
@@ -57,24 +66,13 @@ function AdminPage() {
     }
   };
 
-  const fetchSolBalance = async () => {
-    try {
-      const response = await API.post("/auth/balance");
-      setSolBalance(response.data.length);
-    } catch (error) {
-      console.error("Error fetching Sol balance:", error);
-    }
-  };
-
-
-
   return (
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
         <div className="container p-0 sm:p-8 about relative z-10">
           <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
-            Dashboard 
+            Dashboard
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Event Counts Card */}
@@ -98,7 +96,7 @@ function AdminPage() {
               <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
                 Balance (Sol)
               </h3>
-              <p className="text-3xl font-bold text-yellow-400">{solBalance}</p>
+              <p className="text-3xl font-bold text-yellow-400">{solana_balance?.balance ?? 0}</p>
             </div>
           </div>
         </div>

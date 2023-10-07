@@ -4,6 +4,7 @@ import {
   createEventTicket,
   getAllEvents,
   getAllTickets,
+  getSolanaBalanceRoute,
 } from "../routes/userRoutes";
 import axios from "axios";
 
@@ -72,6 +73,23 @@ export const setCurrentEvent = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error.response);
+      return rejectWithValue(null);
+    }
+  }
+);
+
+//Solana Balance Action
+export const getSolanaBalanceAction = createAsyncThunk(
+  "user/getSolanaBalance",
+  async ({ formData }, { rejectWithValue }) => {
+    try {
+      //Solana Balance Route
+      const { data } = await getSolanaBalanceRoute(formData);
+      console.log(data, "SOLANA BALANCE");
+
+      return data;
+    } catch (error) {
+      console.log(error);
       return rejectWithValue(null);
     }
   }
