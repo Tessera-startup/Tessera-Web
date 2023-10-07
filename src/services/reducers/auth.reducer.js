@@ -36,9 +36,7 @@ const authSlice = createSlice({
     });
     builder.addCase(logoutAction.fulfilled, (state, action) => {
       const { success } = action.payload;
-
       if (success) {
-        // Update the state to reflect a successful logout
         state.authData = null;
         state.error = null; // Clear any previous errors
       } else {

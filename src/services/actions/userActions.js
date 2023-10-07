@@ -2,11 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createEvent,
   createEventTicket,
+  createUserEvents,
+  createUserTickets,
   getAllEvents,
   getAllTickets,
   getSolanaBalanceRoute,
 } from "../routes/userRoutes";
-import axios from "axios";
 
 export const getTicketsAction = createAsyncThunk(
   "user/getTickets",
@@ -27,7 +28,6 @@ export const getAllEventsAction = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await getAllEvents();
-
       return data;
     } catch (error) {
       console.log(error);
@@ -90,6 +90,32 @@ export const getSolanaBalanceAction = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
+      return rejectWithValue(null);
+    }
+  }
+);
+
+export const getEventCountAction = createAsyncThunk(
+  "user/getEventCount",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await createUserEvents();
+      return data.length; // Assuming data is an array of events
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(null);
+    }
+  }
+);
+
+export const getTicketCountAction = createAsyncThunk(
+  "user/getTicketCount",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await createUserTickets();
+      return data.length; // Assuming data is an array of tickets
+    } catch (error) {
+      console.log(error.response);
       return rejectWithValue(null);
     }
   }
