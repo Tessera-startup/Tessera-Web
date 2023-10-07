@@ -26,11 +26,11 @@ export const loginAction = createAsyncThunk(
   async ({ formData, toast }, { rejectWithValue }) => {
     try {
       const { data } = await loginInRoute(formData);
-      console.log(formData, "FORMDATA");
 
-      if (data) {
+      if (data && data.accesstoken) {
         toast.success("Login successful.");
-
+        console.log("Login successful. Data:", data);
+        localStorage.setItem("authToken", data.accesstoken);
         localStorage.setItem("user", JSON.stringify(data));
       }
 

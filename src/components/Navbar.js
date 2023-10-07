@@ -5,19 +5,17 @@ import NavbarImg from "../../public/tesseralogoMain.png";
 import { toast } from "react-toastify";
 import { TessaraContext } from "../context/Context";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../services/actions/authActions";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { wallet, setWallet } = useContext(TessaraContext);
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const loggedIn = useSelector((state) => state.auth.authData !== null);
-  console.log(loggedIn);
+  const [loggedIn, setLoggedIn] = useState(true);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const router = useRouter();
 
   const connectWallet = async () => {
     try {
@@ -36,8 +34,21 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    dispatch(logoutAction({ toast, history: router }));
+    setLoggedIn(false);
+    localStorage.removeItem("authToken");
+    toast.success("Logged out successfully");
+    router.push("/"); 
   };
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    console.log("authToken:", authToken);
+    setLoggedIn(!!authToken);
+  }, []);
+
+  useEffect(() => {
+    console.log("loggedIn state:", loggedIn);
+  }, [loggedIn]);
 
   return (
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
@@ -49,7 +60,7 @@ const Navbar = () => {
                 <Image src={NavbarImg} alt={"tessera"} width={50} height={50} />
               </Link>
             </div>
-            <div className="hidden md:flex justify-end w-full items-center mx-4">
+            <div className="hidden md:flex justify-end w-full items-center">
               <div className="flex space-x-4">
                 <Link
                   passHref
@@ -197,7 +208,7 @@ const Navbar = () => {
             href="/about"
             className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm font-medium"
           >
-            Sca ticket
+            Scan ticket
           </Link>
           <button
             className={`block btn-transparent px-4 py-2 text-white hover:bg-gray-700 hover:text-white hover:px-4  mb-3 rounded-md text-sm font-medium ${

@@ -11,21 +11,33 @@ function AdminPage() {
   const [ticketCount, setTicketCount] = useState(0);
   const [solBalance, setSolBalance] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const { authData } = useSelector((state) => state.auth);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!authData || !authData.user) {
-      router.push("/login");
-    } else {
-      // Call all fetch functions when the component mounts
-      fetchEventCount();
-      fetchTicketCount();
-      fetchSolBalance();
-      setIsLoading(false);
-    }
-  }, [authData, router]);
+    const checkAuthAndFetchData = async () => {
+      // Check if access token exists in localStorage
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user || !user.accesstoken) {
+        // Redirect to the login page if not logged in
+        router.push("/login");
+      } else {
+        try {
+          // Call all fetch functions when the component mounts
+          await fetchEventCount();
+          await fetchTicketCount();
+          await fetchSolBalance();
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    checkAuthAndFetchData();
+  }, [router]);
 
   const fetchEventCount = async () => {
     try {
@@ -54,9 +66,7 @@ function AdminPage() {
     }
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+
 
   return (
     <Layout>
@@ -64,7 +74,7 @@ function AdminPage() {
       <Dashboard>
         <div className="container p-0 sm:p-8 about relative z-10">
           <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
-            Dashboard {authData?.user?.email}
+            Dashboard 
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Event Counts Card */}
