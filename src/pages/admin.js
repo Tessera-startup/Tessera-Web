@@ -10,9 +10,6 @@ import {
 } from "../services/actions/userActions";
 
 function AdminPage() {
-  const [visibleEvents, setVisibleEvents] = useState(3);
-  const [isLoading, setIsLoading] = useState(true);
-
   const dispatch = useDispatch();
   const { solana_balance, eventCount, ticketCount } = useSelector(
     (state) => state.user
