@@ -60,7 +60,7 @@ function AdminPage() {
   const fetchSolBalance = async () => {
     try {
       const response = await API.post("/auth/balance");
-      setSolBalance(response.data.balance);
+      setSolBalance(response.data.length);
     } catch (error) {
       console.error("Error fetching Sol balance:", error);
     }
