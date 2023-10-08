@@ -8,24 +8,55 @@ import {
   getSolanaBalanceAction,
   getTicketCountAction,
 } from "../services/actions/userActions";
+import { loginAction } from "../services/actions/authActions";
 
 function AdminPage() {
   const dispatch = useDispatch();
   const { solana_balance, eventCount, ticketCount } = useSelector(
     (state) => state.user
   );
+  const { authData } = useSelector((state) => state.auth);
 
-  let authData;
-  if (typeof window !== "undefined") {
-    authData = JSON.parse(localStorage.getItem("user"));
-  }
+  const auth =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+
   const router = useRouter();
   useEffect(() => {
-    const formData = { address: authData?.user?.public_key };
-    dispatch(getSolanaBalanceAction({ formData: formData }));
-    dispatch(getEventCountAction());
-    dispatch(getTicketCountAction());
-  }, [router]);
+    const fetchData = async () => {
+      // Check if authData is not null and authData.user exists before accessing its properties
+      if (
+        !auth ||
+        !authData ||
+        !authData.user ||
+        Object.keys(authData.user).length === 0
+      ) {
+        // If authData is not available during the initial load, you may want to fetch it again or redirect to login
+        await dispatch(loginAction());
+        const newAuthData = JSON.parse(localStorage.getItem("user"));
+        if (
+          !newAuthData ||
+          !newAuthData.user ||
+          Object.keys(newAuthData.user).length === 0
+        ) {
+          router.push("/login");
+        } else {
+          const formData = { address: newAuthData.user.public_key };
+          dispatch(getSolanaBalanceAction({ formData: formData }));
+          dispatch(getEventCountAction());
+          dispatch(getTicketCountAction());
+        }
+      } else {
+        const formData = { address: authData?.user?.public_key };
+        dispatch(getSolanaBalanceAction({ formData: formData }));
+        dispatch(getEventCountAction());
+        dispatch(getTicketCountAction());
+      }
+    };
+
+    fetchData();
+  }, [authData, router, dispatch]);
 
   return (
     <Layout>
