@@ -3,17 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import { getAllEventsAction, setCurrentEvent } from "../services/actions/userActions";
+import {
+  getAllEventsAction,
+  setCurrentEvent,
+} from "../services/actions/userActions";
 import { useSelector } from "react-redux";
+import ImageUrl from "../../public/hero-image.jpg"
 
 const EventList = () => {
   // const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
-  const { events } = useSelector(state => state.user)
+  const { events } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllEventsAction());
@@ -22,7 +24,6 @@ const EventList = () => {
   const loadMoreEvents = () => {
     setVisibleEvents(visibleEvents + 3);
   };
-
 
   return (
     <motion.div
@@ -41,24 +42,29 @@ const EventList = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {events?.slice(0, visibleEvents).map((event) => (
           <Link
-           onClick={()=> dispatch(setCurrentEvent({data:event}))}
-            href={`/event/${event?._id}`} key={event?._id}>
+            onClick={() => dispatch(setCurrentEvent({ data: event }))}
+            href={`/event/${event?._id}`}
+            key={event?._id}
+          >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
             >
-              <div className="relative">
+              <div
+                className="relative"
+                style={{ width: "100%", height: "100%" }}
+              >
                 <Image
-                  src={event?.image}
-                  // alt={event?.name}
-                  width={500}
-                  height={500}
+                  src={ event.image ?? ImageUrl}
+                  alt={event?.name}
                   layout="responsive"
+                  width={500}
+                  height={300}
                   objectFit="cover"
-                  className="rounded-t-md"
                 />
+
                 <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
                   {event?.location}
                 </div>
@@ -84,7 +90,6 @@ const EventList = () => {
                   </motion.p>
                 </div>
               </div>
-              
             </motion.div>
           </Link>
         ))}

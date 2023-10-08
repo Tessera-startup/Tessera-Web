@@ -28,6 +28,7 @@ const userSlice = createSlice({
     builder.addCase(getTicketsAction.fulfilled, (state, action) => {
       state.loadingState = false;
       state.tickets = action.payload;
+      console.log("Events:", action.payload);
     });
     builder.addCase(getTicketsAction.rejected, (state, action) => {
       state.loadingState = false;
@@ -39,6 +40,7 @@ const userSlice = createSlice({
     builder.addCase(getAllEventsAction.fulfilled, (state, action) => {
       state.loadingState = false;
       state.events = action.payload;
+      console.log("Events:", action.payload);
     });
     builder.addCase(getAllEventsAction.rejected, (state, action) => {
       state.loadingState = false;
@@ -81,14 +83,18 @@ const userSlice = createSlice({
       state.eventCount = action.payload;
     });
     builder.addCase(getEventCountAction.rejected, (state, action) => {
-      // Handle rejection if needed
+      state.loadingState = false;
     });
 
     builder.addCase(getTicketCountAction.fulfilled, (state, action) => {
       state.ticketCount = action.payload;
     });
     builder.addCase(getTicketCountAction.rejected, (state, action) => {
-      // Handle rejection if needed
+      state.loadingState = false;
+    });
+
+    builder.addDefaultCase((state, action) => {
+      state.loadingState = false;
     });
   },
 });

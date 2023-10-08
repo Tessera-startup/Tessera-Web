@@ -13,15 +13,12 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 const EventDetail = ({ event }) => {
+  console.log("EventDetails", event);
   const { wallet, setWallet } = useContext(TessaraContext);
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [solanaPrice, setSolanaPrice] = useState(0);
   const dispatch = useDispatch();
   const { purchase_ticket } = useSelector((state) => state.user);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -76,6 +73,10 @@ const EventDetail = ({ event }) => {
     });
   }, []);
 
+  console.log("Event Image URL:", event?.image);
+  console.log("Events:", event);
+  
+
   return (
     <div className="container mx-auto mb-10 relative z-10">
       <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
@@ -85,12 +86,24 @@ const EventDetail = ({ event }) => {
         <Image
           src={event?.image}
           alt={event?.name}
-          width={500}
-          height={300}
+          width={1000} 
+          height={600} 
           layout="responsive"
-          objectFit="cover"
+          objectFit="contain"
+          className="responsive-image"
+        />
+        <Image
+          src={event?.image}
+          alt={event?.name}
+          fill
+          objectPosition="center"
+          className="rounded-md"
+          style={{
+            objectFit: "cover",
+          }}
         />
       </div>
+
       <div className="mt-8">
         <h2 className="text-3xl lg:text-4xl text-[#ffffff] tessera-header font-semibold mb-4 section-header-title ">
           {event?.name}
