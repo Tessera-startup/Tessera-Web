@@ -8,10 +8,9 @@ import {
   setCurrentEvent,
 } from "../services/actions/userActions";
 import { useSelector } from "react-redux";
-import ImageUrl from "../../public/hero-image.jpg"
+import ImageUrl from "../../public/hero-image.jpg";
 
 const EventList = () => {
-  // const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
   const { events } = useSelector((state) => state.user);
 
@@ -50,14 +49,14 @@ const EventList = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
+              className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 blog-header-image border border-gray-700 flex flex-col"
             >
               <div
                 className="relative"
-                style={{ width: "100%", height: "100%" }}
+                style={{ flex: "1 0 0%", width: "100%", height: "100%" }}
               >
                 <Image
-                  src={ event.image ?? ImageUrl}
+                  src={event.image ?? ImageUrl}
                   alt={event?.name}
                   layout="responsive"
                   width={500}
@@ -69,22 +68,22 @@ const EventList = () => {
                   {event?.location}
                 </div>
               </div>
-              <div className="p-3">
+              <div className="px-3 pt-5 pb-10 flex flex-col">
                 <motion.h3
-                  className="text-md sm:text-lg md:text-xl font-medium text-gray-400"
+                  className="text-md sm:text-lg md:text-2xl font-bold text-white"
                   whileHover={{ scale: 1.05 }}
                 >
-                  {event?.title}
+                  {event?.name}
                 </motion.h3>
                 <p className="text-gray-400">{event?.date_of_event}</p>
                 <p className="text-gray-400">{event?.location}</p>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mt-auto">
                   <p className="text-sm sm:text-md md:text-lg font-semibold text-gray-400">
                     {event?.ticket_count}
                   </p>
                   <motion.p
-                    className="text-sm sm:text-md md:text-lg text-gray-400 cursor-pointer"
-                    whileHover={{ textDecoration: "underline" }}
+                    whileHover={{ scale: 1.05 }}
+                    className="text-sm sm:text-md md:text-lg text-gray-100 bg-gradient-to-r from-web3blue to-web3purple rounded-full cursor-pointer focus:outline-none"
                   >
                     Get Ticket
                   </motion.p>
@@ -96,22 +95,10 @@ const EventList = () => {
       </div>
       {visibleEvents < events?.length && (
         <div className="flex justify-center my-4 text-gray-100">
-          <button className="button pt-1" onClick={loadMoreEvents}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 pt-1"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-              ></path>
-            </svg>
-
+          <button
+            onClick={loadMoreEvents}
+          >
+          
             <div className="text">Load more</div>
           </button>
         </div>

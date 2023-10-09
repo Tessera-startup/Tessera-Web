@@ -14,16 +14,16 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              <div className="w-48 h-48 md:w-80 md:h-80"> {/* Adjust width and height */}
+              <div className="w-48 md:w-80"> 
                 <Image
                   src={heroImage}
                   layout="responsive"
-                  objectFit="contain" // Set objectFit to "contain"
+                  objectFit="contain" 
                   alt={"codecrafted"}
                 />
               </div>
             </motion.div>
-            <h1 className="text-2xl sm:text-4xl lg:text-6xl mt-4 sm:mt-8 text-white tessera-header">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl mt-14 font-bold text-white tessera-header">
               Building the Future of Decentralized Ticketing
             </h1>
           </div>

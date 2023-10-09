@@ -29,7 +29,7 @@ const EventPage = () => {
   }, [router.query.id, id, dispatch, events, loadingState]);
 
   if (loadingState) {
-    return <Layout>Loading...</Layout>; 
+    return <Layout> <p className="text-white text-[20px] ml-2">loading...</p></Layout>; 
   }
 
   return (
@@ -43,7 +43,7 @@ const EventPage = () => {
             </div>
           </>
         ) : (
-          <p className="text-white text-[20px] ml-2">Event not found</p>
+          <p className="text-white text-[20px] ml-2">loading...</p>
         )}
       </>
     </Layout>
