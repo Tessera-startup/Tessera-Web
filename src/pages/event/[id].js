@@ -23,14 +23,12 @@ const EventPage = () => {
     } else {
       const foundEvent = events?.find((event) => event?._id === id);
       setEvent(foundEvent);
-      console.log("event id", events);
-      console.log(id);
     }
   }, [router.query.id, id, dispatch, events, loadingState]);
 
-  if (loadingState) {
-    return <Layout> <p className="text-white text-[20px] ml-2">loading...</p></Layout>; 
-  }
+  // if (loadingState) {
+  //   return <Layout>Loading...</Layout>; 
+  // }
 
   return (
     <Layout>

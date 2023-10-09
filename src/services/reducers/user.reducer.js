@@ -40,7 +40,6 @@ const userSlice = createSlice({
     builder.addCase(getAllEventsAction.fulfilled, (state, action) => {
       state.loadingState = false;
       state.events = action.payload;
-      console.log("Events:", action.payload);
     });
     builder.addCase(getAllEventsAction.rejected, (state, action) => {
       state.loadingState = false;
