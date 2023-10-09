@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import QRCode from "qrcode.react";
 import Image from "next/image";
 import Layout from "../components/Layout";
@@ -9,11 +9,13 @@ import {
 } from "../services/actions/userActions";
 import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
+import { TessaraContext } from "../context/Context";
 
 // Dummy NFT data (replace with real data later)
 
 const NftTicket = () => {
   const { tickets, events } = useSelector((state) => state.user);
+  const { wallet } = useContext(TessaraContext)
   const dispatch = useDispatch();
 
   const eventImage = (id) => {
@@ -21,9 +23,10 @@ const NftTicket = () => {
     return ev;
   };
 
-  const downLoadTicket = (image_url) => {
-    saveAs(image_url, "image.png");
-    toast.success("Ticket downloaded successfully");
+  const downLoadTicket = async (image_url) => {
+    const res = await saveAs(image_url, "image.png");
+    // console.log(res, "DOWNLAOD RES");
+    // toast.success("Ticket downloaded successfully");
   };
   useEffect(() => {
     dispatch(getAllEventsAction());
@@ -81,12 +84,37 @@ const NftTicket = () => {
                   <img src={nftTicket?.qrcode_data} alt="" className="w-full" />
                 </div>
               </div>
-              <button
-                onClick={() => downLoadTicket(nftTicket?.qrcode_data)}
-                className="px-4 py-2 w-full rounded-sm font-semibold bg-slate-500"
-              >
-                Download ticket
-              </button>
+              <div className="flex flex-col lg:flex-row lg: space-x-2 lg:mx-auto space-y-2">
+                <button
+                  onClick={() => {
+
+
+                    if (wallet?.publicKey?.toBase58() === nftTicket?.payer_address) {
+                      // downLoadTicket(nftTicket?.qrcode_data)
+                    } else {
+                      toast.warning('Not a ticket owner')
+                    }
+
+                  }}
+                  className="px-4 py-2 w-full rounded-sm font-semibold bg-purple-500"
+                >
+                  Mint ticket
+                </button>
+                <button
+                  onClick={() => {
+
+                    if (wallet?.publicKey !== undefined && wallet?.publicKey?.toBase58() === nftTicket?.payer_address) {
+                      downLoadTicket(nftTicket?.qrcode_data)
+                    } else {
+                      toast.warning('Ensure wallet is connected and you own this ticket')
+                    }
+
+                  }}
+                  className="px-4 py-2 w-full rounded-sm font-semibold bg-slate-500"
+                >
+                  Download ticket
+                </button>
+              </div>
             </div>
           ))}
         </div>

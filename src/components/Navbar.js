@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { wallet, setWallet } = useContext(TessaraContext);
   const [loggedIn, setLoggedIn] = useState(true);
+ 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

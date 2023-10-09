@@ -17,7 +17,7 @@ const EventDetail = ({ event }) => {
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [solanaPrice, setSolanaPrice] = useState(0);
   const dispatch = useDispatch();
-  const { purchase_ticket } = useSelector((state) => state.user);
+  const { purchase_ticket, loadingState } = useSelector((state) => state.user);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -149,34 +149,42 @@ const EventDetail = ({ event }) => {
           </div>
           <div
             className="flex justify-center"
-            onClick={async () => {
-              if (wallet != "" && window.solana != undefined) {
-                const data = {
-                  event_id: event?._id,
-                  amount: event?.amount,
-                  customer_name: formData.name,
-                  email: formData.email,
-                };
-                console.log(data);
-                const res = await dispatch(
-                  createEventTicketAction({ formData: data, toast })
-                );
-                if (res.error == undefined) {
-                  const amount = event?.amount / solanaPrice;
-                  purchaseTicket(purchase_ticket?.address, amount.toFixed(2));
-                }
-              } else {
-                return toast.warning("Wallet not connected");
-              }
-            }}
+
           >
-            <button className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
+            {!loadingState ? <button
+              onClick={async () => {
+                if (wallet != "" && window.solana != undefined) {
+                  const data = {
+                    event_id: event?._id,
+                    amount: event?.amount,
+                    customer_name: formData.name,
+                    email: formData.email,
+                  };
+                  console.log(data);
+                  const res = await dispatch(
+                    createEventTicketAction({ formData: data, toast })
+                  );
+                  if (res.error == undefined) {
+                    const amount = event?.amount / solanaPrice;
+                    purchaseTicket(purchase_ticket?.address, amount.toFixed(2));
+                  }
+                } else {
+                  return toast.warning("Wallet not connected");
+                }
+              }}
+
+              className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
               Purchase
-            </button>
+            </button> :
+              <button className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
+                Processing
+              </button>
+
+            }
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

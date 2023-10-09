@@ -41,16 +41,18 @@ function CreateEventPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <Link
-          className="flex items-center mt-32 mb-5 text-gray-400"
-          href="/admin"
-        >
-          <IoMdArrowBack /> <span className="ml-2">Go back</span>
-        </Link>
+
         <div className="event-content  p-0 sm:p-8 about relative z-10">
+          <Link
+            className="flex items-center mb-5 text-gray-400"
+            href="/admin"
+          >
+            <IoMdArrowBack /> <span className="ml-2">Go back</span>
+          </Link>
           <h2 className="text-3xl font-semibold text-white mb-4">
             Create a New Event
           </h2>
+
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
@@ -112,44 +114,46 @@ function CreateEventPage() {
                 required
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
-                Ticket Amount:
-              </label>
-              <input
-                type="number"
-                name="amount"
+            <div className="flex flex-row space-x-2">
+              <div className="mb-4">
+                <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
+                  Ticket Amount:
+                </label>
+                <input
+                  type="number"
+                  name="amount"
 
-                onChange={(e) => handleChange(e)}
-                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
-                Event Date:
-              </label>
-              <input
-                type="date"
-                name="date_of_event"
+                  onChange={(e) => handleChange(e)}
+                  className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
+                  Event Date:
+                </label>
+                <input
+                  type="date"
+                  name="date_of_event"
 
-                onChange={(e) => handleChange(e)}
-                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
-                Ticket Count:
-              </label>
-              <input
-                type="number"
-                name="ticket_count"
+                  onChange={(e) => handleChange(e)}
+                  className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg text-[#e2e8ff] font-semibold mb-2">
+                  Ticket Count:
+                </label>
+                <input
+                  type="number"
+                  name="ticket_count"
 
-                onChange={(e) => handleChange(e)}
-                className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
-                required
-              />
+                  onChange={(e) => handleChange(e)}
+                  className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2"
+                  required
+                />
+              </div>
             </div>
             <button
               type="submit"

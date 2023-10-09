@@ -16,7 +16,7 @@ const EventPage = () => {
           <>
             <div className="event-content">
               <div className="gradient fixed"></div>
-              <EventDetail event={id} />
+              <EventDetail event={event} />
             </div>
           </>
         ) : (
