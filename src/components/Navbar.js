@@ -1,3 +1,4 @@
+
 import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -5,51 +6,59 @@ import NavbarImg from "../../public/tesseralogoMain.png";
 import { toast } from "react-toastify";
 import { TessaraContext } from "../context/Context";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction, logoutAction } from "../services/actions/authActions";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [auth, setAuth] = useState(true);
   const { wallet, setWallet } = useContext(TessaraContext);
-  const [loggedIn, setLoggedIn] = useState(true);
- 
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { authData } = useSelector((state) => state.auth || {})
+
+  const loggedIn = !!auth;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  const router = useRouter();
 
   const connectWallet = async () => {
     try {
       if (window.solana) {
         const currentWallet = await window.solana.connect();
         setWallet(currentWallet);
+        toast.success("Wallet connected");
       } else {
         return toast.warning("Wallet extension not installed");
       }
     } catch (error) {
       console.log(error, "Wallet connection error");
     }
-    await window.solana.on("connect", () => {
-      toast.success("Wallect connected");
-    });
   };
 
-  const logout = () => {
-    setLoggedIn(false);
-    localStorage.removeItem("authToken");
-    toast.success("Logged out successfully");
-    router.push("/"); 
+  const handleLogout = async () => {
+    await dispatch(logoutAction({ toast, history: router }));
+    router.push("/login");
   };
 
   useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
-    console.log("authToken:", authToken);
-    setLoggedIn(!!authToken);
-  }, []);
+    const user = JSON.parse(localStorage.getItem('user'));
+    setAuth(user);
+    const fetchData = async () => {
+      // Fetch user data if not available
+      if (
+        !auth ||
+        !authData ||
+        !authData.user ||
+        Object.keys(authData.user).length === 0
+      ) {
+        await dispatch(loginAction());
+      }
+    };
 
-  useEffect(() => {
-    console.log("loggedIn state:", loggedIn);
-  }, [loggedIn]);
+    fetchData();
+  }, [dispatch, authData]);
 
   return (
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">
@@ -61,7 +70,7 @@ const Navbar = () => {
                 <Image src={NavbarImg} alt={"tessera"} width={50} height={50} />
               </Link>
             </div>
-            <div className="hidden md:flex justify-end w-full items-center">
+            <div className="hidden md:flex justify-end w-full items-center mx-4">
               <div className="flex space-x-4">
                 <Link
                   passHref
@@ -73,9 +82,8 @@ const Navbar = () => {
                 <Link
                   passHref
                   href="/admin"
-                  className={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm ${
-                    loggedIn ? "" : "hidden"
-                  }`}
+                  className={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm ${loggedIn ? "" : "hidden"
+                    }`}
                 >
                   Admin
                 </Link>
@@ -95,9 +103,8 @@ const Navbar = () => {
                 </Link>
                 <Link
                   href="/login"
-                  className={`text-gray-300 border btn-transparent hover:text-white px-3 py-2 rounded-md text-sm ${
-                    loggedIn ? "hidden" : ""
-                  }`}
+                  className={`text-gray-300 border btn-transparent hover:text-white px-3 py-2 rounded-md text-sm ${loggedIn ? "hidden" : ""
+                    }`}
                 >
                   Login
                 </Link>
@@ -106,7 +113,7 @@ const Navbar = () => {
                   <Link
                     onClick={(e) => {
                       e.preventDefault();
-                      logout();
+                      handleLogout();
                     }}
                     href="/logout"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
@@ -212,9 +219,8 @@ const Navbar = () => {
             Scan ticket
           </Link>
           <button
-            className={`block btn-transparent px-4 py-2 text-white hover:bg-gray-700 hover:text-white hover:px-4  mb-3 rounded-md text-sm font-medium ${
-              loggedIn ? "hidden" : ""
-            }`}
+            className={`block btn-transparent px-4 py-2 text-white hover:bg-gray-700 hover:text-white hover:px-4  mb-3 rounded-md text-sm font-medium ${loggedIn ? "hidden" : ""
+              }`}
             onClick={() => router.push("/login")}
           >
             Login
@@ -222,7 +228,7 @@ const Navbar = () => {
           {loggedIn && (
             <button
               className="block btn-transparent text-white mb-3 px-4 py-2"
-              onClick={logout}
+              onClick={handleLogout}
             >
               Logout
             </button>

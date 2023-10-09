@@ -3,68 +3,60 @@ import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { API } from "./../services/axios_config";
-import { getSolanaBalanceAction } from "../services/actions/userActions";
-
+import {
+  getEventCountAction,
+  getSolanaBalanceAction,
+  getTicketCountAction,
+} from "../services/actions/userActions";
+import { loginAction } from "../services/actions/authActions";
 
 function AdminPage() {
-  const [visibleEvents, setVisibleEvents] = useState(3);
-  const [eventCount, setEventCount] = useState(0);
-  const [ticketCount, setTicketCount] = useState(0);
-  const [solBalance, setSolBalance] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch()
-  const { solana_balance } = useSelector(state => state.user)
-  let authData
-  if (typeof window !== "undefined") {
-    authData = JSON.parse(localStorage.getItem('user'))
-  }
+  const dispatch = useDispatch();
+  const { solana_balance, eventCount, ticketCount } = useSelector(
+    (state) => state.user
+  );
+  const { authData } = useSelector((state) => state.auth);
+
+  const auth =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+
   const router = useRouter();
-
   useEffect(() => {
-    const formData = { address: authData?.user?.public_key }
-    dispatch(getSolanaBalanceAction({ formData: formData }))
-    // const checkAuthAndFetchData = async () => {
-    //   // Check if access token exists in localStorage
-    //   const user = JSON.parse(localStorage.getItem("user"));
+    const fetchData = async () => {
+      // Check if authData is not null and authData.user exists before accessing its properties
+      if (
+        !auth ||
+        !authData ||
+        !authData.user ||
+        Object.keys(authData.user).length === 0
+      ) {
+        // If authData is not available during the initial load, you may want to fetch it again or redirect to login
+        await dispatch(loginAction());
+        const newAuthData = JSON.parse(localStorage.getItem("user"));
+        if (
+          !newAuthData ||
+          !newAuthData.user ||
+          Object.keys(newAuthData.user).length === 0
+        ) {
+          router.push("/login");
+        } else {
+          const formData = { address: newAuthData.user.public_key };
+          dispatch(getSolanaBalanceAction({ formData: formData }));
+          dispatch(getEventCountAction());
+          dispatch(getTicketCountAction());
+        }
+      } else {
+        const formData = { address: authData?.user?.public_key };
+        dispatch(getSolanaBalanceAction({ formData: formData }));
+        dispatch(getEventCountAction());
+        dispatch(getTicketCountAction());
+      }
+    };
 
-    //   if (!user || !user.accesstoken) {
-    //     // Redirect to the login page if not logged in
-    //     router.push("/login");
-    //   } else {
-    //     try {
-    //       // Call all fetch functions when the component mounts
-    //       await fetchEventCount();
-    //       await fetchTicketCount();
-    //       await fetchSolBalance();
-    //       setIsLoading(false);
-    //     } catch (error) {
-    //       console.error("Error fetching data:", error);
-    //       setIsLoading(false);
-    //     }
-    //   }
-    // };
-
-    // checkAuthAndFetchData();
-  }, [router]);
-
-  const fetchEventCount = async () => {
-    try {
-      const response = await API.get("/events/all-events");
-      setEventCount(response.data.length);
-    } catch (error) {
-      console.error("Error fetching event count:", error);
-    }
-  };
-
-  const fetchTicketCount = async () => {
-    try {
-      const response = await API.get("/events/all-event-tickets");
-      setTicketCount(response.data.length);
-    } catch (error) {
-      console.error("Error fetching ticket count:", error);
-    }
-  };
+    fetchData();
+  }, [authData, router, dispatch]);
 
   return (
     <Layout>
@@ -80,7 +72,9 @@ function AdminPage() {
               <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
                 Event Counts
               </h3>
-              <p className="text-3xl font-bold text-green-400">{eventCount}</p>
+              <p className="text-3xl font-bold text-green-400">
+                {eventCount ?? 0}
+              </p>
             </div>
 
             {/* Ticket Counts Card */}
@@ -88,7 +82,9 @@ function AdminPage() {
               <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
                 Ticket Counts
               </h3>
-              <p className="text-3xl font-bold text-blue-400">{ticketCount}</p>
+              <p className="text-3xl font-bold text-blue-400">
+                {ticketCount ?? 0}
+              </p>
             </div>
 
             {/* Balance (Sol) Card */}
@@ -96,7 +92,9 @@ function AdminPage() {
               <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
                 Balance (Sol)
               </h3>
-              <p className="text-3xl font-bold text-yellow-400">{solana_balance?.balance ?? 0}</p>
+              <p className="text-3xl font-bold text-yellow-400">
+                {solana_balance?.balance ?? 0}
+              </p>
             </div>
           </div>
         </div>
