@@ -68,7 +68,6 @@ const EventDetail = ({ event }) => {
   const handlePurchase = async (e, event_id, amount, name, email, address) => {
     e.preventDefault();
 
-
     if (wallet != "" && window.solana != undefined) {
       const data = {
         event_id: event_id,
@@ -76,8 +75,6 @@ const EventDetail = ({ event }) => {
         customer_name: name,
         email: email,
       };
-
-      console.log(data, );
       const res = await dispatch(
         createEventTicketAction({ formData: data, toast })
       );
@@ -86,12 +83,10 @@ const EventDetail = ({ event }) => {
         const amount = event?.amount / solanaPrice;
         purchaseTicket(address, amount.toFixed(2));
       }
-
     } else {
       return toast.warning("Wallet not connected");
     }
-
-  }
+  };
 
   useEffect(() => {
     const url = "https://data.messari.io/api/v1/assets/sol/metrics";
@@ -101,108 +96,122 @@ const EventDetail = ({ event }) => {
   }, []);
 
   return (
-    <div className="container mx-auto mb-10 relative z-10">
+    <div className="container mx-auto mb-10 relative z-10 ">
       <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
         <IoMdArrowBack /> <span className="ml-2">Go back</span>
       </Link>
-      <div className="blog-header-image">
-        <Image
-          src={event?.image}
-          alt={event?.name}
-          width={1000}
-          height={600}
-          layout="responsive"
-          objectFit="contain"
-          className="responsive-image"
-        />
-        <Image
-          src={event?.image}
-          alt={event?.name}
-          fill
-          objectPosition="center"
-          className="rounded-md"
-          style={{
-            objectFit: "cover",
-          }}
-        />
-      </div>
-
-      <div className="mt-8">
-        <h2 className="text-3xl lg:text-4xl text-[#ffffff] tessera-header font-semibold mb-4 section-header-title ">
-          {event?.name}
-        </h2>
-        <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
-          Date: {event?.date_of_event}
-        </p>
-        <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
-          Location: {event?.location}
-        </p>
-        <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
-          Price: ${event?.amount}
-        </p>
-        <div className="mt-8">
-          <h2 className="text-2xl lg:text-3xl font-semibold text-[#ffffff]">
-            About this Event
-          </h2>
-          <p className="text-base lg:text-lg text-[#e2e8ff]">
-            {event?.description}
-          </p>
+      <div className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 blog-header-image border border-gray-700 flex flex-col p-5">
+        <div className="blog-header-image ">
+          <Image
+            src={event?.image}
+            alt={event?.name}
+            width={1000}
+            height={600}
+            layout="responsive"
+            objectFit="contain"
+            className="responsive-image"
+          />
+          <Image
+            src={event?.image}
+            alt={event?.name}
+            fill
+            objectPosition="center"
+            className="rounded-md"
+            style={{
+              objectFit: "cover",
+            }}
+          />
         </div>
 
-        <form onSubmit={(e) => handlePurchase(e, event?._id, event?.amount, formData?.name, formData?.email, purchase_ticket?.address)}>
-          <div className="flex text-white text-[20px] font-bold mx-auto justify-center">
-            <p>Purchase Ticket</p>
+        <div className="mt-8">
+          <h2 className="text-3xl lg:text-4xl text-[#ffffff] tessera-header font-semibold mb-4 section-header-title ">
+            {event?.name}
+          </h2>
+          <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
+            Date: {event?.date_of_event}
+          </p>
+          <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
+            Location: {event?.location}
+          </p>
+          <p className="text-lg lg:text-xl font-medium text-[#e2e8ff]">
+            Price: ${event?.amount}
+          </p>
+          <div className="mt-8">
+            <h2 className="text-2xl lg:text-3xl font-semibold text-[#ffffff] mb-4">
+              About this Event
+            </h2>
+            <p className="text-base lg:text-lg text-[#e2e8ff]">
+              {event?.description}
+            </p>
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-[#e2e8ff]">
-              Name:
-            </label>
-            <input
-              type="name"
-              id="name"
-              name="name"
-              className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-              placeholder="Enter your name"
-              // value={email}
-              onChange={(e) => handleChange(e)}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-[#e2e8ff]">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
-              placeholder="Enter your email"
-              // value={email}
-              onChange={(e) => handleChange(e)}
-              required
-            />
-          </div>
-          <div
-            className="flex justify-center"
-            onSubmit={(e) => e.preventDefault()}
 
-          >
-            {!loadingState ? <button
-              type="submit"
-
-              className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
-              Purchase
-            </button> :
-              <button className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
-                Processing
-              </button>
-
+          <form
+            onSubmit={(e) =>
+              handlePurchase(
+                e,
+                event?._id,
+                event?.amount,
+                formData?.name,
+                formData?.email,
+                purchase_ticket?.address
+              )
             }
-          </div>
-        </form>
+            className="m-4"
+          >
+            <div className="flex text-white text-[20px] font-bold mx-auto justify-center">
+              <p className="font-boldy">Purchase Ticket</p>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-[#e2e8ff]">
+                Name:
+              </label>
+              <input
+                type="name"
+                id="name"
+                name="name"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Enter your name"
+                // value={email}
+                onChange={(e) => handleChange(e)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-[#e2e8ff]">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="bg-gray-800 text-white btn-transparent rounded mt-1 px-3 py-2 w-full"
+                placeholder="Enter your email"
+                // value={email}
+                onChange={(e) => handleChange(e)}
+                required
+              />
+            </div>
+            <div
+              className="flex justify-center"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              {!loadingState ? (
+                <button
+                  type="submit"
+                  className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md"
+                >
+                  Purchase
+                </button>
+              ) : (
+                <button className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
+                  Processing
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
-    </div >
+    </div>
   );
 };
 

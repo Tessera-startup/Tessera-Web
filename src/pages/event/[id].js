@@ -41,7 +41,7 @@ const EventPage = () => {
             </div>
           </>
         ) : (
-          <p className="text-white text-[20px] ml-2">Event not found</p>
+          <p className="text-white text-[20px] ml-2">loading...</p>
         )}
       </>
     </Layout>
