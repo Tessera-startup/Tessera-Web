@@ -156,7 +156,7 @@ const EventDetail = ({ event }) => {
                 purchase_ticket?.address
               )
             }
-            className="m-4"
+            className="mt-4"
           >
             <div className="flex text-white text-[20px] font-bold mx-auto justify-center">
               <p className="font-boldy">Purchase Ticket</p>

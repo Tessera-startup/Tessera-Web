@@ -67,22 +67,22 @@ const Navbar = () => {
           <div className="flex w-full items-center">
             <div className="flex-shrink-0 mx-4">
               <Link href="/" className="text-white relative text-2xl" passHref>
-                <Image src={NavbarImg} alt={"tessera"} width={50} height={50} />
+                <Image src={NavbarImg} alt={"tessera"} width={60} height={50} />
               </Link>
             </div>
             <div className="hidden md:flex justify-end w-full items-center mx-4">
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 font-bold">
                 <Link
                   passHref
                   href="/"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md"
                 >
                   Home
                 </Link>
                 <Link
                   passHref
                   href="/admin"
-                  className={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm ${loggedIn ? "" : "hidden"
+                  className={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md ${loggedIn ? "" : "hidden"
                     }`}
                 >
                   Admin
@@ -90,20 +90,20 @@ const Navbar = () => {
                 <Link
                   passHref
                   href="/tickets"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md"
                 >
                   Tickets
                 </Link>
                 <Link
                   passHref
                   href="/about"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md"
                 >
                   About
                 </Link>
                 <Link
                   href="/login"
-                  className={`text-gray-300 border btn-transparent hover:text-white px-3 py-2 rounded-md text-sm ${loggedIn ? "hidden" : ""
+                  className={`text-gray-300 border btn-transparent hover:text-white px-3 py-2 rounded-md text-md ${loggedIn ? "hidden" : ""
                     }`}
                 >
                   Login
@@ -116,7 +116,7 @@ const Navbar = () => {
                       handleLogout();
                     }}
                     href="/logout"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md"
                   >
                     Logout
                   </Link>
@@ -124,7 +124,7 @@ const Navbar = () => {
                 <Link
                   passHref
                   href="/scanner"
-                  className="text-gray-300 border btn-transparent  hover:text-white px-6 py-2 rounded-md text-sm"
+                  className="text-gray-300 border btn-transparent  hover:text-white px-6 py-2 rounded-md text-md"
                 >
                   Scan Ticket
                 </Link>
@@ -184,7 +184,7 @@ const Navbar = () => {
           <Link
             passHref
             href="/"
-            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-md "
           >
             Home
           </Link>
@@ -192,7 +192,7 @@ const Navbar = () => {
             <Link
               passHref
               href="/admin"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
+              className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-md "
             >
               Admin
             </Link>
@@ -200,26 +200,26 @@ const Navbar = () => {
           <Link
             passHref
             href="/tickets"
-            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm "
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-md "
           >
             My Tickets
           </Link>
           <Link
             passHref
             href="/about"
-            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm font-medium"
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-md font-medium"
           >
             About
           </Link>
           <Link
             passHref
             href="/about"
-            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-sm font-medium"
+            className="block text-gray-300 hover:bg-gray-700 hover:text-white hover:px-4 py-2 rounded-md text-md font-medium"
           >
             Scan ticket
           </Link>
           <button
-            className={`block btn-transparent px-4 py-2 text-white hover:bg-gray-700 hover:text-white hover:px-4  mb-3 rounded-md text-sm font-medium ${loggedIn ? "hidden" : ""
+            className={`block btn-transparent px-4 py-2 text-white hover:bg-gray-700 hover:text-white hover:px-4  mb-3 rounded-md text-md font-medium ${loggedIn ? "hidden" : ""
               }`}
             onClick={() => router.push("/login")}
           >

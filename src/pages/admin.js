@@ -12,7 +12,9 @@ import { loginAction } from "../services/actions/authActions";
 
 function AdminPage() {
   const dispatch = useDispatch();
-  const { solana_balance, eventCount, ticketCount } = useSelector((state) => state.user);
+  const { solana_balance, eventCount, ticketCount } = useSelector(
+    (state) => state.user
+  );
   const { authData } = useSelector((state) => state.auth);
 
   const auth =
@@ -60,19 +62,19 @@ function AdminPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <div className="container p-0 sm:p-8 about relative z-10">
+        <div
+          className="relative p-0 sm:p-8 about z-10 overflow-x-auto shadow-md sm:rounded-lg ml-2 bg-gray-800"
+          style={{ marginTop: "100px" }}
+        >
           <div className="flex justify-between">
-            <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
+            <h2 className="text-3xl font-semibold mb-4 text-white">
               Dashboard
-            </h2>
-            <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
-
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Event Counts Card */}
-            <div className="btn-transparent p-4 rounded-lg">
-              <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
+            <div className="btn-transparent p-4 rounded-lg text-xl uppercase">
+              <h3 className="font-semibold text-[#e2e8ff] mb-2">
                 Event Counts
               </h3>
               <p className="text-3xl font-bold text-green-400">
@@ -82,7 +84,7 @@ function AdminPage() {
 
             {/* Ticket Counts Card */}
             <div className="btn-transparent p-4 rounded-lg">
-              <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
+              <h3 className="text-xl uppercase font-semibold text-[#e2e8ff] mb-2">
                 Ticket Counts
               </h3>
               <p className="text-3xl font-bold text-blue-400">
@@ -92,7 +94,7 @@ function AdminPage() {
 
             {/* Balance (Sol) Card */}
             <div className="btn-transparent p-4 rounded-lg">
-              <h3 className="text-xl font-semibold text-[#e2e8ff] mb-2">
+              <h3 className="text-xl uppercase font-semibold text-[#e2e8ff] mb-2">
                 Balance (Sol)
               </h3>
               <p className="text-3xl font-bold text-yellow-400">

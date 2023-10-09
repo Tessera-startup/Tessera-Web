@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { FiHome, FiPlusCircle, FiCalendar } from "react-icons/fi";
-
 import React from "react";
 
 const Dashboard = ({ children }) => {
   return (
     <div className="flex container mx-auto relative z-10">
-      <div className="text-white w-16 lg:w-64 min-h-screen p-4 mt-20 bg-slate-500 rounded-md">
-        <ul className="space-y-4">
+      <div className="text-white w-16 lg:w-44 p-4 mt-20 rounded-md">
+        <ul className="space-y-4 uppercase font-bold">
           <li>
             <Link href="/admin" className="flex items-center">
               <FiHome className="mr-2 text-3xl lg:text-xl" />{" "}

@@ -53,7 +53,12 @@ const EventList = () => {
             >
               <div
                 className="relative"
-                style={{ flex: "1 0 0%", width: "100%", height: "100%" }}
+                style={{
+                  flex: "1 0 0%",
+                  width: "100%",
+                  height: "100%",
+                  maxHeight: "300px", // Set your desired max-height
+                }}
               >
                 <Image
                   src={event.image ?? ImageUrl}
@@ -75,6 +80,7 @@ const EventList = () => {
                 >
                   {event?.name}
                 </motion.h3>
+                <hr className="btn-transparent my-3"/>
                 <p className="text-gray-400">{event?.date_of_event}</p>
                 <p className="text-gray-400">{event?.location}</p>
                 <div className="flex justify-between items-center mt-auto">
