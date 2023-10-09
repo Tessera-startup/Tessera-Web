@@ -24,7 +24,7 @@ instance.interceptors.request.use(
         : null;
     }
     if (USERFROMLS && USERFROMLS.accesstoken) {
-      console.log(USERFROMLS.accesstoken, "ACCESSSSSSS TOKEN");
+  
       req.headers["Authorization"] = `Bearer ${USERFROMLS.accesstoken}`;
     }
     return req;

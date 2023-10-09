@@ -77,10 +77,11 @@ const EventDetail = ({ event }) => {
         email: email,
       };
 
-
+      console.log(data, );
       const res = await dispatch(
         createEventTicketAction({ formData: data, toast })
       );
+
       if (res.error == undefined) {
         const amount = event?.amount / solanaPrice;
         purchaseTicket(address, amount.toFixed(2));
