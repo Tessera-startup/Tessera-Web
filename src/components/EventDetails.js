@@ -13,7 +13,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 const EventDetail = ({ event }) => {
-  console.log("EventDetails", event);
   const { wallet, setWallet } = useContext(TessaraContext);
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [solanaPrice, setSolanaPrice] = useState(0);
@@ -66,16 +65,39 @@ const EventDetail = ({ event }) => {
     return signature;
   };
 
+  const handlePurchase = async (e, event_id, amount, name, email, address) => {
+    e.preventDefault();
+
+
+    if (wallet != "" && window.solana != undefined) {
+      const data = {
+        event_id: event_id,
+        amount: amount,
+        customer_name: name,
+        email: email,
+      };
+
+
+      const res = await dispatch(
+        createEventTicketAction({ formData: data, toast })
+      );
+      if (res.error == undefined) {
+        const amount = event?.amount / solanaPrice;
+        purchaseTicket(address, amount.toFixed(2));
+      }
+
+    } else {
+      return toast.warning("Wallet not connected");
+    }
+
+  }
+
   useEffect(() => {
     const url = "https://data.messari.io/api/v1/assets/sol/metrics";
     axios.get(url).then((response) => {
       setSolanaPrice(response.data.data.market_data.price_usd);
     });
   }, []);
-
-  console.log("Event Image URL:", event?.image);
-  console.log("Events:", event);
-  
 
   return (
     <div className="container mx-auto mb-10 relative z-10">
@@ -86,8 +108,8 @@ const EventDetail = ({ event }) => {
         <Image
           src={event?.image}
           alt={event?.name}
-          width={1000} 
-          height={600} 
+          width={1000}
+          height={600}
           layout="responsive"
           objectFit="contain"
           className="responsive-image"
@@ -126,7 +148,7 @@ const EventDetail = ({ event }) => {
           </p>
         </div>
 
-        <div>
+        <form onSubmit={(e) => handlePurchase(e, event?._id, event?.amount, formData?.name, formData?.email, purchase_ticket?.address)}>
           <div className="flex text-white text-[20px] font-bold mx-auto justify-center">
             <p>Purchase Ticket</p>
           </div>
@@ -162,29 +184,11 @@ const EventDetail = ({ event }) => {
           </div>
           <div
             className="flex justify-center"
+            onSubmit={(e) => e.preventDefault()}
 
           >
             {!loadingState ? <button
-              onClick={async () => {
-                if (wallet != "" && window.solana != undefined) {
-                  const data = {
-                    event_id: event?._id,
-                    amount: event?.amount,
-                    customer_name: formData.name,
-                    email: formData.email,
-                  };
-                  console.log(data);
-                  const res = await dispatch(
-                    createEventTicketAction({ formData: data, toast })
-                  );
-                  if (res.error == undefined) {
-                    const amount = event?.amount / solanaPrice;
-                    purchaseTicket(purchase_ticket?.address, amount.toFixed(2));
-                  }
-                } else {
-                  return toast.warning("Wallet not connected");
-                }
-              }}
+              type="submit"
 
               className="px-8 py-2 inline-block  bg-slate-400 hover:bg-gray-400 rounded-md">
               Purchase
@@ -195,7 +199,7 @@ const EventDetail = ({ event }) => {
 
             }
           </div>
-        </div>
+        </form>
       </div>
     </div >
   );

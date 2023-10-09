@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FiHome, FiPlusCircle, FiCalendar } from "react-icons/fi";
+
 import React from "react";
 
 const Dashboard = ({ children }) => {
@@ -23,6 +24,12 @@ const Dashboard = ({ children }) => {
             <Link href="/admin/create-event" className="flex items-center">
               <FiPlusCircle className="mr-2 text-3xl lg:text-xl" />{" "}
               <span className="lg:inline-block hidden">Create Event</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/admin-tickets" className="flex items-center">
+              <FiCalendar className="mr-2 text-3xl lg:text-xl" />{" "}
+              <span className="lg:inline-block hidden">Tickets</span>
             </Link>
           </li>
         </ul>

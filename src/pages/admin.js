@@ -12,9 +12,7 @@ import { loginAction } from "../services/actions/authActions";
 
 function AdminPage() {
   const dispatch = useDispatch();
-  const { solana_balance, eventCount, ticketCount } = useSelector(
-    (state) => state.user
-  );
+  const { solana_balance, eventCount, ticketCount } = useSelector((state) => state.user);
   const { authData } = useSelector((state) => state.auth);
 
   const auth =
@@ -63,9 +61,14 @@ function AdminPage() {
       <div className="gradient fixed"></div>
       <Dashboard>
         <div className="container p-0 sm:p-8 about relative z-10">
-          <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
-            Dashboard
-          </h2>
+          <div className="flex justify-between">
+            <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
+              Dashboard
+            </h2>
+            <h2 className="text-3xl font-semibold mb-4 text-white  mt-16">
+
+            </h2>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Event Counts Card */}
             <div className="btn-transparent p-4 rounded-lg">
@@ -83,7 +86,7 @@ function AdminPage() {
                 Ticket Counts
               </h3>
               <p className="text-3xl font-bold text-blue-400">
-                {ticketCount ?? 0}
+                {ticketCount?.length ?? 0}
               </p>
             </div>
 

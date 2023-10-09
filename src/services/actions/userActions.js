@@ -113,7 +113,7 @@ export const getTicketCountAction = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await createUserTickets();
-      return data.length; // Assuming data is an array of tickets
+      return data; // Assuming data is an array of tickets
     } catch (error) {
       console.log(error.response);
       return rejectWithValue(null);

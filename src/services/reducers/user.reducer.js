@@ -19,7 +19,7 @@ const userSlice = createSlice({
     tickets: null,
     solana_balance: null,
     eventCount: 0,
-    ticketCount: 0,
+    ticketCount: null,
   },
   extraReducers: (builder) => {
     builder.addCase(getTicketsAction.pending, (state, action) => {

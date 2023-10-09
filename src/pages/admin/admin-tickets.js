@@ -3,35 +3,24 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import Dashboard from "../../components/Dashboard";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getTicketCountAction } from "../../services/actions/userActions";
 
-function AdminEventsPage() {
+function AdminTickets() {
   const [events, setEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(3);
-  const { authData } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { eventCount, ticketCount } = useSelector(state => state.user);
+
+
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!authData || !authData.user) {
-      router.push("/login");
-    } else {
-      fetchEventsData();
-    }
-  }, [authData, router]);
-
-  const fetchEventsData = async () => {
-    try {
-      const response = await API.get("/events/user-events");
-      setEvents(response.data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
+    dispatch(getTicketCountAction());
+  });
 
   const loadMoreEvents = () => {
     setVisibleEvents(visibleEvents + 3);
@@ -46,7 +35,7 @@ function AdminEventsPage() {
           <Link className="flex items-center mt-20 mb-5 text-gray-400" href="/">
             <IoMdArrowBack /> <span className="ml-2">Go back</span>
           </Link>
-          <p className="text-white">Events created</p>
+          <p className="text-white ">Tickets Sold</p>
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -54,31 +43,37 @@ function AdminEventsPage() {
                   Event
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Location
+                  Ticket Owner
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Date
+                  Date Paid
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  Price
+                  Amount Paid(sol)
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Payer address
                 </th>
 
               </tr>
             </thead>
             <tbody>
-              {events?.map((event, i) => (
+              {ticketCount?.map((ticket, i) => (
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {event?.name}
+                    {ticket?.event_name}
                   </th>
                   <td class="px-6 py-4">
-                    {event?.location}
+                    {ticket?.customer_name}
                   </td>
                   <td class="px-6 py-4">
-                    {event?.date_of_event}
+                    {ticket?.date.slice(0, 25)}
                   </td>
                   <td class="px-6 py-4">
-                    ${event?.amount}
+                    {ticket?.amount} SOL
+                  </td>
+                  <td class="px-6 text-[10px] py-4">
+                    {ticket?.payer_address}
                   </td>
 
                 </tr>
@@ -116,4 +111,4 @@ function AdminEventsPage() {
   );
 }
 
-export default AdminEventsPage;
+export default AdminTickets;
