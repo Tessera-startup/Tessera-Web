@@ -100,8 +100,8 @@ const EventDetail = ({ event }) => {
       <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
         <IoMdArrowBack /> <span className="ml-2">Go back</span>
       </Link>
-      <div className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform blog-header-image border border-gray-700 flex flex-col p-5">
-        <div className="blog-header-image ">
+      <div className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform blog-header-image border border-gray-700 flex flex-col">
+        <div className="blog-header-image">
           <Image
             src={event?.image}
             alt={event?.name}
@@ -110,13 +110,6 @@ const EventDetail = ({ event }) => {
             layout="responsive"
             objectFit="contain"
             className="responsive-image"
-          />
-          <Image
-            src={event?.image}
-            alt={event?.name}
-            fill
-            objectPosition="center"
-            className="rounded-md"
             style={{
               objectFit: "cover",
               width: "100%",
@@ -126,7 +119,7 @@ const EventDetail = ({ event }) => {
           />
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8 px-5">
           <h2 className="text-3xl lg:text-4xl text-[#ffffff] tessera-header font-semibold mb-4 section-header-title ">
             {event?.name}
           </h2>
