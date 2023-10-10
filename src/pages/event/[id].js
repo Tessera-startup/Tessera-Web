@@ -26,7 +26,6 @@ const EventPage = () => {
     }
   }, [router.query.id, id, dispatch, events, loadingState]);
 
-
   return (
     <Layout>
       <>
@@ -38,7 +37,9 @@ const EventPage = () => {
             </div>
           </>
         ) : (
-          <p className="text-white text-[20px] ml-2">loading event...</p>
+          <div className="event-content">
+            <p className="text-white text-[20px] ml-2 mt-60">loading event details...</p>
+          </div>
         )}
       </>
     </Layout>
