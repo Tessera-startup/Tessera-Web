@@ -7,6 +7,7 @@ import {
   setCurrentEvent,
   getEventCountAction,
   getTicketCountAction,
+  mintNftAction,
 } from "../actions/userActions";
 
 const userSlice = createSlice({
@@ -55,7 +56,7 @@ const userSlice = createSlice({
     builder.addCase(setCurrentEvent.rejected, (state, action) => {
       state.loadingState = false;
     });
-    //
+
     //
     builder.addCase(createEventTicketAction.pending, (state, action) => {
       state.loadingState = true;
@@ -67,6 +68,7 @@ const userSlice = createSlice({
     builder.addCase(createEventTicketAction.rejected, (state, action) => {
       state.loadingState = false;
     });
+    //
     builder.addCase(getSolanaBalanceAction.pending, (state, action) => {
       state.loadingState = true;
     });
@@ -77,6 +79,7 @@ const userSlice = createSlice({
     builder.addCase(getSolanaBalanceAction.rejected, (state, action) => {
       state.loadingState = false;
     });
+    //
 
     builder.addCase(getEventCountAction.fulfilled, (state, action) => {
       state.eventCount = action.payload;
@@ -84,7 +87,7 @@ const userSlice = createSlice({
     builder.addCase(getEventCountAction.rejected, (state, action) => {
       state.loadingState = false;
     });
-
+    //
     builder.addCase(getTicketCountAction.fulfilled, (state, action) => {
       state.ticketCount = action.payload;
     });
@@ -92,9 +95,24 @@ const userSlice = createSlice({
       state.loadingState = false;
     });
 
+    builder.addCase(mintNftAction.pending, (state, action) => {
+      state.loadingState = true;
+    });
+    builder.addCase(mintNftAction.fulfilled, (state, action) => {
+      state.loadingState = false;
+    });
+    builder.addCase(mintNftAction.rejected, (state, action) => {
+      state.loadingState = false;
+    });
+    //
+    
     builder.addDefaultCase((state, action) => {
       state.loadingState = false;
     });
+    //
+    
+    
+
   },
 });
 

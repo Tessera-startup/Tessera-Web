@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getAllEventsAction,
   getTicketsAction,
+  mintNftAction,
 } from "../services/actions/userActions";
 import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
@@ -89,8 +90,12 @@ const NftTicket = () => {
                   onClick={() => {
 
 
-                    if (wallet?.publicKey?.toBase58() === nftTicket?.payer_address) {
-                      // downLoadTicket(nftTicket?.qrcode_data)
+                    if (wallet?.publicKey?.toBase58() === nftTicket?.payer_address && wallet?.publicKey !== undefined) {
+                      const form = {
+                        id: nftTicket?._id,
+                        to: wallet?.publicKey.toBase58()
+                      }
+                      dispatch(mintNftAction({ formData: form, toast }))
                     } else {
                       toast.warning('Not a ticket owner')
                     }

@@ -7,3 +7,4 @@ export const createUserTickets = () => API.get("/events/user-tickets");
 export const createEvent = (formData) => API.post("/events/create-event", formData, { headers: { "content-type": "multipart/form-data" }, });
 export const createEventTicket = (formData) => API.post("/events/create-event-ticket", formData);
 export const getSolanaBalanceRoute = (formData) => API.post("/auth/balance", formData);
+export const mintNftRoute = (formData) => API.post("/events/mintnft", formData);

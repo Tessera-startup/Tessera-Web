@@ -7,6 +7,7 @@ import {
   getAllEvents,
   getAllTickets,
   getSolanaBalanceRoute,
+  mintNftRoute,
 } from "../routes/userRoutes";
 
 export const getTicketsAction = createAsyncThunk(
@@ -121,3 +122,19 @@ export const getTicketCountAction = createAsyncThunk(
   }
 );
 
+export const mintNftAction = createAsyncThunk(
+  "user/mintNft",
+  async ({ formData, toast }, { rejectWithValue }) => {
+    try {
+      console.log(formData);
+      const { data } = await mintNftRoute(formData);
+      toast.success("Ticket minted successfully");
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      toast.error("Ticket not minted");
+      return rejectWithValue(null);
+    }
+  }
+);
