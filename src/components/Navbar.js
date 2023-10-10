@@ -182,7 +182,7 @@ const Navbar = () => {
           >
             Home
           </Link>
-          {/* {loggedIn && (
+          {loggedIn && (
             <Link
               passHref
               href="/admin"
@@ -190,7 +190,7 @@ const Navbar = () => {
             >
               Admin
             </Link>
-          )} */}
+          )}
           <Link
             passHref
             href="/tickets"

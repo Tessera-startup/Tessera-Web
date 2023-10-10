@@ -119,6 +119,10 @@ const EventDetail = ({ event }) => {
             className="rounded-md"
             style={{
               objectFit: "cover",
+              width: "100%",
+              height: "100%",
+              minHeight: "300px",
+              maxHeight:"300px"
             }}
           />
         </div>
