@@ -14,15 +14,15 @@ const Dashboard = ({ children }) => {
             </Link>
           </li>
           <li>
-            <Link href="/admin/events" className="flex items-center">
-              <FiCalendar className="mr-2 text-3xl lg:text-xl" />{" "}
-              <span className="lg:inline-block hidden">Events</span>
-            </Link>
-          </li>
-          <li>
             <Link href="/admin/create-event" className="flex items-center">
               <FiPlusCircle className="mr-2 text-3xl lg:text-xl" />{" "}
               <span className="lg:inline-block hidden">Create Event</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/events" className="flex items-center">
+              <FiCalendar className="mr-2 text-3xl lg:text-xl" />{" "}
+              <span className="lg:inline-block hidden">Events</span>
             </Link>
           </li>
           <li>
