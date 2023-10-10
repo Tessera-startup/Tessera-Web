@@ -52,13 +52,8 @@ const EventList = () => {
               className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 blog-header-image border border-gray-700 flex flex-col"
             >
               <div
-                className="relative"
-                style={{
-                  flex: "1 0 0%",
-                  width: "100%",
-                  height: "100%",
-                  maxHeight: "300px", // Set your desired max-height
-                }}
+                className="relative "
+                style={{ flex: "1 0 0%", width: "100%", height: "100%" }}
               >
                 <Image
                   src={event.image ?? ImageUrl}
@@ -67,6 +62,11 @@ const EventList = () => {
                   width={500}
                   height={300}
                   objectFit="cover"
+                  style={{
+                    flex: "1 0 0%",
+                    width: "100%",
+                    height: "100%",
+                  }}
                 />
 
                 <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
