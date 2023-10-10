@@ -11,13 +11,12 @@ import { loginAction, logoutAction } from "../services/actions/authActions";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [auth, setAuth] = useState(true);
   const { wallet, setWallet } = useContext(TessaraContext);
   const router = useRouter();
   const dispatch = useDispatch();
-  const { authData } = useSelector((state) => state.auth || {})
+  const { authData } = useSelector((state) => state.auth || {});
 
-  const loggedIn = !!auth;
+  const loggedIn = !!authData?.user;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,10 +29,10 @@ const Navbar = () => {
         setWallet(currentWallet);
         toast.success("Wallet connected");
       } else {
-        return toast.warning("Wallet extension not installed");
+        toast.warning("Wallet extension not installed");
       }
     } catch (error) {
-      console.log(error, "Wallet connection error");
+      console.log("Wallet connection error", error);
     }
   };
 
@@ -43,22 +42,17 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    setAuth(user);
     const fetchData = async () => {
       // Fetch user data if not available
-      if (
-        !auth ||
-        !authData ||
-        !authData.user ||
-        Object.keys(authData.user).length === 0
-      ) {
+      if (!authData?.user) {
         await dispatch(loginAction());
       }
     };
 
     fetchData();
   }, [dispatch, authData]);
+
+  
 
   return (
     <nav className="bg-gray-900 nav-font w-full top-0 z-50 border-b border-gray-800 mx-auto">

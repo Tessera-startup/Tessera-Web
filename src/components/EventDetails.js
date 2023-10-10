@@ -100,7 +100,7 @@ const EventDetail = ({ event }) => {
       <Link className="flex items-center mt-32 mb-5 text-gray-400" href="/">
         <IoMdArrowBack /> <span className="ml-2">Go back</span>
       </Link>
-      <div className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 blog-header-image border border-gray-700 flex flex-col p-5">
+      <div className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform blog-header-image border border-gray-700 flex flex-col p-5">
         <div className="blog-header-image ">
           <Image
             src={event?.image}

@@ -47,7 +47,7 @@ function AdminTickets() {
           <h2 className="text-3xl font-semibold text-white mb-4">
             Tickets Sold
           </h2>
-          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <table class="w-full text-sm text-left text-white">
             <thead className="text-white text-xl uppercase bg-gray-700">
               {" "}
               <tr>
