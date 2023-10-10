@@ -62,11 +62,13 @@ const EventList = () => {
                   width={500}
                   height={300}
                   objectFit="cover"
-                  style={{
-                    flex: "1 0 0%",
-                    width: "100%",
-                    height: "100%",
-                  }}
+                    style={{
+                      flex: "1 0 0%",
+                      width: "100%",
+                      height: "100%",
+                      minHeight: "300px",
+                    }}
+                  className="min-h-[100px]"
                 />
 
                 <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
