@@ -14,11 +14,10 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              <div className="w-48 md:w-80"> 
+              <div className="w-48 md:w-80">
                 <Image
                   src={heroImage}
-                  layout="responsive"
-                  objectFit="contain" 
+                  style={{ aspectRatio: "16/9" }}
                   alt={"codecrafted"}
                 />
               </div>
