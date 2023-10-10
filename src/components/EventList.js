@@ -68,9 +68,7 @@ const EventList = () => {
                       height: "100%",
                       minHeight: "320px",
                     }}
-                  className="min-h-[100px]"
                 />
-
                 <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
                   {event?.location}
                 </div>
@@ -78,7 +76,7 @@ const EventList = () => {
               <div className="px-3 pt-5 pb-10 flex flex-col">
                 <motion.h3
                   className="text-md sm:text-lg md:text-2xl font-bold text-white"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.01 }}
                 >
                   {event?.name}
                 </motion.h3>
