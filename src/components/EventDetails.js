@@ -188,7 +188,7 @@ const EventDetail = ({ event }) => {
               />
             </div>
             <div
-              className="flex justify-center"
+              className="flex justify-center mb-8"
               onSubmit={(e) => e.preventDefault()}
             >
               {!loadingState ? (
