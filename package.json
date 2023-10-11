@@ -22,7 +22,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "vercel-build": "npm run prepare && next build" 
+    "vercel-build": "npm run prepare && next build",
+    "prepare": "echo 'No preparation tasks.'" 
   },
   "devDependencies": {
     "react-router-dom": "^6.16.0"

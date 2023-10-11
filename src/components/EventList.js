@@ -39,7 +39,7 @@ const EventList = () => {
         Upcoming Events
       </motion.h2>
       {loading ? (
-        <p className="text-white font-bold text-2xl">Loading...</p>
+        <p className="text-white font-bold text-2xl">Loading events...</p>
       ) : !events || events.length === 0 ? (
         <p className="text-white font-bold text-2xl">No events available</p>
       ) : (
