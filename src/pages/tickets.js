@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import QRCode from "qrcode.react";
 import Image from "next/image";
 import Layout from "../components/Layout";
@@ -15,7 +15,8 @@ import { TessaraContext } from "../context/Context";
 // Dummy NFT data (replace with real data later)
 
 const NftTicket = () => {
-  const { tickets, events } = useSelector((state) => state.user);
+  const { tickets, events, loadingState } = useSelector((state) => state.user);
+  const [currentButton, setCurrentButton] = useState(0)
   const { wallet } = useContext(TessaraContext)
   const dispatch = useDispatch();
 
@@ -34,6 +35,12 @@ const NftTicket = () => {
     dispatch(getTicketsAction());
   }, []);
 
+
+  useEffect(() => {
+
+  }, [currentButton, setCurrentButton])
+
+
   return (
     <Layout>
       <div className="gradient fixed"></div>
@@ -42,7 +49,7 @@ const NftTicket = () => {
           QRCODE Tickets
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {tickets?.map((nftTicket) => (
+          {tickets?.map((nftTicket, index) => (
             <div
               key={nftTicket?._id}
               className="bg-[#111827] p-4 blog-header-image border border-gray-700"
@@ -86,25 +93,45 @@ const NftTicket = () => {
                 </div>
               </div>
               <div className="flex flex-col lg:flex-row lg: space-x-2 lg:mx-auto space-y-2">
-                <button
-                  onClick={() => {
+                {loadingState && index === currentButton ?
+                  <button className="px-4 py-2 w-full rounded-sm font-semibold bg-purple-500">
+                    Minting in process
+                  </button>
+
+                  : <button
+                    onClick={() => {
+
+                      setCurrentButton(index)
+                      console.log(currentButton, "::index", index);
 
 
-                    if (wallet?.publicKey?.toBase58() === nftTicket?.payer_address && wallet?.publicKey !== undefined) {
-                      const form = {
-                        id: nftTicket?._id,
-                        to: wallet?.publicKey.toBase58()
+                      if (wallet?.publicKey !== undefined) {
+                        const form = {
+                          id: nftTicket?._id,
+                          to: wallet?.publicKey.toBase58()
+                        }
+                        if (wallet?.publicKey.toBase58() === nftTicket?.payer_address) {
+
+                          dispatch(mintNftAction({ formData: form, toast }))
+                          // setCurrentButton(-1)
+                          
+                        
+                        } else {
+                          toast.warning('You dont own this ticket')
+
+                        }
+                      } else {
+                        setCurrentButton(-1)
+                        toast.warning('Connect wallet to mint')
                       }
-                      dispatch(mintNftAction({ formData: form, toast }))
-                    } else {
-                      toast.warning('Not a ticket owner')
-                    }
 
-                  }}
-                  className="px-4 py-2 w-full rounded-sm font-semibold bg-purple-500"
-                >
-                  Mint ticket
-                </button>
+                    }}
+                    className="px-4 py-2 w-full rounded-sm font-semibold bg-purple-500"
+                  >
+                    Mint ticket
+                  </button>
+
+                }
                 <button
                   onClick={() => {
 
