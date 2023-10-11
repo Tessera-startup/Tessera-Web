@@ -12,8 +12,7 @@ import ImageUrl from "../../public/hero-image.jpg";
 
 const EventList = () => {
   const [visibleEvents, setVisibleEvents] = useState(3);
-  const { events, loading } = useSelector((state) => state.user);
-
+  const { events } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const EventList = () => {
       >
         Upcoming Events
       </motion.h2>
-      {loading ? (
+      {events === null || events === undefined ? (
         <p className="text-white font-bold text-2xl">Loading events...</p>
       ) : !events || events.length === 0 ? (
         <p className="text-white font-bold text-2xl">No events available</p>
@@ -56,9 +55,7 @@ const EventList = () => {
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="bg-gradient-to-r from-web3blue to-web3purple rounded shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 blog-header-image border border-gray-700 flex flex-col"
               >
-                <div
-                  className="relative "
-                >
+                <div className="relative ">
                   <Image
                     src={event.image ?? ImageUrl}
                     alt={event?.name}
@@ -70,8 +67,8 @@ const EventList = () => {
                       flex: "1 0 0%",
                       width: "100%",
                       height: "100%",
-                      minHeight: "300px",
                     }}
+                    className="blog-header-image-list"
                   />
                   <div className="absolute top-0 left-0 m-2 p-1 bg-gray-800 text-white text-xs sm:text-sm rounded-md">
                     {event?.location}
