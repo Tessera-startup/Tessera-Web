@@ -14,20 +14,18 @@ const Scanner = (props) => {
       <div className="w-2/3 flex flex-col justify-center mx-auto">
         <div className="flex justify-center">
           <p className="text-[15px] italic text-black font-bold">
-            Ticket Verification
+            Tessara Ticket Verification Page
           </p>
         </div>
 
         <div className="flex justify-center">
           <QrReader
-            className="flex w-2/5"
+            className="flex w-full lg:w-2/5"
             onResult={(result, error) => {
               if (!!result) {
                 const parsedData = JSON.parse(result?.text);
                 if (parsedData.hasOwnProperty("is_paid")) {
                   setData(parsedData);
-
-                  console.log(parsedData, "PARESED");
                 } else {
                   setData("ERRR");
                   console.log();
@@ -91,7 +89,7 @@ const Scanner = (props) => {
             </div>
           </div>
         )}
-        <div className="flex space-x-2 w-1/2 mx-auto">
+        <div className="flex space-x-2 w-full lg:w-1/2 mx-auto">
           <button
             onClick={() => location.reload()}
             className="bg-blue-400 w-2/3 mx-auto text-white py-2 px-2 rounded-lg mt-2"
