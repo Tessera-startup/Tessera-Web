@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import { BsCheckCircle } from "react-icons/bs";
 import { ImCancelCircle } from "react-icons/im";
@@ -8,6 +8,9 @@ import Link from "next/link";
 const Scanner = (props) => {
   const [data, setData] = useState(null);
 const [camera, setCamera] = useState(true)
+
+useEffect(() => {
+}, [setCamera, camera])
 
 
 
