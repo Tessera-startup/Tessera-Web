@@ -10,7 +10,7 @@ const Scanner = (props) => {
 
 
   return (
-    <div className="flex flex-col justify-center bg-white h-screen w-full p-20">
+    <div className="flex flex-col justify-center bg-white h-screen w-full px-20 py-12">
       <div className="w-full lg:w-2/3 flex flex-col justify-center mx-auto">
         <div className="flex justify-center">
           <p className="text-[15px] italic text-black font-bold">
