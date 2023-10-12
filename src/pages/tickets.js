@@ -20,6 +20,10 @@ const NftTicket = () => {
   const { wallet } = useContext(TessaraContext)
   const dispatch = useDispatch();
 
+  
+  const connectedWalletTicket = tickets?.filter((ticks) => ticks?.payer_address === wallet?.publicKey?.toBase58())
+
+
   const eventImage = (id) => {
     const ev = events?.filter((event) => event?._id === id)[0];
     return ev;
@@ -27,8 +31,6 @@ const NftTicket = () => {
 
   const downLoadTicket = async (image_url) => {
     const res = await saveAs(image_url, "image.png");
-    // console.log(res, "DOWNLAOD RES");
-    // toast.success("Ticket downloaded successfully");
   };
   useEffect(() => {
     dispatch(getAllEventsAction());
@@ -38,7 +40,7 @@ const NftTicket = () => {
 
   useEffect(() => {
 
-  }, [currentButton, setCurrentButton])
+  }, [currentButton, setCurrentButton, wallet])
 
 
   return (
@@ -49,7 +51,7 @@ const NftTicket = () => {
           QRCODE Tickets
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {tickets?.map((nftTicket, index) => (
+          {connectedWalletTicket?.map((nftTicket, index) => (
             <div
               key={nftTicket?._id}
               className="bg-[#111827] p-4 blog-header-image border border-gray-700"
@@ -78,7 +80,7 @@ const NftTicket = () => {
                     Location: {eventImage(nftTicket?.event_id)?.location}
                   </p>
                   <p className="text-[10px]">
-                    Date Paid: {nftTicket?.date.slice(0, 25)}
+                    Date Paid: {nftTicket?.date?.slice(0, 25)}
                   </p>
                   <p className="text-[10px]">
                     Ticket Owner: {nftTicket?.customer_name}
@@ -102,8 +104,6 @@ const NftTicket = () => {
                     onClick={() => {
 
                       setCurrentButton(index)
-                      console.log(currentButton, "::index", index);
-
 
                       if (wallet?.publicKey !== undefined) {
                         const form = {
@@ -114,8 +114,8 @@ const NftTicket = () => {
 
                           dispatch(mintNftAction({ formData: form, toast }))
                           // setCurrentButton(-1)
-                          
-                        
+
+
                         } else {
                           toast.warning('You dont own this ticket')
 

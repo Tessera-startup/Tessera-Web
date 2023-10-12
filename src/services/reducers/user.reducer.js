@@ -29,7 +29,6 @@ const userSlice = createSlice({
     builder.addCase(getTicketsAction.fulfilled, (state, action) => {
       state.loadingState = false;
       state.tickets = action.payload;
-      console.log("Events:", action.payload);
     });
     builder.addCase(getTicketsAction.rejected, (state, action) => {
       state.loadingState = false;
