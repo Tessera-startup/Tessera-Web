@@ -11,7 +11,7 @@ const Scanner = (props) => {
 
   return (
     <div className="flex flex-col justify-center bg-white h-screen w-full p-20">
-      <div className="w-2/3 flex flex-col justify-center mx-auto">
+      <div className="w-full lg:w-2/3 flex flex-col justify-center mx-auto">
         <div className="flex justify-center">
           <p className="text-[15px] italic text-black font-bold">
             Tessera Ticket Verification Page
@@ -53,7 +53,7 @@ const Scanner = (props) => {
         {data == null ? (
           <p className="flex mx-auto">No Data Loaded</p>
         ) : data?.is_paid == true ? (
-            <div className="flex flex-col justify-center rounded-xl shadow-xl w-full lg:2/5 border px-4 h 1/2 py-4 mx-auto">
+          <div className="flex flex-col justify-center rounded-xl shadow-xl w-full lg:2/5 border px-4 h 1/2 py-4 mx-auto">
             <div className="flex space-x-2 mx-auto">
               <p className="text-green-500 font-bold italic">
                 Payment Verifed{" "}
