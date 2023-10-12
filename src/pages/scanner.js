@@ -50,10 +50,7 @@ const Scanner = (props) => {
               }
             }}
             style={{ width: "40%", height: "40%" }}
-            constraints={{
-              audio: true,
-              video: { facingMode: "environment" }
-            }}
+            facingMode="environment"
             key="environment"
           />
         </div>
