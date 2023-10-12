@@ -38,7 +38,19 @@ const EventList = () => {
         Upcoming Events
       </motion.h2>
       {events === null || events === undefined ? (
-        <p className="text-white font-bold text-2xl">Loading events...</p>
+         <motion.p
+         initial={{ opacity: 0, y: -20 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{
+           duration: 1,
+           ease: "easeInOut",
+           repeat: Infinity,
+           repeatType: "reverse",
+         }}
+         className="text-white font-bold text-2xl mt-6"
+       >
+         Loading events...
+       </motion.p>
       ) : !events || events.length === 0 ? (
         <p className="text-white font-bold text-2xl">No events available</p>
       ) : (
