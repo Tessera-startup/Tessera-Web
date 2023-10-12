@@ -54,6 +54,7 @@ const Scanner = (props) => {
               audio: true,
               video: { facingMode: "environment" }
             }}
+            key="environment"
           />
         </div>
         <MdOutlineCameraswitch
