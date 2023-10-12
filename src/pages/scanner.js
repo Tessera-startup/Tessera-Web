@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { BsCheckCircle } from "react-icons/bs";
 import { ImCancelCircle } from "react-icons/im";
+import { MdOutlineCameraswitch } from 'react-icons/md'
 import Link from "next/link";
 
 const Scanner = (props) => {
   const [data, setData] = useState(null);
-  // const jsonData = JSON.stringify(data)
-  // const parseData = JSON.parse(jsonData)
+const [camera, setCamera] = useState(true)
+
+
 
   return (
     <div className="flex flex-col justify-center bg-white h-screen w-full p-20">
@@ -20,7 +22,9 @@ const Scanner = (props) => {
 
         <div className="flex justify-center">
           <QrReader
+            
             className="flex w-full lg:w-2/5"
+            
             onResult={(result, error) => {
               if (!!result) {
                 const parsedData = JSON.parse(result?.text);
@@ -43,8 +47,13 @@ const Scanner = (props) => {
               }
             }}
             style={{ width: "40%", height: "40%" }}
+            facingMode = {camera?"rear": "f"}
           />
         </div>
+        <MdOutlineCameraswitch 
+        onClick={()=>setCamera(!camera)}
+        size={30} className="mx-auto mb-4 hover:cursor-pointer"/>
+
 
         {data == null ? (
           <p className="flex mx-auto">No Data Loaded</p>
