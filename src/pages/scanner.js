@@ -78,13 +78,13 @@ const Scanner = (props) => {
               <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Ticket ID : {data?.id}
               </p>
-              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
+              <p className="text-black font-bold italic text-[6px] lg:text-[9px]">
                 Payer's Address : {data?.payer_address}
               </p>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col justify-center rounded-xl shadow-xl border px-4 h 1/2 py-4 w-2/5 mx-auto">
+          <div className="flex flex-col justify-center rounded-xl shadow-xl border px-4 h 1/2 py-4 w-full lg:w-2/5 mx-auto">
             <div className="flex flex-col space-y-2 mx-auto">
               <p className="text-red-500 font-bold italic">
                 Payment Not Verifed{" "}
