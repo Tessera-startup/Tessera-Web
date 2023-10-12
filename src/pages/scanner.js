@@ -62,7 +62,7 @@ const Scanner = (props) => {
         {data == null ? (
           <p className="flex mx-auto">No Data Loaded</p>
         ) : data?.is_paid == true ? (
-          <div className="flex flex-col justify-center rounded-xl shadow-xl border px-4 h 1/2 py-4 w-2/5 mx-auto">
+            <div className="flex flex-col justify-center rounded-xl shadow-xl w-full lg:2/5 border px-4 h 1/2 py-4 mx-auto">
             <div className="flex space-x-2 mx-auto">
               <p className="text-green-500 font-bold italic">
                 Payment Verifed{" "}
