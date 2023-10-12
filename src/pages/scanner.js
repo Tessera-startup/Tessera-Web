@@ -16,7 +16,7 @@ const [camera, setCamera] = useState(true)
       <div className="w-2/3 flex flex-col justify-center mx-auto">
         <div className="flex justify-center">
           <p className="text-[15px] italic text-black font-bold">
-            Tessara Ticket Verification Page
+            Tessera Ticket Verification Page
           </p>
         </div>
 
