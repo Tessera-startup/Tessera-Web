@@ -63,22 +63,22 @@ const Scanner = (props) => {
             <hr className="my-1" />
 
             <div>
-              <p className="text-black font-bold italic text-[9px]">
+              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Ticket Owner: {data.customer_name}{" "}
               </p>
-              <p className="text-black font-bold italic text-[9px]">
+              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Event: {data?.event_name}{" "}
               </p>
-              <p className="text-black font-bold italic text-[9px]">
+              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Date Paid: {data?.date}
               </p>
-              <p className="text-black font-bold italic text-[9px]">
+              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Location:{data?.location}{" "}
               </p>
-              <p className="text-black font-bold italic text-[9px]">
+              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Ticket ID : {data?.id}
               </p>
-              <p className="text-black font-bold italic text-[9px]">
+              <p className="text-black font-bold italic text-[8px] lg:text-[9px]">
                 Payer's Address : {data?.payer_address}
               </p>
             </div>
