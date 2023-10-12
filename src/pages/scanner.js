@@ -7,10 +7,10 @@ import Link from "next/link";
 
 const Scanner = (props) => {
   const [data, setData] = useState(null);
-const [camera, setCamera] = useState(true)
+  const [camera, setCamera] = useState(true)
 
-useEffect(() => {
-}, [setCamera, camera])
+  // useEffect(() => {
+  // }, [setCamera, camera])
 
 
 
@@ -25,9 +25,9 @@ useEffect(() => {
 
         <div className="flex justify-center">
           <QrReader
-            
+
             className="flex w-full lg:w-2/5"
-            
+
             onResult={(result, error) => {
               if (!!result) {
                 const parsedData = JSON.parse(result?.text);
@@ -50,12 +50,15 @@ useEffect(() => {
               }
             }}
             style={{ width: "40%", height: "40%" }}
-            facingMode = {camera?"rear": "f"}
+            constraints={{
+              audio: true,
+              video: { facingMode: "environment" }
+            }}
           />
         </div>
-        <MdOutlineCameraswitch 
-        onClick={()=>setCamera(!camera)}
-        size={30} className="mx-auto mb-4 hover:cursor-pointer"/>
+        <MdOutlineCameraswitch
+          onClick={() => setCamera(!camera)}
+          size={30} className="mx-auto mb-4 hover:cursor-pointer" />
 
 
         {data == null ? (
