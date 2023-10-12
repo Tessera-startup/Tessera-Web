@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import { BsCheckCircle } from "react-icons/bs";
 import { ImCancelCircle } from "react-icons/im";
-import { MdOutlineCameraswitch } from 'react-icons/md'
 import Link from "next/link";
 
 const Scanner = (props) => {
   const [data, setData] = useState(null);
-  const [camera, setCamera] = useState(true)
-
-  // useEffect(() => {
-  // }, [setCamera, camera])
 
 
 
@@ -54,10 +49,6 @@ const Scanner = (props) => {
             key="environment"
           />
         </div>
-        <MdOutlineCameraswitch
-          onClick={() => setCamera(!camera)}
-          size={30} className="mx-auto mb-4 hover:cursor-pointer" />
-
 
         {data == null ? (
           <p className="flex mx-auto">No Data Loaded</p>
