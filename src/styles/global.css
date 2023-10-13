@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
+* {
+  padding: 0%;
+  scroll-behavior: smooth;
+}
 
 body {
   font-family:'Space Grotesk', sans-serif;
@@ -70,6 +74,19 @@ body {
 nav {
   position: sticky;
 }
+
+.tableClass {
+  width: 100%;
+  padding: 30px 0;}
+
+.main {
+  height: 100%;
+  max-width: 900px;
+  background: #e87a64;
+  padding: 2rem;
+  margin: auto;
+  overflow-x: auto; }
+
 
 .section-header-title span {
   background-image: linear-gradient(

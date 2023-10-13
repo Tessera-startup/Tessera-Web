@@ -45,8 +45,8 @@ function AdminEventsPage() {
     <Layout>
       <div className="gradient fixed"></div>
       <Dashboard>
-        <div
-          className="relative p-0 sm:p-8 about z-10 overflow-x-auto shadow-md sm:rounded-lg ml-2 bg-gray-800"
+      <div
+          className="relative p-0 sm:p-8  z-10  shadow-md sm:rounded-lg ml-2 bg-gray-800"
           style={{ marginTop: "100px" }}
         >
           <Link
@@ -58,66 +58,73 @@ function AdminEventsPage() {
           <h2 className="text-3xl font-semibold text-white mb-4">
             Events created
           </h2>
-          <table class="w-full text-sm text-left text-white">
-            <thead className="text-white text-xl uppercase bg-gray-700">
-              <tr>
-                <th scope="col" class="px-6 py-3">
-                  <div className="flex items-center">
-                    <p className="mr-2">Event</p>
-                    <Image src={EventName} alt="event" width={30} height={50} />
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3 border-left-transparent">
-                  <div className="flex items-center">
-                    <p className="mr-2">Location</p>
-                    <Image
-                      src={EventLocation}
-                      alt="event"
-                      width={30}
-                      height={30}
-                    />
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3 border-left-transparent">
-                  <div className="flex items-center">
-                    <p className="mr-2">Date</p>
-                    <Image
-                      src={EventCalender}
-                      alt="event"
-                      width={30}
-                      height={30}
-                    />
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3 border-left-transparent">
-                  <div className="flex items-center">
-                    <p className="mr-2">Price</p>
-                    <Image
-                      src={EventPrice}
-                      alt="event"
-                      width={30}
-                      height={30}
-                    />
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {events?.map((event, i) => (
-                <tr className="btn-transparent bg-gray-600" key={i}>
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {event?.name}
+          <div className="table-container about overflow-x-scroll relative">
+            <table className="table w-full text-sm text-left text-white">
+              <thead className="text-white text-xl uppercase bg-gray-700">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    <div className="flex items-center">
+                      <p className="mr-2">Event</p>
+                      <Image
+                        src={EventName}
+                        alt="event"
+                        width={30}
+                        height={50}
+                      />
+                    </div>
                   </th>
-                  <td class="px-6 py-4">{event?.location}</td>
-                  <td class="px-6 py-4">{event?.date_of_event}</td>
-                  <td class="px-6 py-4">${event?.amount}</td>
+                  <th scope="col" className="px-6 py-3 border-left-transparent">
+                    <div className="flex items-center">
+                      <p className="mr-2">Location</p>
+                      <Image
+                        src={EventLocation}
+                        alt="event"
+                        width={30}
+                        height={30}
+                      />
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-3 border-left-transparent">
+                    <div className="flex items-center">
+                      <p className="mr-2">Date</p>
+                      <Image
+                        src={EventCalender}
+                        alt="event"
+                        width={30}
+                        height={30}
+                      />
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-3 border-left-transparent">
+                    <div className="flex items-center">
+                      <p className="mr-2">Price</p>
+                      <Image
+                        src={EventPrice}
+                        alt="event"
+                        width={30}
+                        height={30}
+                      />
+                    </div>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {events?.map((event, i) => (
+                  <tr className="btn-transparent bg-gray-600" key={i}>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {event?.name}
+                    </th>
+                    <td className="px-6 py-4">{event?.location}</td>
+                    <td className="px-6 py-4">{event?.date_of_event}</td>
+                    <td className="px-6 py-4">${event?.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {visibleEvents < events.length && (
@@ -127,13 +134,13 @@ function AdminEventsPage() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-6 h-6 pt-1"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
                 ></path>
               </svg>

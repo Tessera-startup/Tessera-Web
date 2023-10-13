@@ -25,14 +25,12 @@ function AdminPage() {
   const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
-      // Check if authData is not null and authData.user exists before accessing its properties
       if (
         !auth ||
         !authData ||
         !authData.user ||
         Object.keys(authData.user).length === 0
       ) {
-        // If authData is not available during the initial load, you may want to fetch it again or redirect to login
         await dispatch(loginAction());
         const newAuthData = JSON.parse(localStorage.getItem("user"));
         if (
@@ -63,7 +61,7 @@ function AdminPage() {
       <div className="gradient fixed"></div>
       <Dashboard>
         <div
-          className="relative p-0 sm:p-8 about z-10 overflow-x-auto shadow-md sm:rounded-lg ml-2 bg-gray-800"
+          className="relative p-4 sm:p-8 about z-10 overflow-x-auto shadow-md rounded-lg ml-2 bg-gray-800"
           style={{ marginTop: "100px" }}
         >
           <div className="flex justify-between">

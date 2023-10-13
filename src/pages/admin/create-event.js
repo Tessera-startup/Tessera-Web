@@ -58,16 +58,16 @@ function CreateEventPage() {
       <div className="gradient fixed"></div>
       <Dashboard>
         <div
-          className="relative event-content p-0 sm:p-8 about z-10 overflow-x-auto shadow-md sm:rounded-lg ml-2 bg-gray-800"
-          style={{ marginTop: "100px",marginBottom: "30px" }}
+          className="relative event-content p-0 sm:p-8 about z-10 overflow-x-auto shadow-md rounded-lg ml-2 bg-gray-800"
+          style={{ marginTop: "100px", marginBottom: "30px" }}
         >
           <Link
-            className="flex items-center mt-16 mb-4 text-gray-400 hover:text-gray-600 cursor-pointer w-20%"
+            className="flex items-center mt-10 mb-4 text-gray-400 hover:text-gray-600 cursor-pointer w-20%"
             href="/admin"
           >
             <IoMdArrowBack /> <span className="ml-2">Go back</span>
           </Link>
-          <div className="btn-transparent p-4 rounded-lg">
+          <div className="btn-transparent p-4 rounded-lg mb-8">
             <div className="flex items-center mb-4">
               <p className="text-3xl font-semibold text-white mr-2">
                 Create a New Event
@@ -146,6 +146,7 @@ function CreateEventPage() {
                     onChange={handleChange}
                     className="bg-gray-800 text-[#e2e8ff] btn-transparent rounded-md p-2 w-full"
                     required
+                    min="15"
                   />
                 </div>
 

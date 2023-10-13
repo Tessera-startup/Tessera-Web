@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllEventsAction } from "../../services/actions/userActions";
+import { motion } from "framer-motion";
 
 const EventPage = () => {
   const router = useRouter();
@@ -38,7 +39,19 @@ const EventPage = () => {
           </>
         ) : (
           <div className="event-content">
-            <p className="text-white text-[20px] ml-2 mt-60">loading event details...</p>
+             <motion.p
+         initial={{ opacity: 0, y: -20 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{
+           duration: 1,
+           ease: "easeInOut",
+           repeat: Infinity,
+           repeatType: "reverse",
+         }}
+         className="text-white font-bold text-2xl mt-56"
+       >
+         Loading event details...
+       </motion.p>
           </div>
         )}
       </>

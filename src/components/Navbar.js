@@ -97,7 +97,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   href="/login"
-                  className={`text-gray-300 border btn-transparent hover:text-white px-3 py-2 rounded-md text-md ${loggedIn ? "hidden" : ""
+                  className={`text-gray-300 border btn-transparent hover:text-white lg:px-3 px-1 py-2 rounded-md text-md ${loggedIn ? "hidden" : ""
                     }`}
                 >
                   Login
