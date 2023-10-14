@@ -61,8 +61,8 @@ function AdminPage() {
       <div className="gradient fixed"></div>
       <Dashboard>
         <div
-          className="relative p-4 sm:p-8 about z-10 overflow-x-auto shadow-md rounded-lg ml-2 bg-gray-800"
-          style={{ marginTop: "100px" }}
+          className="relative p-4 sm:p-8 about overflow-x-auto shadow-md rounded-lg ml-2 bg-gray-800"
+          style={{ marginTop: "100px", zIndex: "100" }}
         >
           <div className="flex justify-between">
             <h2 className="text-3xl font-semibold mb-4 text-white">

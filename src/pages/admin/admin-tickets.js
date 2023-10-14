@@ -35,7 +35,7 @@ function AdminTickets() {
       <div className="gradient fixed"></div>
       <Dashboard>
         <div
-          className="relative p-0 sm:p-8 about z-10 overflow-x-auto shadow-md sm:rounded-lg ml-2 bg-gray-800"
+          className="relative p-4 sm:p-8 about z-10 overflow-x-auto shadow-md sm:rounded-lg ml-2 bg-gray-800"
           style={{ marginTop: "100px" }}
         >
           <Link

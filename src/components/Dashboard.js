@@ -5,7 +5,7 @@ import React from "react";
 
 const Dashboard = ({ children }) => {
   return (
-    <div className="lg:flex container mx-auto relative">
+    <div className="lg:flex container mx-auto relative z-10">
       <div className="text-white w-14 md:w-16 lg:w-44 p-2 pt-4 md:p-4 mt-20 rounded-md">
         <ul className="space-y-4 uppercase font-bold lg:block md:hidden hidden">
           <li>

@@ -55,7 +55,7 @@ const SponsorLogin = () => {
   return (
     <Layout>
       <div className="gradient fixed"></div>
-      <div className="container mx-auto mt-32 z-50 relative">
+      <div className="container mx-auto mt-32 z-5 relative">
         <div className="max-w-screen-sm mx-auto mt-9 px-5">
           <h2 className="text-3xl font-semibold mb-4 text-[#ffffff]">
             Sponsor Login
